@@ -3,29 +3,28 @@ import { useApp } from './context/AppContext.jsx'
 import Sidebar from './components/layout/Sidebar.jsx'
 import Topbar from './components/layout/Topbar.jsx'
 import Toast from './components/shared/Toast.jsx'
+import NotificationsPanel from './components/shared/NotificationsPanel.jsx'
 
-const Dashboard    = lazy(() => import('./pages/Dashboard.jsx'))
-const BoothMap     = lazy(() => import('./pages/BoothMap.jsx'))
-const Voters       = lazy(() => import('./pages/Voters.jsx'))
-const KnowledgeGraph = lazy(() => import('./pages/KnowledgeGraph.jsx'))
-const Issues       = lazy(() => import('./pages/Issues.jsx'))
-const Campaigns    = lazy(() => import('./pages/Campaigns.jsx'))
-const AIInsights   = lazy(() => import('./pages/AIInsights.jsx'))
+const Dashboard     = lazy(() => import('./pages/Dashboard.jsx'))
+const BoothMap      = lazy(() => import('./pages/BoothMap.jsx'))
+const Voters        = lazy(() => import('./pages/Voters.jsx'))
+const Issues        = lazy(() => import('./pages/Issues.jsx'))
+const Campaigns     = lazy(() => import('./pages/Campaigns.jsx'))
+const AIInsights    = lazy(() => import('./pages/AIInsights.jsx'))
 const Communication = lazy(() => import('./pages/Communication.jsx'))
-const CitizenPortal = lazy(() => import('./pages/CitizenPortal.jsx'))
+const Notifications = lazy(() => import('./pages/Notifications.jsx'))
 const Settings      = lazy(() => import('./pages/Settings.jsx'))
 
 const PAGE_MAP = {
-  dashboard: Dashboard,
-  boothmap: BoothMap,
-  voters: Voters,
-  graph: KnowledgeGraph,
-  issues: Issues,
-  campaigns: Campaigns,
-  aiinsights: AIInsights,
+  dashboard:     Dashboard,
+  boothmap:      BoothMap,
+  voters:        Voters,
+  issues:        Issues,
+  campaigns:     Campaigns,
+  aiinsights:    AIInsights,
   communication: Communication,
-  citizenportal: CitizenPortal,
-  settings: Settings,
+  notifications: Notifications,
+  settings:      Settings,
 }
 
 function App() {
@@ -52,6 +51,7 @@ function App() {
         </main>
       </div>
       <Toast />
+      <NotificationsPanel />
     </div>
   )
 }

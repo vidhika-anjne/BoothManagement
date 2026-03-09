@@ -82,6 +82,59 @@ export const ACTIVITY = [
   { color:'#10b981', text:'Road Damage ISS-006 <strong>marked as resolved</strong>',        time:'3 hr'   },
 ];
 
+export const NOTIFICATIONS = [
+  {
+    id: 'N-001', issueRef: 'ISS-008', type: 'resolved',
+    title: '6 Street Lights Repaired — Gandhi Chowk, Booth 141',
+    body: 'All 6 non-functional street lights near Gandhi Chowk, Booth 141 have been repaired, rewired and fully commissioned by BEST Maharashtra. Nighttime safety in the locality is completely restored.',
+    category: 'Street Lights', booth: 'Booth 141', resolvedDate: '2026-03-08',
+    resolvedBy: 'BEST Maharashtra', sentTo: 1240, channels: ['SMS', 'WhatsApp'],
+    beforeDesc: 'All 6 lights non-functional since Feb 26 — area pitch-dark at night',
+    afterDesc: '6/6 lights repaired, tested & commissioned successfully',
+    visualType: 'streetlight', read: false, time: '2 hours ago',
+  },
+  {
+    id: 'N-002', issueRef: 'ISS-006', type: 'resolved',
+    title: 'Road Repaired — Main Junction, Booth 146',
+    body: 'Post-monsoon road damage at the main junction near Booth 146 has been fully repaired. PWD Maharashtra laid 120m of fresh asphalt and refreshed road markings.',
+    category: 'Roads & Drainage', booth: 'Booth 146', resolvedDate: '2026-03-07',
+    resolvedBy: 'PWD Maharashtra', sentTo: 823, channels: ['SMS'],
+    beforeDesc: 'Large potholes causing vehicle damage & daily accidents',
+    afterDesc: 'New tar surface laid; road markings refreshed',
+    visualType: 'road', read: false, time: '1 day ago',
+  },
+  {
+    id: 'N-003', issueRef: 'ISS-002', type: 'in-progress',
+    title: 'Pothole Repair Underway — School Road, Booth 141',
+    body: 'Repair work has commenced on the dangerous pothole near the school entry road, Booth 141. Temporary patchwork is done; full resurfacing is expected within 2 working days.',
+    category: 'Roads & Drainage', booth: 'Booth 141', resolvedDate: '2026-03-06',
+    resolvedBy: 'PMC Roads Dept.', sentTo: 756, channels: ['WhatsApp'],
+    beforeDesc: 'Deep pothole causing accidents & injuries near school gate',
+    afterDesc: 'Temporary patch done; full resurfacing in progress',
+    visualType: 'road', read: true, time: '2 days ago',
+  },
+  {
+    id: 'N-004', issueRef: 'ISS-001', type: 'update',
+    title: 'Water Supply Update — Technical Team on Site, Booth 142',
+    body: 'MCGM Water Department has dispatched a technical team to investigate and fix the supply disruption in Sector B, Booth 142. Water supply is expected to be fully restored within 24 hours.',
+    category: 'Water Supply', booth: 'Booth 142', resolvedDate: '2026-03-09',
+    resolvedBy: 'MCGM Water Dept.', sentTo: 1034, channels: ['SMS', 'WhatsApp'],
+    beforeDesc: 'No water supply to 200+ households for 4 days straight',
+    afterDesc: 'Technical team on-site; supply expected in 24 hrs',
+    visualType: 'water', read: true, time: '3 hours ago',
+  },
+  {
+    id: 'N-005', issueRef: 'ISS-009', type: 'resolved',
+    title: 'Garbage Collection Resumed — Booth 143',
+    body: 'Regular daily garbage collection has resumed in the Booth 143 area after a 7-day disruption. MCGM Sanitation has assigned a dedicated vehicle and crew to this sector.',
+    category: 'Sanitation', booth: 'Booth 143', resolvedDate: '2026-03-05',
+    resolvedBy: 'MCGM Sanitation', sentTo: 903, channels: ['SMS'],
+    beforeDesc: 'Garbage uncollected for 7+ days — serious health hazard',
+    afterDesc: 'Daily collection resumed; locality sanitised',
+    visualType: 'other', read: true, time: '4 days ago',
+  },
+];
+
 export const FIELD_WORKERS = [
   { id:'fw1', name:'Priya Singh',   initials:'PS', booth:'Booth 142', online:true,  color:'#6366f1' },
   { id:'fw2', name:'Ranjit Kamble', initials:'RK', booth:'Booth 141', online:true,  color:'#10b981' },

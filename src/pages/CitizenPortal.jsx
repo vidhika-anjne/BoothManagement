@@ -2,10 +2,11 @@ import { useState } from 'react'
 import {
   User, Search, AlertCircle, Award, BarChart2, ClipboardList,
   Shield, Landmark, CheckCircle2, ArrowRight, ChevronRight,
-  Info, Check, X, Star, Phone, Home, FileText
+  Info, Check, X, Star, Phone, Home, FileText, Bell
 } from 'lucide-react'
 import { useApp } from '../context/AppContext.jsx'
-import { BOOTHS, ISSUES } from '../data/mockData.js'
+import { BOOTHS, ISSUES, NOTIFICATIONS } from '../data/mockData.js'
+import BeforeAfterVisual from '../components/shared/BeforeAfterVisual.jsx'
 
 // ─── Indian ID Validators ───────────────────────────────────────────────────
 const AADHAAR_RE = /^\d{12}$/
@@ -775,15 +776,60 @@ function TrackTab() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+//  TAB 7 – WARD ALERTS (notifications)
+// ═══════════════════════════════════════════════════════════════════════════
+const NOTIF_TYPE_CFG = {
+  resolved:      { label: 'Resolved',    bg: 'rgba(16,185,129,.12)', color: '#10b981' },
+  'in-progress': { label: 'In Progress', bg: 'rgba(245,158,11,.12)',  color: '#f59e0b' },
+  update:        { label: 'Update',      bg: 'rgba(59,130,246,.12)', color: '#3b82f6' },
+}
+
+function WardAlertsTab() {
+  return (
+    <div className="cpf-form">
+      <div className="cpf-section">
+        <div className="cpf-sec-title"><Bell size={15} /> Ward 8 — Issue Alerts &amp; Resolution Proof</div>
+        <p className="cpf-survey-intro">
+          Official updates on resolved and in-progress civic issues in your ward,
+          with before &amp; after photo proof from the responsible department.
+        </p>
+        <div className="citizen-notif-feed">
+          {NOTIFICATIONS.map(n => {
+            const tc = NOTIF_TYPE_CFG[n.type] || NOTIF_TYPE_CFG.update
+            return (
+              <div key={n.id} className="citizen-notif-card">
+                <div className="citizen-notif-header">
+                  <span className="notif-type-pill" style={{ background: tc.bg, color: tc.color }}>{tc.label}</span>
+                  <span className="cpf-tag">{n.booth}</span>
+                  <span className="cpf-tag">{n.time}</span>
+                </div>
+                <div className="citizen-notif-title">{n.title}</div>
+                <div className="citizen-notif-body">{n.body}</div>
+                <BeforeAfterVisual notif={n} compact />
+                <div className="citizen-notif-footer">
+                  <span>By: <strong>{n.resolvedBy}</strong></span>
+                  <span>{n.sentTo.toLocaleString('en-IN')} residents notified</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 //  MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════
 const TABS = [
-  { id: 'register',  label: 'Voter Registration', icon: User },
-  { id: 'status',    label: 'Check Status',        icon: Search },
-  { id: 'complaint', label: 'File Complaint',      icon: AlertCircle },
-  { id: 'schemes',   label: 'Scheme Eligibility',  icon: Award },
-  { id: 'survey',    label: 'Citizen Survey',      icon: BarChart2 },
-  { id: 'track',     label: 'Track Issues',        icon: ClipboardList },
+  { id: 'register',      label: 'Voter Registration', icon: User },
+  { id: 'status',        label: 'Check Status',        icon: Search },
+  { id: 'complaint',     label: 'File Complaint',      icon: AlertCircle },
+  { id: 'schemes',       label: 'Scheme Eligibility',  icon: Award },
+  { id: 'survey',        label: 'Citizen Survey',      icon: BarChart2 },
+  { id: 'track',         label: 'Track Issues',        icon: ClipboardList },
+  { id: 'notifications', label: 'Ward Alerts',         icon: Bell },
 ]
 
 export default function CitizenPortal() {
@@ -797,7 +843,8 @@ export default function CitizenPortal() {
       case 'complaint': return <ComplaintTab showToast={showToast} />
       case 'schemes':   return <SchemesTab />
       case 'survey':    return <SurveyTab showToast={showToast} />
-      case 'track':     return <TrackTab />
+      case 'track':         return <TrackTab />
+      case 'notifications': return <WardAlertsTab />
       default:          return null
     }
   }

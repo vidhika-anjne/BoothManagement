@@ -8,6 +8,7 @@ export function AppProvider({ children }) {
   const [toast, setToast] = useState({ visible: false, message: '' });
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [notifPanelOpen, setNotifPanelOpen] = useState(false);
 
   const showToast = useCallback((message) => {
     setToast({ visible: true, message });
@@ -29,8 +30,7 @@ export function AppProvider({ children }) {
       activePage, navigate,
       toast, showToast,
       sidebarCollapsed, setSidebarCollapsed,
-      mobileSidebarOpen, setMobileSidebarOpen,
-    }}>
+      mobileSidebarOpen, setMobileSidebarOpen,      notifPanelOpen, setNotifPanelOpen,    }}>
       {children}
     </AppContext.Provider>
   );

@@ -5,17 +5,16 @@ const PAGE_LABELS = {
   dashboard:     'Dashboard',
   boothmap:      'Booth Map',
   voters:        'Voter Management',
-  graph:         'Knowledge Graph',
   issues:        'Issues Tracker',
   campaigns:     'Campaigns',
   aiinsights:    'AI Insights',
   communication: 'Communication',
-  mobileview:    'Mobile Field App',
+  notifications: 'Notifications',
   settings:      'Settings',
 }
 
 export default function Topbar() {
-  const { darkMode, toggleDarkMode, activePage, setMobileSidebarOpen, mobileSidebarOpen, showToast } = useApp()
+  const { darkMode, toggleDarkMode, activePage, setMobileSidebarOpen, mobileSidebarOpen, showToast, setNotifPanelOpen } = useApp()
 
   return (
     <header className="topbar">
@@ -47,7 +46,7 @@ export default function Topbar() {
         <button
           className="icon-btn"
           title="Notifications"
-          onClick={() => showToast('You have 3 new notifications')}
+          onClick={() => setNotifPanelOpen(true)}
         >
           <Bell size={15} />
           <span className="notif-dot" />

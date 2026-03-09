@@ -1,21 +1,20 @@
 import { useApp } from '../../context/AppContext.jsx'
 import {
-  LayoutDashboard, Map, Users, Network, AlertTriangle, Megaphone,
-  BrainCircuit, MessageSquare, Globe, Settings, ChevronLeft,
-  ChevronRight, MoreVertical, Zap
+  LayoutDashboard, Map, Users, AlertTriangle, Megaphone,
+  BrainCircuit, MessageSquare, Bell, Settings, ChevronLeft,
+  ChevronRight, MoreVertical, Zap, Globe
 } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { id: 'dashboard',     label: 'Dashboard',        icon: LayoutDashboard, badge: null },
-  { id: 'boothmap',      label: 'Booth Map',         icon: Map,             badge: null },
-  { id: 'voters',        label: 'Voters',            icon: Users,           badge: null },
-  { id: 'graph',         label: 'Knowledge Graph',   icon: Network,         badge: 'new' },
-  { id: 'issues',        label: 'Issues',            icon: AlertTriangle,   badge: '5', badgeClass: 'alert' },
-  { id: 'campaigns',     label: 'Campaigns',         icon: Megaphone,       badge: null },
-  { id: 'aiinsights',    label: 'AI Insights',       icon: BrainCircuit,    badge: '3', badgeClass: 'new' },
-  { id: 'communication', label: 'Communication',     icon: MessageSquare,   badge: null },
-  { id: 'citizenportal', label: 'Citizen Portal',     icon: Globe,           badge: 'new' },
-  { id: 'settings',      label: 'Settings',           icon: Settings,        badge: null },
+  { id: 'dashboard',     label: 'Dashboard',     icon: LayoutDashboard, badge: null },
+  { id: 'boothmap',      label: 'Booth Map',      icon: Map,             badge: null },
+  { id: 'voters',        label: 'Voters',         icon: Users,           badge: null },
+  { id: 'issues',        label: 'Issues',         icon: AlertTriangle,   badge: '5', badgeClass: 'alert' },
+  { id: 'campaigns',     label: 'Campaigns',      icon: Megaphone,       badge: null },
+  { id: 'aiinsights',    label: 'AI Insights',    icon: BrainCircuit,    badge: '3', badgeClass: 'new' },
+  { id: 'communication', label: 'Communication',  icon: MessageSquare,   badge: null },
+  { id: 'notifications', label: 'Notifications',  icon: Bell,            badge: '2', badgeClass: 'alert' },
+  { id: 'settings',      label: 'Settings',       icon: Settings,        badge: null },
 ]
 
 export default function Sidebar() {
@@ -45,16 +44,21 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         {!collapsed && <div className="nav-section-label">MAIN MENU</div>}
-        {NAV_ITEMS.slice(0,8).map(item => (
+        {NAV_ITEMS.slice(0, 7).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
         {!collapsed && <div className="nav-section-label">SYSTEM</div>}
-        {NAV_ITEMS.slice(8).map(item => (
+        {NAV_ITEMS.slice(7).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
       </nav>
 
       <div className="sidebar-footer">
+        {!collapsed && (
+          <a href="#/citizen" className="citizen-portal-link" title="Open Citizen Portal in same tab">
+            <Globe size={13} /> Citizen Portal ↗
+          </a>
+        )}
         <div className="user-card">
           <div className="user-avatar">VK</div>
           <div className="user-info">
