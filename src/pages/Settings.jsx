@@ -9,7 +9,7 @@ function Toggle({ on, onToggle }) {
 export default function Settings() {
   const { showToast } = useApp()
 
-  const [profile, setProfile] = useState({ name: 'Vidhika Kumar', email: 'vidhika@boothmanagement.gov', phone: '+91 98765 43210', role: 'Senior Booth Manager', constituency: 'Ward 42, Mumbai North' })
+  const [profile, setProfile] = useState({ name: 'Neha Diwedi', email: 'neha@boothmanagement.gov', phone: '+91 98765 43210', role: 'Senior Booth Manager', constituency: 'Ward 8, Delhi' })
 
   const [notifs, setNotifs] = useState({ email: true, sms: false, push: true, issueAlerts: true, campaignUpdates: false, dailyReport: true })
   const [privacy, setPrivacy] = useState({ twoFactor: true, sessionLog: true, dataExport: false })

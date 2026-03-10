@@ -1037,7 +1037,7 @@ export default function CitizenPortal() {
         </div>
         <div className="cp-hero-text">
           <h1>Citizen Service Portal</h1>
-          <p>Ward 8 · Maharashtra · Electoral Services &amp; Grievance Redressal</p>
+          <p>Ward 8 · Delhi · Electoral Services &amp; Grievance Redressal</p>
         </div>
         <div className="cp-hero-badges">
           <div className="cp-hero-badge"><Phone size={13} /><span>Helpline: 1950</span></div>

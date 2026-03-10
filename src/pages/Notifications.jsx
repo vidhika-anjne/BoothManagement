@@ -119,7 +119,7 @@ function ComposeForm({ onSubmit, onCancel }) {
           </>)}
         </F>
         <F label="Responsible Department / Agency*" err={errors.resolvedBy}>
-          {inp('resolvedBy', { placeholder: 'e.g. PWD Maharashtra, MCGM Water Dept.' })}
+          {inp('resolvedBy', { placeholder: 'e.g. PWD Delhi, MCD Dept.' })}
         </F>
         <F label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
           {inp('sentTo', { type: 'number', placeholder: 'e.g. 800' })}

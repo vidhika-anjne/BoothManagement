@@ -722,15 +722,15 @@ select.cpf-input{cursor:pointer}
 ═══════════════════════════════════════════════════════ */
 .ba-wrap{display:flex;align-items:stretch;gap:.6rem;margin:.75rem 0}
 .ba-wrap.compact{gap:.4rem;margin:.5rem 0}
-.ba-card{flex:1;display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.9rem .75rem;border-radius:10px;text-align:center;min-height:95px;position:relative;overflow:hidden}
-.ba-wrap.compact .ba-card{padding:.6rem .5rem;min-height:72px;gap:.35rem}
-.ba-chip{font-size:.6rem;font-weight:800;letter-spacing:.08em;padding:2px 7px;border-radius:20px;line-height:1.4}
-.ba-chip.before{background:rgba(239,68,68,.22);color:#ef4444}
-.ba-chip.after{background:rgba(16,185,129,.22);color:#10b981}
-.ba-desc{font-size:.7rem;color:rgba(255,255,255,.65);line-height:1.35;word-break:break-word}
+.ba-card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.9rem .75rem;border-radius:10px;text-align:center;min-height:220px;position:relative;overflow:hidden;border:1px solid var(--border);background-size:cover;background-position:center;background-repeat:no-repeat}
+.ba-wrap.compact .ba-card{min-height:140px;padding:.6rem .5rem;gap:.35rem}
+.ba-chip{font-size:.6rem;font-weight:800;letter-spacing:.08em;padding:3px 9px;border-radius:20px;line-height:1.4}
+.ba-chip.before{background:rgba(239,68,68,.75);color:white;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.ba-chip.after{background:rgba(16,185,129,.75);color:white;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.ba-desc{font-size:.75rem;color:white;line-height:1.4;word-break:break-word;text-shadow:0 2px 4px rgba(0,0,0,.9);font-weight:600}
 .ba-wrap.compact .ba-desc{font-size:.63rem}
-.ba-desc.after{color:rgba(255,255,255,.8)}
-.ba-arrow{font-size:1.25rem;color:var(--text-muted);flex-shrink:0;align-self:center}
+.ba-desc.after{color:white}
+.ba-arrow{font-size:1.5rem;color:var(--text-muted);flex-shrink:0;align-self:center;font-weight:bold}
 
 /* ═══════════════════════════════════════════════════════
    NOTIFICATIONS PANEL (slide-in drawer)

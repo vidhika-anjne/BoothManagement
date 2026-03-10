@@ -43,7 +43,7 @@ export default function CitizenApp() {
             </div>
             <div>
               <div className="citizen-brand-name">Ward 8 Citizen Service Portal</div>
-              <div className="citizen-brand-sub">Government of Maharashtra &nbsp;·&nbsp; Electoral Services &amp; Grievance Redressal</div>
+              <div className="citizen-brand-sub">Government of Delhi &nbsp;·&nbsp; Electoral Services &amp; Grievance Redressal</div>
             </div>
           </div>
 
@@ -76,8 +76,8 @@ export default function CitizenApp() {
 
       <footer className="citizen-footer">
         <div className="citizen-footer-inner">
-          <span>Government of Maharashtra &nbsp;·&nbsp; Ward 8 &nbsp;·&nbsp; Booth 141–146</span>
-          <span>Helpline: 1950 &nbsp;·&nbsp; ward8.maharashtra.gov.in &nbsp;·&nbsp; © 2026</span>
+          <span>Government of Delhi &nbsp;·&nbsp; Ward 8 &nbsp;·&nbsp; Booth 141–146</span>
+          <span>Helpline: 1950 &nbsp;·&nbsp; ward8.delhi.gov.in &nbsp;·&nbsp; © 2026</span>
         </div>
       </footer>
 
