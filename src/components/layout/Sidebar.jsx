@@ -2,7 +2,7 @@ import { useApp } from '../../context/AppContext.jsx'
 import {
   LayoutDashboard, Map, Users, AlertTriangle, Megaphone,
   BrainCircuit, MessageSquare, Bell, Settings, ChevronLeft,
-  ChevronRight, MoreVertical, Zap, Globe
+  ChevronRight, MoreVertical, Zap, Globe, Award
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -12,16 +12,23 @@ const NAV_ITEMS = [
   { id: 'issues',        label: 'Issues',         icon: AlertTriangle,   badge: '5', badgeClass: 'alert' },
   { id: 'campaigns',     label: 'Campaigns',      icon: Megaphone,       badge: null },
   { id: 'aiinsights',    label: 'AI Insights',    icon: BrainCircuit,    badge: '3', badgeClass: 'new' },
+  { id: 'beneficiaries', label: 'Beneficiaries',  icon: Award,           badge: null },
   { id: 'communication', label: 'Communication',  icon: MessageSquare,   badge: null },
   { id: 'notifications', label: 'Notifications',  icon: Bell,            badge: '2', badgeClass: 'alert' },
   { id: 'settings',      label: 'Settings',       icon: Settings,        badge: null },
 ]
 
 export default function Sidebar() {
-  const { activePage, navigate, sidebarCollapsed, setSidebarCollapsed, mobileSidebarOpen, setMobileSidebarOpen } = useApp()
+  const { activePage, navigate, sidebarCollapsed, setSidebarCollapsed, mobileSidebarOpen, setMobileSidebarOpen, signOut, user } = useApp()
 
   const collapsed = sidebarCollapsed
   const mobileClass = mobileSidebarOpen ? ' mobile-open' : ''
+
+  const handleSignOut = () => {
+    if (window.confirm('Are you sure you want to sign out?')) {
+      signOut()
+    }
+  }
 
   return (
     <aside className={`sidebar${collapsed ? ' collapsed' : ''}${mobileClass}`}>
@@ -44,11 +51,11 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         {!collapsed && <div className="nav-section-label">MAIN MENU</div>}
-        {NAV_ITEMS.slice(0, 7).map(item => (
+        {NAV_ITEMS.slice(0, 8).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
         {!collapsed && <div className="nav-section-label">SYSTEM</div>}
-        {NAV_ITEMS.slice(7).map(item => (
+        {NAV_ITEMS.slice(8).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
       </nav>
@@ -60,12 +67,19 @@ export default function Sidebar() {
           </a>
         )}
         <div className="user-card">
-          <div className="user-avatar">VK</div>
+          <div className="user-avatar">{user?.name?.split(' ').map(n => n[0]).join('') || 'A'}</div>
           <div className="user-info">
-            <span className="user-name">Vidhika Kumar</span>
-            <span className="user-role">Booth Manager</span>
+            <span className="user-name">{user?.name || 'Admin'}</span>
+            <span className="user-role">{user?.boothId || 'Officer'}</span>
           </div>
-          <button className="user-menu-btn"><MoreVertical size={15}/></button>
+          <button
+            className="user-menu-btn"
+            onClick={handleSignOut}
+            title="Sign Out"
+            style={{ color: 'var(--text-muted)', cursor: 'pointer' }}
+          >
+            <MoreVertical size={15}/>
+          </button>
         </div>
       </div>
     </aside>

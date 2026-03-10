@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   User, Search, AlertCircle, Award, BarChart2, ClipboardList,
   Shield, Landmark, CheckCircle2, ArrowRight, ChevronRight,
   Info, Check, X, Star, Phone, Home, FileText, Bell
 } from 'lucide-react'
 import { useApp } from '../context/AppContext.jsx'
-import { BOOTHS, ISSUES, NOTIFICATIONS } from '../data/mockData.js'
+import { BOOTHS, ISSUES, NOTIFICATIONS, VOTER_DB } from '../data/mockData.js'
 import BeforeAfterVisual from '../components/shared/BeforeAfterVisual.jsx'
 
 // ─── Indian ID Validators ───────────────────────────────────────────────────
@@ -62,12 +62,7 @@ const COMPLAINT_CATS = {
 }
 
 // ─── MOCK DB for status check ──────────────────────────────────────────────
-const VOTER_DB = [
-  { voterId: 'MH2401001', name: 'Ramesh Yadav', aadhaar: '234567890123', dob: '1980-03-10', booth: 'Booth 142', status: 'Active', officer: 'Priya Singh', enrolled: '2024-01-15', gender: 'Male' },
-  { voterId: 'MH2401002', name: 'Sunita Devi',  aadhaar: '345678901234', dob: '1987-07-22', booth: 'Booth 142', status: 'Active', officer: 'Priya Singh', enrolled: '2024-02-01', gender: 'Female' },
-  { voterId: 'MH2401003', name: 'Aakash Singh', aadhaar: '456789012345', dob: '2004-11-05', booth: 'Booth 141', status: 'Active', officer: 'Ranjit Kamble', enrolled: '2024-07-10', gender: 'Male' },
-  { voterId: 'MH2401004', name: 'Kamla Bai',    aadhaar: '567890123456', dob: '1958-01-20', booth: 'Booth 143', status: 'Active', officer: 'Sonal Mishra', enrolled: '2024-03-05', gender: 'Female' },
-]
+// ─── VOTER_DB is now imported from mockData.js ───
 
 // ─── Field components ──────────────────────────────────────────────────────
 function Field({ label, error, hint, children, full }) {
@@ -126,7 +121,7 @@ function SuccessCard({ icon: Icon, iconColor, title, message, refId, refLabel = 
 //  TAB 1 – VOTER REGISTRATION
 // ═══════════════════════════════════════════════════════════════════════════
 function RegisterTab({ showToast }) {
-  const blank = { fullName: '', dob: '', gender: '', category: '', phone: '', address: '', pincode: '', booth: '', idType: 'aadhaar', aadhaar: '', pan: '', voterExisting: '' }
+  const blank = { fullName: '', dob: '', gender: '', occupation: '', phone: '', address: '', pincode: '', booth: '', idType: 'aadhaar', aadhaar: '', pan: '', voterExisting: '' }
   const [form, setForm] = useState(blank)
   const [errors, setErrors] = useState({})
   const [done, setDone] = useState(null)
@@ -142,7 +137,7 @@ function RegisterTab({ showToast }) {
       if (age < 18) e.dob = 'You must be at least 18 years old to register'
     }
     if (!form.gender) e.gender = 'Select gender'
-    if (!form.category) e.category = 'Select your voter category'
+    if (!form.occupation) e.occupation = 'Enter your occupation'
     if (!form.phone || !/^[6-9]\d{9}$/.test(form.phone)) e.phone = 'Enter valid 10-digit Indian mobile number'
     if (!form.address.trim()) e.address = 'Residential address is mandatory for electoral roll'
     if (!form.pincode || !/^\d{6}$/.test(form.pincode)) e.pincode = '6-digit PIN code required'
@@ -208,11 +203,8 @@ function RegisterTab({ showToast }) {
               <option>Male</option><option>Female</option><option>Transgender</option>
             </Sel>
           </Field>
-          <Field label="Voter Category*" error={errors.category}>
-            <Sel error={errors.category} value={form.category} onChange={e => set('category', e.target.value)}>
-              <option value="">Select category</option>
-              {CATEGORIES.map(c => <option key={c}>{c}</option>)}
-            </Sel>
+          <Field label="Occupation*" error={errors.occupation}>
+            <Inp error={errors.occupation} placeholder="e.g. Farmer, Teacher, Engineer, Business Owner" value={form.occupation} onChange={e => set('occupation', e.target.value)} />
           </Field>
           <Field label="Mobile Number*" error={errors.phone} hint="Must start with 6, 7, 8, or 9">
             <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
@@ -392,12 +384,54 @@ function StatusTab() {
 //  TAB 3 – FILE COMPLAINT
 // ═══════════════════════════════════════════════════════════════════════════
 function ComplaintTab({ showToast }) {
-  const blank = { category: '', subcat: '', booth: '', title: '', description: '', phone: '', priority: 'Medium', idType: 'none', idNumber: '' }
+  const blank = { category: '', subcat: '', booth: '', title: '', description: '', phone: '', photo: null, photoPreview: null }
   const [form, setForm] = useState(blank)
   const [errors, setErrors] = useState({})
   const [done, setDone] = useState(null)
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
+
+  // AI-based priority assignment based on category
+  const assignPriority = (cat) => {
+    const criticalIssues = ['Water Supply', 'Electricity', 'Healthcare', 'Drainage']
+    if (criticalIssues.includes(cat)) return 'High'
+    if (['Road Damage', 'Street Lights'].includes(cat)) return 'Medium'
+    return 'Low'
+  }
+
+  // Verification function: checks photo, location, and duplicates
+  const verifyComplaint = (complaint) => {
+    return new Promise((resolve) => {
+      // Simulate 5-6 hours delay (using 3 seconds for demo)
+      setTimeout(() => {
+        const checks = {
+          hasPhoto: !!complaint.photo && complaint.photoPreview,
+          hasLocation: !!complaint.booth && complaint.booth.trim().length > 0,
+          isDuplicate: false
+        }
+
+        // Check for duplicate issues (same category and same booth within last week)
+        // More lenient: only flag if multiple exact duplicates in same location
+        const existingComplaints = JSON.parse(localStorage.getItem('complaints') || '[]')
+        const similarIssues = existingComplaints.filter(existing => 
+          existing.category === complaint.category && 
+          existing.booth === complaint.booth &&
+          existing.status === 'Verified' // Only count verified issues, not pending or rejected
+        )
+        // Only mark as duplicate if there are 3+ similar verified issues
+        checks.isDuplicate = similarIssues.length >= 3
+
+        // Verification passes if all required data is present and not a duplicate
+        const isVerified = checks.hasPhoto && checks.hasLocation && !checks.isDuplicate
+
+        resolve({
+          isVerified,
+          checks,
+          verificationTime: new Date().toLocaleTimeString()
+        })
+      }, 3000) // 3 seconds delay for demo (represents 5-6 hours in production)
+    })
+  }
 
   const validate = () => {
     const e = {}
@@ -406,34 +440,92 @@ function ComplaintTab({ showToast }) {
     if (!form.title.trim() || form.title.trim().length < 10) e.title = 'Provide a clear title (min 10 characters)'
     if (!form.description.trim() || form.description.trim().length < 30) e.description = 'Describe the issue in detail (min 30 characters)'
     if (!form.phone || !/^[6-9]\d{9}$/.test(form.phone)) e.phone = 'Valid 10-digit mobile number required for follow-up'
-    if (form.idType === 'aadhaar' && form.idNumber && !AADHAAR_RE.test(form.idNumber.replace(/\s/g, ''))) e.idNumber = 'Invalid Aadhaar'
-    if (form.idType === 'voter_id' && form.idNumber && !VOTER_RE.test(form.idNumber.toUpperCase())) e.idNumber = 'Invalid Voter ID'
+    if (!form.photo) e.photo = 'Issue photo is required for verification'
     return e
   }
 
-  const handleSubmit = () => {
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        set('photo', file.name)
+        set('photoPreview', event.target.result)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleSubmit = async () => {
     const e = validate()
     setErrors(e)
     if (Object.keys(e).length) return
+    
     const id = 'ISS-' + String(1000 + Math.floor(Math.random() * 9000))
-    setDone({ id, phone: form.phone, priority: form.priority })
-    showToast(`Complaint ${id} filed successfully!`)
+    const priority = assignPriority(form.category)
+    const daysMap = { High: 2, Medium: 5, Low: 10 }
+    const resolutionDate = new Date(Date.now() + daysMap[priority] * 24 * 60 * 60 * 1000).toLocaleDateString()
+    
+    // Initially set status to "Pending Verification"
+    const complaint = { 
+      id, 
+      ...form, 
+      priority, 
+      filed: new Date().toLocaleDateString(), 
+      status: 'Pending Verification',
+      resolutionDate,
+      photo: form.photoPreview
+    }
+    
+    // Store in localStorage immediately
+    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]')
+    complaints.push(complaint)
+    localStorage.setItem('complaints', JSON.stringify(complaints))
+    
+    // Show success immediately
+    setDone({ id, phone: form.phone, priority, resolutionDate })
+    showToast(`Complaint ${id} filed successfully! Verification in progress...`)
+
+    // Run verification in background asynchronously (don't await, let it happen in background)
+    verifyComplaint(complaint).then(verification => {
+      // Update complaint status based on verification result
+      const updatedComplaints = JSON.parse(localStorage.getItem('complaints') || '[]')
+      const complaintIndex = updatedComplaints.findIndex(c => c.id === id)
+      
+      if (complaintIndex !== -1) {
+        if (verification.isVerified) {
+          updatedComplaints[complaintIndex].status = 'Verified'
+          updatedComplaints[complaintIndex].verificationReason = 'All checks passed: Photo verified, Location confirmed, No duplicate detected'
+        } else {
+          updatedComplaints[complaintIndex].status = 'Rejected'
+          const reasons = []
+          if (!verification.checks.hasPhoto) reasons.push('No photo provided')
+          if (!verification.checks.hasLocation) reasons.push('Location not specified')
+          if (verification.checks.isDuplicate) reasons.push('Too many similar issues already reported in this area')
+          updatedComplaints[complaintIndex].verificationReason = reasons.join(', ')
+        }
+        updatedComplaints[complaintIndex].verificationTime = verification.verificationTime
+        localStorage.setItem('complaints', JSON.stringify(updatedComplaints))
+      }
+    })
   }
 
   const daysMap = { High: '2–3', Medium: '5–7', Low: '10–15' }
 
-  if (done) return (
-    <SuccessCard
-      icon={CheckCircle2} iconColor="var(--warning)"
-      title="Complaint Filed!"
-      message="Your grievance has been logged and assigned to the local Booth Officer and Ward Councillor for resolution."
-      refId={done.id} refLabel="Complaint ID"
-      steps={['Filed & Acknowledged', 'Assigned to Officer', 'Under Investigation', 'Resolved']}
-      note={`Expected resolution: ${daysMap[done.priority]} working days. Live updates will be sent to +91-${done.phone}.`}
-      onReset={() => { setDone(null); setForm(blank); setErrors({}) }}
-      resetLabel="File Another Complaint"
-    />
-  )
+  if (done) {
+    return (
+      <SuccessCard
+        icon={CheckCircle2} iconColor="var(--success)"
+        title="Complaint Filed Successfully!"
+        message="Your grievance has been filed and stored. Verification is happening in the background. Check 'My Complaints' later to see the verification result."
+        refId={done.id} refLabel="Complaint ID"
+        steps={['Submitted', 'Verifying...', 'Assigned to Officer', 'Under Investigation', 'Resolved']}
+        note={`Expected completion after verification: ${done.resolutionDate}. Status updates will be sent to +91-${done.phone}.`}
+        onReset={() => { setDone(null); setForm(blank); setErrors({}) }}
+        resetLabel="File Another Complaint"
+      />
+    )
+  }
 
   return (
     <div className="cpf-form">
@@ -477,45 +569,24 @@ function ComplaintTab({ showToast }) {
               onChange={e => set('description', e.target.value)} />
           </Field>
         </div>
+      </div>
 
-        <div className="cpf-priority-block">
-          <label className="cpf-label">Priority Level</label>
-          <div className="cpf-priority-row">
-            {['Low', 'Medium', 'High'].map(p => (
-              <button key={p}
-                className={`cpf-prio-btn ${p.toLowerCase()}${form.priority === p ? ' active' : ''}`}
-                onClick={() => set('priority', p)}>
-                {p} Priority
-              </button>
-            ))}
-          </div>
+      {/* Photo Upload Section */}
+      <div className="cpf-section">
+        <div className="cpf-sec-title"><FileText size={15} /> Issue Photo</div>
+        <p style={{ fontSize: '.9rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+          Upload a clear photo of the issue for verification. This helps us confirm it's a genuine public problem.
+        </p>
+        <div style={{ marginBottom: '1rem' }}>
+          <input type="file" accept="image/*" onChange={handlePhotoUpload} style={{ display: 'block', marginBottom: '.5rem' }} />
+          {errors.photo && <span style={{ color: 'var(--danger)', fontSize: '.85rem' }}>{errors.photo}</span>}
         </div>
-
-        {/* Optional identity */}
-        <div className="cpf-section" style={{ background: 'var(--surface-2)', borderRadius: '10px', padding: '1rem', marginTop: '.5rem' }}>
-          <div className="cpf-sec-title" style={{ marginBottom: '.75rem' }}><FileText size={14} /> Your Identity (Optional but helps verification)</div>
-          <div className="cpf-grid">
-            <Field label="Verify With">
-              <Sel value={form.idType} onChange={e => { set('idType', e.target.value); set('idNumber', '') }}>
-                <option value="none">Skip Identity</option>
-                <option value="voter_id">Voter ID / EPIC</option>
-                <option value="aadhaar">Aadhaar Number</option>
-              </Sel>
-            </Field>
-            {form.idType !== 'none' && (
-              <Field label={form.idType === 'voter_id' ? 'Voter ID (EPIC)' : 'Aadhaar Number'} error={errors.idNumber}>
-                <Inp error={errors.idNumber}
-                  className="cpf-input mono"
-                  placeholder={form.idType === 'voter_id' ? 'ABC0000000' : 'XXXX XXXX XXXX'}
-                  value={form.idNumber}
-                  onChange={e => set('idNumber', form.idType === 'voter_id'
-                    ? e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10)
-                    : fmtAadhaar(e.target.value)
-                  )} />
-              </Field>
-            )}
+        {form.photoPreview && (
+          <div style={{ border: '1px solid var(--border)', padding: '1rem', marginTop: '1rem' }}>
+            <img src={form.photoPreview} alt="Issue photo" style={{ maxWidth: '100%', maxHeight: '300px', objectFit: 'cover' }} />
+            <p style={{ fontSize: '.8rem', color: 'var(--text-muted)', marginTop: '.5rem' }}>Photo: {form.photo}</p>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="cpf-form-footer">
@@ -820,6 +891,112 @@ function WardAlertsTab() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+//  TAB 8 – COMPLAINT HISTORY
+// ═══════════════════════════════════════════════════════════════════════════
+function HistoryTab() {
+  const [complaints, setComplaints] = useState([])
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('complaints') || '[]')
+    setComplaints(stored.reverse())
+  }, [])
+
+  const STATUS_COLOR = { 
+    'Pending Verification': '#3b82f6',
+    'Verified': '#10b981', 
+    'Rejected': '#ef4444',
+    'Filed': '#3b82f6', 
+    'In Progress': '#f59e0b', 
+    'Resolved': '#10b981' 
+  }
+
+  const getStatusIcon = (status) => {
+    switch(status) {
+      case 'Pending Verification':
+        return '⏳'
+      case 'Verified':
+        return '✓'
+      case 'Rejected':
+        return '✕'
+      case 'Filed':
+        return '📝'
+      case 'In Progress':
+        return '⚙️'
+      case 'Resolved':
+        return '✅'
+      default:
+        return '•'
+    }
+  }
+
+  if (complaints.length === 0) {
+    return (
+      <div className="cpf-form">
+        <div className="cpf-section">
+          <div className="cpf-sec-title"><FileText size={15} /> My Complaints History</div>
+          <div className="cpf-empty" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+            <FileText size={48} style={{ color: 'var(--border)', marginBottom: '1rem' }} />
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '.5rem' }}>No complaints filed yet.</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '.9rem' }}>Your grievances will appear here for easy tracking.</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="cpf-form">
+      <div className="cpf-section">
+        <div className="cpf-sec-title"><FileText size={15} /> My Complaints History</div>
+        <div style={{ fontSize: '.9rem', color: 'var(--text-secondary)', marginTop: '.5rem' }}>
+          {complaints.length} complaint{complaints.length !== 1 ? 's' : ''} filed
+        </div>
+      </div>
+
+      <div className="cpf-issues-list">
+        {complaints.map(c => (
+          <div key={c.id} className="cpf-issue-card" style={{ opacity: c.status === 'Rejected' ? 0.7 : 1, borderLeft: `4px solid ${STATUS_COLOR[c.status] || '#666'}` }}>
+            <div className="cpf-issue-meta-top">
+              <span className="cpf-issue-id">{c.id}</span>
+              <span className="cpf-issue-status" style={{ background: STATUS_COLOR[c.status] + '1a', color: STATUS_COLOR[c.status] }}>
+                {getStatusIcon(c.status)} {c.status}
+              </span>
+            </div>
+            <div className="cpf-issue-title">{c.title}</div>
+            <div className="cpf-issue-tags">
+              <span className="cpf-tag">{c.category}</span>
+              <span className="cpf-tag">{c.booth}</span>
+              <span className="cpf-tag">{c.filed}</span>
+              {c.status !== 'Rejected' && <span className="cpf-tag">Expected: {c.resolutionDate}</span>}
+            </div>
+            
+            {/* Verification details for rejected or verified items */}
+            {(c.status === 'Rejected' || c.status === 'Verified') && c.verificationReason && (
+              <div style={{ marginTop: '.75rem', padding: '.75rem', background: STATUS_COLOR[c.status] + '10', borderRadius: '2px', fontSize: '.85rem', color: STATUS_COLOR[c.status] }}>
+                <strong>{c.status === 'Verified' ? '✓ Verification Passed:' : '✕ Verification Failed:'}</strong> {c.verificationReason}
+              </div>
+            )}
+
+            {/* Pending verification indicator */}
+            {c.status === 'Pending Verification' && (
+              <div style={{ marginTop: '.75rem', padding: '.75rem', background: '#3b82f61a', borderRadius: '2px', fontSize: '.85rem', color: '#3b82f6' }}>
+                <strong>⏳ Verification in progress...</strong> System is analyzing your complaint.
+              </div>
+            )}
+
+            {c.photoPreview && (
+              <div style={{ marginTop: '.75rem' }}>
+                <img src={c.photoPreview} alt="Issue" style={{ maxWidth: '150px', maxHeight: '120px', objectFit: 'cover', border: '1px solid var(--border)' }} />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 //  MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════
 const TABS = [
@@ -829,6 +1006,7 @@ const TABS = [
   { id: 'schemes',       label: 'Scheme Eligibility',  icon: Award },
   { id: 'survey',        label: 'Citizen Survey',      icon: BarChart2 },
   { id: 'track',         label: 'Track Issues',        icon: ClipboardList },
+  { id: 'history',       label: 'My Complaints',       icon: FileText },
   { id: 'notifications', label: 'Ward Alerts',         icon: Bell },
 ]
 
@@ -843,7 +1021,8 @@ export default function CitizenPortal() {
       case 'complaint': return <ComplaintTab showToast={showToast} />
       case 'schemes':   return <SchemesTab />
       case 'survey':    return <SurveyTab showToast={showToast} />
-      case 'track':         return <TrackTab />
+      case 'track':     return <TrackTab />
+      case 'history':   return <HistoryTab />
       case 'notifications': return <WardAlertsTab />
       default:          return null
     }

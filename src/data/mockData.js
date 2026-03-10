@@ -1,10 +1,16 @@
 export const BOOTHS = [
-  { id: 'B-141', name: 'Booth 141', lat: 19.0760, lng: 72.8777, voters: 892,  topIssue: 'Road Damage',  coverage: 78, engagement: 82, density: 'High',   officer: 'Ranjit Kamble' },
-  { id: 'B-142', name: 'Booth 142', lat: 19.0800, lng: 72.8850, voters: 1034, topIssue: 'Water Supply', coverage: 65, engagement: 68, density: 'Medium',  officer: 'Priya Singh'   },
-  { id: 'B-143', name: 'Booth 143', lat: 19.0720, lng: 72.8920, voters: 756,  topIssue: 'Electricity',  coverage: 49, engagement: 51, density: 'Low',     officer: 'Sonal Mishra'  },
-  { id: 'B-144', name: 'Booth 144', lat: 19.0850, lng: 72.8800, voters: 810,  topIssue: 'Healthcare',   coverage: 72, engagement: 76, density: 'High',    officer: 'Hari Thakur'   },
-  { id: 'B-145', name: 'Booth 145', lat: 19.0680, lng: 72.8700, voters: 673,  topIssue: 'Water Supply', coverage: 61, engagement: 64, density: 'Medium',  officer: 'Deepak Sawant' },
-  { id: 'B-146', name: 'Booth 146', lat: 19.0900, lng: 72.8950, voters: 656,  topIssue: 'Road Damage',  coverage: 38, engagement: 41, density: 'Low',     officer: 'Mala Pawar'    },
+  { id: 'B-141', name: 'Booth 141 - Connaught Place', lat: 28.6295, lng: 77.1896, voters: 892,  topIssue: 'Road Damage',  coverage: 78, engagement: 82, density: 'High',   officer: 'Ranjit Kamble' },
+  { id: 'B-142', name: 'Booth 142 - Karol Bagh', lat: 28.6414, lng: 77.1869, voters: 1034, topIssue: 'Water Supply', coverage: 65, engagement: 68, density: 'Medium',  officer: 'Priya Singh'   },
+  { id: 'B-143', name: 'Booth 143 - Patel Nagar', lat: 28.6352, lng: 77.2005, voters: 756,  topIssue: 'Electricity',  coverage: 49, engagement: 51, density: 'Low',     officer: 'Sonal Mishra'  },
+  { id: 'B-144', name: 'Booth 144 - Rajiv Chowk', lat: 28.6328, lng: 77.2197, voters: 810,  topIssue: 'Healthcare',   coverage: 72, engagement: 76, density: 'High',    officer: 'Hari Thakur'   },
+  { id: 'B-145', name: 'Booth 145 - Civil Lines', lat: 28.6476, lng: 77.2316, voters: 673,  topIssue: 'Water Supply', coverage: 61, engagement: 64, density: 'Medium',  officer: 'Deepak Sawant' },
+  { id: 'B-146', name: 'Booth 146 - Kasturba Nagar', lat: 28.6160, lng: 77.1874, voters: 656,  topIssue: 'Road Damage',  coverage: 38, engagement: 41, density: 'Low',     officer: 'Mala Pawar'    },
+  { id: 'B-147', name: 'Booth 147 - New Delhi', lat: 28.5921, lng: 77.2046, voters: 945,  topIssue: 'Electricity',  coverage: 75, engagement: 79, density: 'High',   officer: 'Vikram Desai'  },
+  { id: 'B-148', name: 'Booth 148 - Green Park', lat: 28.5504, lng: 77.1974, voters: 812,  topIssue: 'Water Supply', coverage: 68, engagement: 71, density: 'Medium',  officer: 'Anjali Verma'  },
+  { id: 'B-149', name: 'Booth 149 - Dwarka', lat: 28.5921, lng: 77.0461, voters: 1123, topIssue: 'Road Damage',  coverage: 82, engagement: 85, density: 'High',   officer: 'Suresh Kumar'  },
+  { id: 'B-150', name: 'Booth 150 - South Delhi', lat: 28.5244, lng: 77.1855, voters: 734,  topIssue: 'Healthcare',   coverage: 55, engagement: 58, density: 'Medium',  officer: 'Meera Sharma'  },
+  { id: 'B-151', name: 'Booth 151 - Hauz Khas', lat: 28.5506, lng: 77.2034, voters: 567,  topIssue: 'Drainage',     coverage: 42, engagement: 45, density: 'Low',     officer: 'Arjun Singh'   },
+  { id: 'B-152', name: 'Booth 152 - Noida Border', lat: 28.5355, lng: 77.3710, voters: 1089, topIssue: 'Electricity',  coverage: 71, engagement: 74, density: 'High',   officer: 'Neha Kapoor'   },
 ];
 
 export const VOTERS = [
@@ -213,6 +219,17 @@ export const GRAPH_DATA = {
 
 export const NODE_COLORS = { voter:'#6366f1', booth:'#10b981', ward:'#f59e0b', scheme:'#8b5cf6', issue:'#ef4444', worker:'#3b82f6' };
 export const NODE_SIZES  = { voter:12, booth:18, ward:22, scheme:14, issue:14, worker:14 };
+
+export const VOTER_DB = [
+  { voterId: 'MHA2401001', name: 'Ramesh Yadav', aadhaar: '234567890123', dob: '1980-03-10', booth: 'Booth 142', status: 'Active', officer: 'Priya Singh', enrolled: '2024-01-15', gender: 'Male' },
+  { voterId: 'MHA2401002', name: 'Sunita Devi',  aadhaar: '345678901234', dob: '1987-07-22', booth: 'Booth 142', status: 'Active', officer: 'Priya Singh', enrolled: '2024-02-01', gender: 'Female' },
+  { voterId: 'DEL2401003', name: 'Aakash Singh', aadhaar: '456789012345', dob: '2004-11-05', booth: 'Booth 141', status: 'Active', officer: 'Ranjit Kamble', enrolled: '2024-07-10', gender: 'Male' },
+  { voterId: 'DEL2401004', name: 'Kamla Bai',    aadhaar: '567890123456', dob: '1958-01-20', booth: 'Booth 143', status: 'Active', officer: 'Sonal Mishra', enrolled: '2024-03-05', gender: 'Female' },
+  { voterId: 'MHA2401005', name: 'Mohan Patel',  aadhaar: '678901234567', dob: '1972-05-15', booth: 'Booth 144', status: 'Pending', officer: 'Hari Thakur', enrolled: '2026-02-20', gender: 'Male' },
+  { voterId: 'DEL2401006', name: 'Priya Chavan', aadhaar: '789012345678', dob: '1995-08-30', booth: 'Booth 141', status: 'Active', officer: 'Ranjit Kamble', enrolled: '2024-06-12', gender: 'Female' },
+  { voterId: 'MHA2401007', name: 'Dinesh Kumar', aadhaar: '890123456789', dob: '1968-11-25', booth: 'Booth 145', status: 'Active', officer: 'Deepak Sawant', enrolled: '2024-01-08', gender: 'Male' },
+  { voterId: 'DEL2401008', name: 'Anita Desai',  aadhaar: '901234567890', dob: '1990-02-14', booth: 'Booth 146', status: 'Active', officer: 'Mala Pawar', enrolled: '2023-12-25', gender: 'Female' },
+];
 
 export const AI_MESSAGES = [
   'Dear Voter, the Water Supply scheme in Booth 142 is approved. Enroll at your nearest booth office. — Ward 8',

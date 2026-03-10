@@ -14,51 +14,56 @@ const PAGE_LABELS = {
 }
 
 export default function Topbar() {
-  const { darkMode, toggleDarkMode, activePage, setMobileSidebarOpen, mobileSidebarOpen, showToast, setNotifPanelOpen } = useApp()
+  const { darkMode, toggleDarkMode, activePage, setMobileSidebarOpen, mobileSidebarOpen, showToast, setNotifPanelOpen, user } = useApp()
 
   return (
-    <header className="topbar">
-      <div className="topbar-left">
-        <button
-          className="mobile-menu-btn icon-btn"
-          onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          style={{ border: 'none' }}
-        >
-          <Menu size={20} />
-        </button>
-        <span className="breadcrumb">{PAGE_LABELS[activePage] || 'Dashboard'}</span>
+    <>
+      <div className="ticker-bar">
+        Portal Status: Active | Last Updated: {new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })} | Ref: GOV-2024
       </div>
-
-      <div className="topbar-right">
-        <div className="search-box">
-          <Search size={14} />
-          <input placeholder="Search voters, booths, issues…" />
+      <header className="topbar">
+        <div className="topbar-left">
+          <button
+            className="mobile-menu-btn icon-btn"
+            onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+            style={{ border: 'none' }}
+          >
+            <Menu size={20} />
+          </button>
+          <span className="breadcrumb">{PAGE_LABELS[activePage] || 'Dashboard'}</span>
         </div>
 
-        <button
-          className="icon-btn"
-          title="Refresh data"
-          onClick={() => showToast('Data refreshed successfully')}
-        >
-          <RefreshCw size={15} />
-        </button>
+        <div className="topbar-right">
+          <div className="search-box">
+            <Search size={14} />
+            <input placeholder="Search voters, booths, issues…" />
+          </div>
 
-        <button
-          className="icon-btn"
-          title="Notifications"
-          onClick={() => setNotifPanelOpen(true)}
-        >
-          <Bell size={15} />
-          <span className="notif-dot" />
-        </button>
+          <button
+            className="icon-btn"
+            title="Refresh data"
+            onClick={() => showToast('Data refreshed successfully')}
+          >
+            <RefreshCw size={15} />
+          </button>
 
-        <button className="theme-toggle" onClick={toggleDarkMode} title="Toggle theme">
-          {darkMode ? <Sun size={14} /> : <Moon size={14} />}
-          {darkMode ? 'Light' : 'Dark'}
-        </button>
+          <button
+            className="icon-btn"
+            title="Notifications"
+            onClick={() => setNotifPanelOpen(true)}
+          >
+            <Bell size={15} />
+            <span className="notif-dot" />
+          </button>
 
-        <div className="topbar-avatar" title="Profile">VK</div>
-      </div>
-    </header>
+          <button className="theme-toggle" onClick={toggleDarkMode} title="Toggle theme">
+            {darkMode ? <Sun size={14} /> : <Moon size={14} />}
+            {darkMode ? 'Light' : 'Dark'}
+          </button>
+
+          <div className="topbar-avatar" title={`${user?.name || 'Admin'}`}>{user?.name?.split(' ').map(n => n[0]).join('') || 'A'}</div>
+        </div>
+      </header>
+    </>
   )
 }

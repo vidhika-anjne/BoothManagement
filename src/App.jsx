@@ -4,6 +4,7 @@ import Sidebar from './components/layout/Sidebar.jsx'
 import Topbar from './components/layout/Topbar.jsx'
 import Toast from './components/shared/Toast.jsx'
 import NotificationsPanel from './components/shared/NotificationsPanel.jsx'
+import AdminSignIn from './pages/AdminSignIn.jsx'
 
 const Dashboard     = lazy(() => import('./pages/Dashboard.jsx'))
 const BoothMap      = lazy(() => import('./pages/BoothMap.jsx'))
@@ -14,6 +15,7 @@ const AIInsights    = lazy(() => import('./pages/AIInsights.jsx'))
 const Communication = lazy(() => import('./pages/Communication.jsx'))
 const Notifications = lazy(() => import('./pages/Notifications.jsx'))
 const Settings      = lazy(() => import('./pages/Settings.jsx'))
+const BeneficiaryLinkage = lazy(() => import('./pages/BeneficiaryLinkage.jsx'))
 
 const PAGE_MAP = {
   dashboard:     Dashboard,
@@ -25,14 +27,24 @@ const PAGE_MAP = {
   communication: Communication,
   notifications: Notifications,
   settings:      Settings,
+  beneficiaries: BeneficiaryLinkage,
 }
 
 function App() {
-  const { darkMode, activePage, mobileSidebarOpen } = useApp()
+  const { darkMode, activePage, mobileSidebarOpen, isAuthenticated, signIn } = useApp()
 
   useEffect(() => {
     document.documentElement.className = darkMode ? 'dark' : ''
   }, [darkMode])
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <AdminSignIn onSignIn={signIn} />
+        <Toast />
+      </>
+    )
+  }
 
   const PageComponent = PAGE_MAP[activePage] || Dashboard
 

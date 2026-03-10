@@ -45,9 +45,9 @@ export default function BoothMap() {
 
       <div className="map-wrapper" style={{ position: 'relative', marginBottom: '1.25rem' }}>
         <MapContainer
-          center={[19.076, 72.877]}
+          center={[28.7041, 77.1025]}
           zoom={12}
-          style={{ height: 460, borderRadius: 12, border: '1px solid var(--border)', zIndex: 1 }}
+          style={{ height: 460, borderRadius: 0, border: '1px solid var(--border)', zIndex: 1 }}
           zoomControl={false}
         >
           <TileLayer
