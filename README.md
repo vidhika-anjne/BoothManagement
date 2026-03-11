@@ -211,7 +211,3 @@ The application includes mock data for:
 ## Contributing
 
 This is a prototype/demo application. For production use, implement proper backend services and security measures.
-
-## License
-
-MIT
