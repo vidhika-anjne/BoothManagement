@@ -980,3 +980,50 @@ select.cpf-input{cursor:pointer}
   .dgl-otp-box{width:38px;height:46px;font-size:1.1rem}
   .dgl-topstrip-gov{display:none}
 }
+
+/* ── Registration full-width layout ─────────────────────────────────────── */
+/* When step === 'registration', the body becomes single-column centered */
+.dgl-center{display:flex;flex-direction:column;align-items:center;gap:.85rem;width:100%}
+
+/* OTP inputs alias (same as dgl-otp-row but left-aligned) */
+.dgl-otp-inputs{display:flex;gap:.5rem;justify-content:center}
+
+/* Success icon fallback */
+.dgl-success-icon{display:flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:50%;background:rgba(16,185,129,.12);color:#10b981;margin:0 auto;animation:dgl-pop .4s cubic-bezier(.4,0,.2,1)}
+
+/* Registration form override — body goes full-width single col */
+.dgl-page .dgl-body:has(.dgl-center){grid-template-columns:1fr;max-width:780px}
+
+/* ── Registration form sections ─────────────────────────────────────────── */
+.reg-section{background:#fff;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.06);overflow:hidden}
+.dark .reg-section{background:#161b22;box-shadow:0 2px 16px rgba(0,0,0,.3)}
+
+.reg-section-title{display:flex;align-items:center;gap:.55rem;font-size:.86rem;font-weight:800;color:#1e293b;padding:.9rem 1.25rem;border-bottom:1px solid #f1f5f9;background:linear-gradient(90deg,#fff9f5,#fff)}
+.dark .reg-section-title{color:#f1f5f9;background:linear-height(90deg,#1a1f2a,#161b22);border-bottom-color:#21262d}
+.reg-section-title svg{color:#f97316;flex-shrink:0}
+
+.reg-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;padding:1.25rem}
+
+.reg-field{display:flex;flex-direction:column;gap:.35rem}
+.reg-label{font-size:.72rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace}
+.dark .reg-label{color:#8b949e}
+
+.reg-input,.reg-select{width:100%;padding:.52rem .75rem;border:1.5px solid #e2e8f0;border-radius:9px;font-size:.875rem;font-family:'Zilla Slab',serif;color:#1e293b;background:#fff;outline:none;transition:border-color .18s,box-shadow .18s;appearance:none;-webkit-appearance:none}
+.dark .reg-input,.dark .reg-select{background:#0d1117;border-color:#30363d;color:#f1f5f9}
+.reg-input:focus,.reg-select:focus{border-color:#f97316;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+.reg-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;padding-right:2.2rem;cursor:pointer}
+.reg-input-err{border-color:#ef4444!important;box-shadow:0 0 0 3px rgba(239,68,68,.1)!important}
+.reg-err{font-size:.72rem;color:#ef4444;font-weight:600;display:flex;align-items:center;gap:.2rem}
+
+.reg-checks{display:flex;flex-direction:column;gap:.5rem;padding:.3rem 0}
+.reg-check{display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.85rem;color:#475569;user-select:none}
+.dark .reg-check{color:#94a3b8}
+.reg-check input[type=checkbox]{width:16px;height:16px;accent-color:#f97316;cursor:pointer;flex-shrink:0}
+.reg-check span{line-height:1.35}
+
+/* ── Responsive for registration grid ──────────────────────────────────── */
+@media(max-width:600px){
+  .reg-row{grid-template-columns:1fr;padding:1rem}
+  .reg-field[style*="span 2"]{grid-column:span 1!important}
+}
+

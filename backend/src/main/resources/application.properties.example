@@ -1,0 +1,16 @@
+spring.application.name=backend
+
+# ── PostgreSQL Database Configuration ─────────────────────────────────────
+# Copy this file to application.properties and fill in your own values.
+# application.properties is gitignored — never commit real credentials.
+spring.datasource.url=jdbc:postgresql://localhost:5432/booth_management
+spring.datasource.username=YOUR_DB_USERNAME
+spring.datasource.password=YOUR_DB_PASSWORD
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# ── JPA / Hibernate Configuration ─────────────────────────────────────────
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+# Dialect is auto-detected by Hibernate 6+ — no need to set it explicitly.
+# spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect

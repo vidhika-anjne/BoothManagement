@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ── Backend: secrets (copy application.properties.example → application.properties) ──
+backend/src/main/resources/application.properties
+
+# ── Backend: Maven build output ───────────────────────────────────────────
+backend/target/
+!backend/.mvn/wrapper/maven-wrapper.properties
