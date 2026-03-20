@@ -10,13 +10,15 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Seeds the voter_profiles table from voters_demo.json on startup if the table is empty.
+ * Seeds (or re-seeds) the voter_profiles table from voters_demo.json on every startup.
+ * The table is truncated first so changes to the JSON are always reflected.
  * Runs at Order(3), after SchemeDataLoader(1) and BoothDataLoader(2).
  */
 @Service
@@ -33,11 +35,17 @@ public class VoterDataLoader implements CommandLineRunner {
     private ObjectMapper objectMapper;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
+        // Check if data already exists to prevent running on every restart
         if (voterRepository.count() > 0) {
-            System.out.println("[VoterDataLoader] voter_profiles already populated — skipping.");
+            System.out.println("[VoterDataLoader] Voters already loaded. Skipping.");
             return;
         }
+
+        // Always truncate and reload so the JSON is the single source of truth
+        voterRepository.deleteAll();
+        System.out.println("[VoterDataLoader] Cleared voter_profiles table.");
 
         Resource resource = resourceLoader.getResource("classpath:json/voters_demo.json");
         List<Voter> voters = new ArrayList<>();
@@ -65,7 +73,13 @@ public class VoterDataLoader implements CommandLineRunner {
                 voter.setAnnualIncome(node.path("annualIncome").asInt());
                 voter.setGovernmentEmployee(node.path("governmentEmployee").asBoolean());
 
-                // Enum fields — parse with fallback to avoid crashes on bad data
+                // Mobile number (used for citizen portal login)
+                String mobile = node.path("mobile_number").asText("").trim();
+                if (!mobile.isEmpty()) {
+                    voter.setMobileNumber(mobile);
+                }
+
+                // Enum fields — parse with fallback
                 try {
                     voter.setGender(Voter.Gender.valueOf(node.path("gender").asText()));
                 } catch (IllegalArgumentException e) {
@@ -110,6 +124,6 @@ public class VoterDataLoader implements CommandLineRunner {
         }
 
         voterRepository.saveAll(voters);
-        System.out.println("[VoterDataLoader] Saved " + voters.size() + " voters from voters_demo.json.");
+        System.out.println("[VoterDataLoader] Loaded " + voters.size() + " voters from voters_demo.json.");
     }
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 @Repository
 public interface VoterRepository extends JpaRepository<Voter, Long> {
     Optional<Voter> findByVoterId(String voterId);
+    Optional<Voter> findByMobileNumber(String mobileNumber);
     List<Voter> findByBoothId(String boothId);
     List<Voter> findByAssemblyConstituencyAc(String ac);
 }

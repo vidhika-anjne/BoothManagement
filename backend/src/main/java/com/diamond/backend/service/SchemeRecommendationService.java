@@ -30,6 +30,7 @@ public class SchemeRecommendationService {
     private static final int WEIGHT_OCCUPATION_MATCH  = 3;  // occupation-derived role
     private static final int WEIGHT_SOCIO_MATCH       = 2;  // caste / income / minority
     private static final int WEIGHT_EMPLOYMENT_MATCH  = 2;  // unemployment / self-employment
+    private static final int WEIGHT_UNIVERSAL_MATCH   = 2;  // citizen/universal
     private static final int WEIGHT_AGE_MATCH         = 1;  // age band relevance
 
     /** Theoretical maximum possible score per scheme (used for normalisation). */
@@ -37,10 +38,11 @@ public class SchemeRecommendationService {
             + WEIGHT_OCCUPATION_MATCH
             + WEIGHT_SOCIO_MATCH
             + WEIGHT_EMPLOYMENT_MATCH
-            + WEIGHT_AGE_MATCH;   // = 12.0
+            + WEIGHT_UNIVERSAL_MATCH
+            + WEIGHT_AGE_MATCH;   // = 14.0
 
     /** Minimum normalised score a scheme must exceed to be included. */
-    private static final double SCORE_THRESHOLD = 0.4;
+    private static final double SCORE_THRESHOLD = 0.2;
 
     /** Maximum number of recommendations returned. */
     private static final int MAX_RESULTS = 5;
@@ -71,6 +73,7 @@ public class SchemeRecommendationService {
         SEMANTIC_ALIASES.put("obc",               Set.of("obc", "backward", "other_backward"));
         SEMANTIC_ALIASES.put("minority",          Set.of("minority", "religious_minority", "linguistic_minority"));
         SEMANTIC_ALIASES.put("disabled",          Set.of("disabled", "disability", "differently_abled", "divyangjan", "pwd"));
+        SEMANTIC_ALIASES.put("citizen",           Set.of("citizen", "everyone", "public", "anybody", "people", "generic"));
         // Demographics
         SEMANTIC_ALIASES.put("student",           Set.of("student", "youth", "scholarship", "education", "apprentice"));
         SEMANTIC_ALIASES.put("youth",             Set.of("youth", "young", "skill", "startup", "entrepreneur", "employment"));
@@ -164,7 +167,8 @@ public class SchemeRecommendationService {
         // — Minority & disability
         if (voter.isMinority())  roles.add("minority");
         if (voter.isDisability()) roles.add("disabled");
-
+        // — Always add "citizen" for universal schemes
+        roles.add("citizen");
         // — Age bands
         if (voter.getAge() != null) {
             if (voter.getAge() >= 18 && voter.getAge() <= 35) roles.add("youth");
@@ -258,7 +262,16 @@ public class SchemeRecommendationService {
             }
         }
 
-        // Tier 4 – age band
+        // Tier 4 – universal
+        if (voterRoles.contains("citizen")) {
+            for (String beneficiary : scheme.getBeneficiaries()) {
+                if (matchesRole("citizen", beneficiary)) {
+                    score += WEIGHT_UNIVERSAL_MATCH;
+                }
+            }
+        }
+
+        // Tier 5 – age band
         if (voter.getAge() != null && scheme.getAgeMin() != null && scheme.getAgeMax() != null) {
             if (voter.getAge() >= scheme.getAgeMin() && voter.getAge() <= scheme.getAgeMax()) {
                 score += WEIGHT_AGE_MATCH;

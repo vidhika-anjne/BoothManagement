@@ -21,7 +21,8 @@
     "annualIncome": 122000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "SAFAI_KARAMCHARI"
+    "occupation": "SAFAI_KARAMCHARI",
+    "mobile_number": "9810000001"
   },
   {
     "voterId": "DL002",
@@ -45,7 +46,8 @@
     "annualIncome": 420000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000002"
   },
   {
     "voterId": "DL003",
@@ -69,7 +71,8 @@
     "annualIncome": 560000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "TEACHER_OR_FACULTY"
+    "occupation": "TEACHER_OR_FACULTY",
+    "mobile_number": "9810000003"
   },
   {
     "voterId": "DL004",
@@ -93,7 +96,8 @@
     "annualIncome": 380000,
     "employmentStatus": "Employed",
     "governmentEmployee": false,
-    "occupation": "HEALTH_WORKER"
+    "occupation": "HEALTH_WORKER",
+    "mobile_number": "9810000004"
   },
   {
     "voterId": "DL005",
@@ -117,7 +121,8 @@
     "annualIncome": 95000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "ORGANIZED_WORKER"
+    "occupation": "ORGANIZED_WORKER",
+    "mobile_number": "9810000005"
   },
   {
     "voterId": "DL006",
@@ -141,7 +146,8 @@
     "annualIncome": 310000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000006"
   },
   {
     "voterId": "DL007",
@@ -165,7 +171,8 @@
     "annualIncome": 88000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "UNORGANIZED_WORKER"
+    "occupation": "UNORGANIZED_WORKER",
+    "mobile_number": "9810000007"
   },
   {
     "voterId": "DL008",
@@ -189,7 +196,8 @@
     "annualIncome": 490000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000008"
   },
   {
     "voterId": "DL009",
@@ -213,7 +221,8 @@
     "annualIncome": 275000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000009"
   },
   {
     "voterId": "DL010",
@@ -237,7 +246,8 @@
     "annualIncome": 72000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "SAFAI_KARAMCHARI"
+    "occupation": "SAFAI_KARAMCHARI",
+    "mobile_number": "9810000010"
   },
   {
     "voterId": "DL011",
@@ -261,7 +271,8 @@
     "annualIncome": 180000,
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
-    "occupation": "STREET_VENDOR"
+    "occupation": "STREET_VENDOR",
+    "mobile_number": "9810000011"
   },
   {
     "voterId": "DL012",
@@ -285,7 +296,8 @@
     "annualIncome": 335000,
     "employmentStatus": "Employed",
     "governmentEmployee": false,
-    "occupation": "TEACHER_OR_FACULTY"
+    "occupation": "TEACHER_OR_FACULTY",
+    "mobile_number": "9810000012"
   },
   {
     "voterId": "DL013",
@@ -309,7 +321,8 @@
     "annualIncome": 720000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000013"
   },
   {
     "voterId": "DL014",
@@ -333,7 +346,8 @@
     "annualIncome": 410000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "HEALTH_WORKER"
+    "occupation": "HEALTH_WORKER",
+    "mobile_number": "9810000014"
   },
   {
     "voterId": "DL015",
@@ -357,7 +371,8 @@
     "annualIncome": 150000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "ORGANIZED_WORKER"
+    "occupation": "ORGANIZED_WORKER",
+    "mobile_number": "9810000015"
   },
   {
     "voterId": "DL016",
@@ -381,7 +396,8 @@
     "annualIncome": 96000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "UNORGANIZED_WORKER"
+    "occupation": "UNORGANIZED_WORKER",
+    "mobile_number": "9810000016"
   },
   {
     "voterId": "DL017",
@@ -405,7 +421,8 @@
     "annualIncome": 580000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000017"
   },
   {
     "voterId": "DL018",
@@ -429,7 +446,8 @@
     "annualIncome": 445000,
     "employmentStatus": "Employed",
     "governmentEmployee": false,
-    "occupation": "HEALTH_WORKER"
+    "occupation": "HEALTH_WORKER",
+    "mobile_number": "9810000018"
   },
   {
     "voterId": "DL019",
@@ -453,7 +471,8 @@
     "annualIncome": 108000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "SAFAI_KARAMCHARI"
+    "occupation": "SAFAI_KARAMCHARI",
+    "mobile_number": "9810000019"
   },
   {
     "voterId": "DL020",
@@ -477,7 +496,8 @@
     "annualIncome": 240000,
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
-    "occupation": "STREET_VENDOR"
+    "occupation": "STREET_VENDOR",
+    "mobile_number": "9810000020"
   },
   {
     "voterId": "DL021",
@@ -501,7 +521,8 @@
     "annualIncome": 390000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000021"
   },
   {
     "voterId": "DL022",
@@ -525,7 +546,8 @@
     "annualIncome": 115000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "UNORGANIZED_WORKER"
+    "occupation": "UNORGANIZED_WORKER",
+    "mobile_number": "9810000022"
   },
   {
     "voterId": "DL023",
@@ -549,7 +571,8 @@
     "annualIncome": 98000,
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
-    "occupation": "STREET_VENDOR"
+    "occupation": "STREET_VENDOR",
+    "mobile_number": "9810000023"
   },
   {
     "voterId": "DL024",
@@ -573,7 +596,8 @@
     "annualIncome": 290000,
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
-    "occupation": "ARTISANS_SPINNERS_AND_WEAVERS"
+    "occupation": "ARTISANS_SPINNERS_AND_WEAVERS",
+    "mobile_number": "9810000024"
   },
   {
     "voterId": "DL025",
@@ -597,7 +621,8 @@
     "annualIncome": 320000,
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
-    "occupation": "KHADI_ARTISAN"
+    "occupation": "KHADI_ARTISAN",
+    "mobile_number": "9810000025"
   },
   {
     "voterId": "DL026",
@@ -621,7 +646,8 @@
     "annualIncome": 60000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "SAFAI_KARAMCHARI"
+    "occupation": "SAFAI_KARAMCHARI",
+    "mobile_number": "9810000026"
   },
   {
     "voterId": "DL027",
@@ -645,7 +671,8 @@
     "annualIncome": 210000,
     "employmentStatus": "Employed",
     "governmentEmployee": false,
-    "occupation": "JOURNALIST"
+    "occupation": "JOURNALIST",
+    "mobile_number": "9810000027"
   },
   {
     "voterId": "DL028",
@@ -669,7 +696,8 @@
     "annualIncome": 0,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "TEACHER_OR_FACULTY"
+    "occupation": "TEACHER_OR_FACULTY",
+    "mobile_number": "9810000028"
   },
   {
     "voterId": "DL029",
@@ -693,7 +721,8 @@
     "annualIncome": 138000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "ORGANIZED_WORKER"
+    "occupation": "ORGANIZED_WORKER",
+    "mobile_number": "9810000029"
   },
   {
     "voterId": "DL030",
@@ -717,7 +746,8 @@
     "annualIncome": 280000,
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
-    "occupation": "STREET_VENDOR"
+    "occupation": "STREET_VENDOR",
+    "mobile_number": "9810000030"
   },
   {
     "voterId": "DL031",
@@ -741,7 +771,8 @@
     "annualIncome": 650000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "HEALTH_WORKER"
+    "occupation": "HEALTH_WORKER",
+    "mobile_number": "9810000031"
   },
   {
     "voterId": "DL032",
@@ -765,7 +796,8 @@
     "annualIncome": 82000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "UNORGANIZED_WORKER"
+    "occupation": "UNORGANIZED_WORKER",
+    "mobile_number": "9810000032"
   },
   {
     "voterId": "DL033",
@@ -789,7 +821,8 @@
     "annualIncome": 195000,
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
-    "occupation": "ARTISANS_SPINNERS_AND_WEAVERS"
+    "occupation": "ARTISANS_SPINNERS_AND_WEAVERS",
+    "mobile_number": "9810000033"
   },
   {
     "voterId": "DL034",
@@ -799,83 +832,61 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-26",
-    "houseNumber": "CSD-KP/12",
-    "partNumber": 26,
+    "boothId": "B-25",
+    "houseNumber": "DG-KP/T4",
+    "partNumber": 25,
     "partName": "DHOBI GHAT KIRBY PLACE",
-    "section": "CSD Complex, Kirby Place",
+    "section": "T-Block Huts, Dhobi Ghat, Kirby Place",
     "area": "Urban",
-    "casteCategory": "General",
+    "casteCategory": "SC",
     "disability": false,
     "minority": false,
     "student": false,
-    "bpl": false,
-    "annualIncome": 510000,
-    "employmentStatus": "Employed",
-    "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "bpl": true,
+    "annualIncome": 105000,
+    "employmentStatus": "Unemployed",
+    "governmentEmployee": false,
+    "occupation": "SAFAI_KARAMCHARI",
+    "mobile_number": "9810000034"
   },
   {
     "voterId": "DL035",
-    "name": "Mukesh Yadav",
+    "name": "Rakesh Patel",
     "gender": "Male",
-    "age": 51,
+    "age": 49,
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
     "boothId": "B-26",
-    "houseNumber": "APS-KP/3",
+    "houseNumber": "KP-MAR/9",
     "partNumber": 26,
-    "partName": "DHOBI GHAT KIRBY PLACE",
-    "section": "Army Public School, Kirby Place",
+    "partName": "KIRBY PLACE",
+    "section": "Main Area, Kirby Place Delhi Cantt",
     "area": "Urban",
     "casteCategory": "OBC",
     "disability": false,
     "minority": false,
     "student": false,
     "bpl": false,
-    "annualIncome": 380000,
+    "annualIncome": 270000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "TEACHER_OR_FACULTY"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000035"
   },
   {
     "voterId": "DL036",
-    "name": "Yasmin Sheikh",
+    "name": "Sudha Chakraborty",
     "gender": "Female",
-    "age": 26,
-    "maritalStatus": "Single",
-    "district": "NEW DELHI",
-    "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-27",
-    "houseNumber": "DG-A/9",
-    "partNumber": 27,
-    "partName": "DHOBI GHAT KIRBY PLACE",
-    "section": "A-Block Huts, Dhobi Ghat, Kirby Place",
-    "area": "Urban",
-    "casteCategory": "OBC",
-    "disability": false,
-    "minority": true,
-    "student": true,
-    "bpl": false,
-    "annualIncome": 0,
-    "employmentStatus": "Unemployed",
-    "governmentEmployee": false,
-    "occupation": "HEALTH_WORKER"
-  },
-  {
-    "voterId": "DL037",
-    "name": "Balwant Singh",
-    "gender": "Male",
-    "age": 60,
+    "age": 55,
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-29",
-    "houseNumber": "BS-D/6",
-    "partNumber": 29,
-    "partName": "BRAR SQUARE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL",
-    "section": "D-Block Huts, Brar Square",
+    "boothId": "B-27",
+    "houseNumber": "KP-STF/14",
+    "partNumber": 27,
+    "partName": "KIRBY PLACE",
+    "section": "Staff Qtrs, Kirby Place Delhi Cantt",
     "area": "Urban",
     "casteCategory": "General",
     "disability": false,
@@ -885,71 +896,199 @@
     "annualIncome": 540000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "occupation": "TEACHER_OR_FACULTY",
+    "mobile_number": "9810000036"
   },
   {
-    "voterId": "DL038",
-    "name": "Kamla Tiwari",
-    "gender": "Female",
-    "age": 54,
-    "maritalStatus": "Married",
-    "district": "NEW DELHI",
-    "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-30",
-    "houseNumber": "UE-P/8",
-    "partNumber": 30,
-    "partName": "URI ENCLAVE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL",
-    "section": "Block-P, Uri Enclave",
-    "area": "Urban",
-    "casteCategory": "SC",
-    "disability": false,
-    "minority": false,
-    "student": false,
-    "bpl": true,
-    "annualIncome": 125000,
-    "employmentStatus": "Employed",
-    "governmentEmployee": true,
-    "occupation": "SAFAI_KARAMCHARI"
-  },
-  {
-    "voterId": "DL039",
-    "name": "Sachin Goel",
+    "voterId": "DL037",
+    "name": "Javed Akhtar",
     "gender": "Male",
     "age": 38,
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-30",
-    "houseNumber": "BS-MH/2",
-    "partNumber": 30,
-    "partName": "URI ENCLAVE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL",
-    "section": "MH Line, Brar Square",
+    "boothId": "B-28",
+    "houseNumber": "MN-A/3",
+    "partNumber": 28,
+    "partName": "MEHRAM NAGAR",
+    "section": "A-Series, Mehram Nagar Village",
     "area": "Urban",
-    "casteCategory": "General",
+    "casteCategory": "OBC",
+    "disability": false,
+    "minority": true,
+    "student": false,
+    "bpl": true,
+    "annualIncome": 130000,
+    "employmentStatus": "Employed",
+    "governmentEmployee": false,
+    "occupation": "UNORGANIZED_WORKER",
+    "mobile_number": "9810000037"
+  },
+  {
+    "voterId": "DL038",
+    "name": "Saroj Devi",
+    "gender": "Female",
+    "age": 62,
+    "maritalStatus": "Widowed",
+    "district": "NEW DELHI",
+    "assemblyConstituencyAc": "DELHI CANTT",
+    "boothId": "B-29",
+    "houseNumber": "MN-B/6",
+    "partNumber": 29,
+    "partName": "MEHRAM NAGAR",
+    "section": "B-Series, Mehram Nagar Village",
+    "area": "Urban",
+    "casteCategory": "SC",
+    "disability": true,
+    "minority": false,
+    "student": false,
+    "bpl": true,
+    "annualIncome": 48000,
+    "employmentStatus": "Unemployed",
+    "governmentEmployee": false,
+    "occupation": "SAFAI_KARAMCHARI",
+    "mobile_number": "9810000038"
+  },
+  {
+    "voterId": "DL039",
+    "name": "Naresh Bishnoi",
+    "gender": "Male",
+    "age": 41,
+    "maritalStatus": "Married",
+    "district": "NEW DELHI",
+    "assemblyConstituencyAc": "DELHI CANTT",
+    "boothId": "B-30",
+    "houseNumber": "MN-C/11",
+    "partNumber": 30,
+    "partName": "MEHRAM NAGAR",
+    "section": "C-Series, Mehram Nagar Village",
+    "area": "Urban",
+    "casteCategory": "OBC",
     "disability": false,
     "minority": false,
     "student": false,
     "bpl": false,
-    "annualIncome": 620000,
-    "employmentStatus": "Employed",
-    "governmentEmployee": true,
-    "occupation": "EX_SERVICEMEN"
+    "annualIncome": 225000,
+    "employmentStatus": "Self_Employed",
+    "governmentEmployee": false,
+    "occupation": "FARMER",
+    "mobile_number": "9810000039"
   },
   {
     "voterId": "DL040",
-    "name": "Ritu Bhatt",
+    "name": "Archana Kumari",
+    "gender": "Female",
+    "age": 26,
+    "maritalStatus": "Single",
+    "district": "NEW DELHI",
+    "assemblyConstituencyAc": "DELHI CANTT",
+    "boothId": "B-31",
+    "houseNumber": "MN-D/2",
+    "partNumber": 31,
+    "partName": "MEHRAM NAGAR",
+    "section": "D-Series, Mehram Nagar Village",
+    "area": "Urban",
+    "casteCategory": "SC",
+    "disability": false,
+    "minority": false,
+    "student": true,
+    "bpl": false,
+    "annualIncome": 155000,
+    "employmentStatus": "Employed",
+    "governmentEmployee": false,
+    "occupation": "TEACHER_OR_FACULTY",
+    "mobile_number": "9810000040"
+  },
+  {
+    "voterId": "DL041",
+    "name": "Mahesh Yadav",
+    "gender": "Male",
+    "age": 53,
+    "maritalStatus": "Married",
+    "district": "NEW DELHI",
+    "assemblyConstituencyAc": "DELHI CANTT",
+    "boothId": "B-32",
+    "houseNumber": "MN-E/8",
+    "partNumber": 32,
+    "partName": "MEHRAM NAGAR",
+    "section": "E-Series, Mehram Nagar Village",
+    "area": "Urban",
+    "casteCategory": "OBC",
+    "disability": false,
+    "minority": false,
+    "student": false,
+    "bpl": true,
+    "annualIncome": 118000,
+    "employmentStatus": "Employed",
+    "governmentEmployee": false,
+    "occupation": "FARMER",
+    "mobile_number": "9810000041"
+  },
+  {
+    "voterId": "DL042",
+    "name": "Kavitha R",
+    "gender": "Female",
+    "age": 35,
+    "maritalStatus": "Married",
+    "district": "NEW DELHI",
+    "assemblyConstituencyAc": "DELHI CANTT",
+    "boothId": "B-33",
+    "houseNumber": "MN-F/5",
+    "partNumber": 33,
+    "partName": "MEHRAM NAGAR",
+    "section": "F-Series, Mehram Nagar Village",
+    "area": "Urban",
+    "casteCategory": "ST",
+    "disability": false,
+    "minority": false,
+    "student": false,
+    "bpl": true,
+    "annualIncome": 78000,
+    "employmentStatus": "Unemployed",
+    "governmentEmployee": false,
+    "occupation": "UNORGANIZED_WORKER",
+    "mobile_number": "9810000042"
+  },
+  {
+    "voterId": "DL043",
+    "name": "Dilip Saini",
+    "gender": "Male",
+    "age": 44,
+    "maritalStatus": "Married",
+    "district": "NEW DELHI",
+    "assemblyConstituencyAc": "DELHI CANTT",
+    "boothId": "B-34",
+    "houseNumber": "MN-G/13",
+    "partNumber": 34,
+    "partName": "MEHRAM NAGAR",
+    "section": "G-Series, Mehram Nagar Village",
+    "area": "Urban",
+    "casteCategory": "OBC",
+    "disability": false,
+    "minority": false,
+    "student": false,
+    "bpl": false,
+    "annualIncome": 265000,
+    "employmentStatus": "Self_Employed",
+    "governmentEmployee": false,
+    "occupation": "STREET_VENDOR",
+    "mobile_number": "9810000043"
+  },
+  {
+    "voterId": "DL044",
+    "name": "Roshni Verma",
     "gender": "Female",
     "age": 30,
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-32",
-    "houseNumber": "UE-T/5",
-    "partNumber": 32,
-    "partName": "URI ENCLAVE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL",
-    "section": "Block-T, Uri Enclave",
+    "boothId": "B-35",
+    "houseNumber": "MN-H/7",
+    "partNumber": 35,
+    "partName": "MEHRAM NAGAR",
+    "section": "H-Series, Mehram Nagar Village",
     "area": "Urban",
-    "casteCategory": "OBC",
+    "casteCategory": "General",
     "disability": false,
     "minority": false,
     "student": false,
@@ -957,93 +1096,72 @@
     "annualIncome": 350000,
     "employmentStatus": "Employed",
     "governmentEmployee": false,
-    "occupation": "TEACHER_OR_FACULTY"
+    "occupation": "HEALTH_WORKER",
+    "mobile_number": "9810000044"
   },
   {
-    "voterId": "DL041",
-    "name": "Prakash Jain",
+    "voterId": "DL045",
+    "name": "Pramod Chauhan",
     "gender": "Male",
-    "age": 64,
+    "age": 67,
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-32",
-    "houseNumber": "KV-UE/1",
-    "partNumber": 32,
-    "partName": "URI ENCLAVE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL",
-    "section": "CB School, Uri Enclave",
+    "boothId": "B-36",
+    "houseNumber": "MN-I/4",
+    "partNumber": 36,
+    "partName": "MEHRAM NAGAR",
+    "section": "I-Series, Mehram Nagar Village",
     "area": "Urban",
     "casteCategory": "General",
     "disability": true,
     "minority": false,
     "student": false,
     "bpl": false,
-    "annualIncome": 480000,
-    "employmentStatus": "Employed",
-    "governmentEmployee": false,
-    "occupation": "TEACHER_OR_FACULTY"
-  },
-  {
-    "voterId": "DL042",
-    "name": "Shaheen Bano",
-    "gender": "Female",
-    "age": 33,
-    "maritalStatus": "Married",
-    "district": "NEW DELHI",
-    "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-33",
-    "houseNumber": "KL-A/12",
-    "partNumber": 33,
-    "partName": "KABUL LINE",
-    "section": "Kabul Line Blocks A, B, C, D, E, F, G",
-    "area": "Urban",
-    "casteCategory": "OBC",
-    "disability": false,
-    "minority": true,
-    "student": false,
-    "bpl": true,
-    "annualIncome": 102000,
+    "annualIncome": 185000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "UNORGANIZED_WORKER"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000045"
   },
   {
-    "voterId": "DL043",
-    "name": "Naresh Dabas",
-    "gender": "Male",
-    "age": 49,
-    "maritalStatus": "Married",
-    "district": "NEW DELHI",
-    "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-33",
-    "houseNumber": "KL-MES/3",
-    "partNumber": 33,
-    "partName": "KABUL LINE",
-    "section": "MES Staff Qtrs Type-1",
-    "area": "Urban",
-    "casteCategory": "SC",
-    "disability": false,
-    "minority": false,
-    "student": false,
-    "bpl": false,
-    "annualIncome": 270000,
-    "employmentStatus": "Employed",
-    "governmentEmployee": true,
-    "occupation": "CONSTRUCTION_WORKER"
-  },
-  {
-    "voterId": "DL044",
-    "name": "Anita Pillai",
+    "voterId": "DL046",
+    "name": "Manju Bai",
     "gender": "Female",
     "age": 45,
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-34",
-    "houseNumber": "GNB-B2/4",
-    "partNumber": 34,
-    "partName": "GOPI NATH BAZAR",
-    "section": "Gopi Nath Bazar Type-III Blocks 1-6",
+    "boothId": "B-37",
+    "houseNumber": "MN-J/1",
+    "partNumber": 37,
+    "partName": "MEHRAM NAGAR",
+    "section": "J-Series, Mehram Nagar Village",
+    "area": "Urban",
+    "casteCategory": "SC",
+    "disability": false,
+    "minority": false,
+    "student": false,
+    "bpl": true,
+    "annualIncome": 67000,
+    "employmentStatus": "Unemployed",
+    "governmentEmployee": false,
+    "occupation": "SAFAI_KARAMCHARI",
+    "mobile_number": "9810000046"
+  },
+  {
+    "voterId": "DL047",
+    "name": "Santosh Pandey",
+    "gender": "Male",
+    "age": 50,
+    "maritalStatus": "Married",
+    "district": "NEW DELHI",
+    "assemblyConstituencyAc": "DELHI CANTT",
+    "boothId": "B-37",
+    "houseNumber": "MN-K/9",
+    "partNumber": 37,
+    "partName": "MEHRAM NAGAR",
+    "section": "K-Series, Mehram Nagar Village",
     "area": "Urban",
     "casteCategory": "General",
     "disability": false,
@@ -1053,103 +1171,33 @@
     "annualIncome": 430000,
     "employmentStatus": "Employed",
     "governmentEmployee": true,
-    "occupation": "HEALTH_WORKER"
-  },
-  {
-    "voterId": "DL045",
-    "name": "Mahesh Pal",
-    "gender": "Male",
-    "age": 41,
-    "maritalStatus": "Married",
-    "district": "NEW DELHI",
-    "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-34",
-    "houseNumber": "DID-NEW/8",
-    "partNumber": 34,
-    "partName": "GOPI NATH BAZAR",
-    "section": "New DID Line",
-    "area": "Urban",
-    "casteCategory": "OBC",
-    "disability": false,
-    "minority": false,
-    "student": false,
-    "bpl": true,
-    "annualIncome": 162000,
-    "employmentStatus": "Employed",
-    "governmentEmployee": true,
-    "occupation": "ORGANIZED_WORKER"
-  },
-  {
-    "voterId": "DL046",
-    "name": "Radha Garg",
-    "gender": "Female",
-    "age": 58,
-    "maritalStatus": "Married",
-    "district": "NEW DELHI",
-    "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-36",
-    "houseNumber": "MN-60/4",
-    "partNumber": 36,
-    "partName": "MEHRAM NAGAR",
-    "section": "60 Qtrs, East Mehram Nagar",
-    "area": "Urban",
-    "casteCategory": "General",
-    "disability": false,
-    "minority": false,
-    "student": false,
-    "bpl": false,
-    "annualIncome": 330000,
-    "employmentStatus": "Employed",
-    "governmentEmployee": false,
-    "occupation": "ARTISANS_SPINNERS_AND_WEAVERS"
-  },
-  {
-    "voterId": "DL047",
-    "name": "Akbar Ali",
-    "gender": "Male",
-    "age": 36,
-    "maritalStatus": "Married",
-    "district": "NEW DELHI",
-    "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-37",
-    "houseNumber": "MN-J/15",
-    "partNumber": 37,
-    "partName": "MEHRAM NAGAR",
-    "section": "J Series, East Mehram Nagar",
-    "area": "Urban",
-    "casteCategory": "OBC",
-    "disability": false,
-    "minority": true,
-    "student": false,
-    "bpl": true,
-    "annualIncome": 142000,
-    "employmentStatus": "Self_Employed",
-    "governmentEmployee": false,
-    "occupation": "STREET_VENDOR"
+    "occupation": "EX_SERVICEMEN",
+    "mobile_number": "9810000047"
   },
   {
     "voterId": "DL048",
-    "name": "Savita Anand",
+    "name": "Reenu Malhotra",
     "gender": "Female",
-    "age": 34,
+    "age": 33,
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-37",
-    "houseNumber": "PC-MN/7",
-    "partNumber": 37,
-    "partName": "MEHRAM NAGAR",
-    "section": "Police Colony, East Mehram Nagar",
+    "boothId": "B-38",
+    "houseNumber": "MNV-6/3",
+    "partNumber": 38,
+    "partName": "MEHRAM NAGAR DR. B.R. AMBEDKAR CANTONMENT BOARD SR. SEC. SCHOOL",
+    "section": "Series-VI, Mehram Nagar Village",
     "area": "Urban",
-    "casteCategory": "General",
+    "casteCategory": "OBC",
     "disability": false,
     "minority": false,
     "student": false,
     "bpl": false,
-    "annualIncome": 440000,
+    "annualIncome": 300000,
     "employmentStatus": "Employed",
     "governmentEmployee": false,
-    "occupation": "HEALTH_WORKER"
+    "occupation": "HEALTH_WORKER",
+    "mobile_number": "9810000048"
   },
   {
     "voterId": "DL049",
@@ -1173,7 +1221,8 @@
     "annualIncome": 55000,
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
-    "occupation": "FARMER"
+    "occupation": "FARMER",
+    "mobile_number": "9810000049"
   },
   {
     "voterId": "DL050",
@@ -1197,6 +1246,7 @@
     "annualIncome": 375000,
     "employmentStatus": "Employed",
     "governmentEmployee": false,
-    "occupation": "TEACHER_OR_FACULTY"
+    "occupation": "TEACHER_OR_FACULTY",
+    "mobile_number": "9810000050"
   }
 ]
