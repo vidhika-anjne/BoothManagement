@@ -63,6 +63,9 @@ public class Voter {
     
     private Integer annualIncome;
 
+    @Column(name = "mobile_number", unique = true)
+    private String mobileNumber;
+
     // Employment
     @Enumerated(EnumType.STRING)
     private EmploymentStatus employmentStatus;
@@ -150,6 +153,8 @@ public class Voter {
     public void setBpl(boolean bpl) { isBpl = bpl; }
     public Integer getAnnualIncome() { return annualIncome; }
     public void setAnnualIncome(Integer annualIncome) { this.annualIncome = annualIncome; }
+    public String getMobileNumber() { return mobileNumber; }
+    public void setMobileNumber(String mobileNumber) { this.mobileNumber = mobileNumber; }
     public EmploymentStatus getEmploymentStatus() { return employmentStatus; }
     public void setEmploymentStatus(EmploymentStatus employmentStatus) { this.employmentStatus = employmentStatus; }
     public boolean isGovernmentEmployee() { return isGovernmentEmployee; }

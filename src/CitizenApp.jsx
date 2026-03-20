@@ -53,8 +53,8 @@ export default function CitizenApp() {
               <span>Helpline: 1950</span>
             </div>
             <div className="citizen-user-pill">
-              <span className="citizen-user-avatar">{user.mobile.slice(-4)}</span>
-              <span className="citizen-user-num">+91-{user.mobile.slice(0,5)}XXXXX</span>
+              <span className="citizen-user-avatar">{user.name?.charAt(0) ?? user.mobileNumber?.slice(-4) ?? '?'}</span>
+              <span className="citizen-user-num">{user.name ?? `+91-${user.mobileNumber?.slice(0,5)}XXXXX`}</span>
             </div>
             <button className="citizen-logout-btn" onClick={handleLogout} title="Sign out">
               Sign out
