@@ -1027,3 +1027,67 @@ select.cpf-input{cursor:pointer}
   .reg-field[style*="span 2"]{grid-column:span 1!important}
 }
 
+/* ═══════════════════════════════════════════════════════
+   SCHEME RECOMMENDATIONS (sr-*)
+═══════════════════════════════════════════════════════ */
+
+/* Loading */
+.sr-loading{display:flex;flex-direction:column;align-items:center;gap:1rem;
+  padding:3rem 2rem;color:var(--text-secondary);font-size:.88rem;text-align:center}
+.sr-spinner{width:36px;height:36px;border:3px solid var(--border);
+  border-top-color:var(--primary);border-radius:50%;
+  animation:spin .75s linear infinite;flex-shrink:0}
+
+/* Error block */
+.sr-error-block{display:flex;flex-direction:column;align-items:center;gap:.65rem;
+  padding:2.5rem 1.5rem;text-align:center;color:var(--text-secondary)}
+.sr-error-block svg{color:var(--danger);opacity:.7}
+.sr-error-block strong{font-size:.95rem;color:var(--text-primary)}
+.sr-error-block p{font-size:.84rem;max-width:440px;line-height:1.55}
+
+/* Status badges */
+.sr-badge{display:inline-flex;align-items:center;padding:.22rem .75rem;
+  border-radius:20px;font-size:.72rem;font-weight:700;white-space:nowrap}
+.sr-badge.highly-relevant{background:rgba(16,185,129,.12);color:#10b981;
+  border:1px solid rgba(16,185,129,.3)}
+.sr-badge.relevant{background:rgba(59,130,246,.12);color:#3b82f6;
+  border:1px solid rgba(59,130,246,.3)}
+
+/* Score bar */
+.sr-score-wrap{display:flex;align-items:center;gap:.55rem;margin-top:.3rem}
+.sr-score-bar-bg{flex:1;height:5px;background:var(--surface-2);border-radius:10px;overflow:hidden}
+.sr-score-bar-fill{height:100%;border-radius:10px;transition:width .6s ease}
+.sr-score-label{font-size:.73rem;font-weight:700;min-width:34px;font-family:'IBM Plex Mono',monospace}
+
+/* Scheme card */
+.sr-card{background:var(--surface);border:1.5px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;transition:border-color .18s}
+.sr-card:hover{border-color:var(--border-2)}
+.sr-card.sr-card-high{border-color:rgba(16,185,129,.35)}
+.sr-card.sr-card-high:hover{border-color:#10b981}
+
+.sr-card-top{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;flex-wrap:nowrap}
+
+/* Rank circle */
+.sr-card-rank{width:30px;height:30px;border-radius:50%;background:var(--primary);
+  color:#f5f0e8;display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;flex-shrink:0;font-family:'IBM Plex Mono',monospace}
+
+.sr-card-info{flex:1;min-width:0}
+
+.sr-scheme-name{font-size:.9rem;font-weight:700;color:var(--text-primary);
+  font-family:'Zilla Slab',serif;line-height:1.2}
+.sr-abbr{font-size:.7rem;font-weight:700;color:var(--text-muted);
+  font-family:'IBM Plex Mono',monospace;background:var(--surface-2);
+  border:1px solid var(--border);padding:1px 6px;border-radius:0}
+
+/* Expandable reasons */
+.sr-reasons{border-top:1px solid var(--border);padding:.85rem 1.1rem;
+  background:var(--surface-2);animation:fadeUp .18s ease}
+.sr-reasons-title{font-size:.74rem;font-weight:700;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:.55rem;
+  font-family:'IBM Plex Mono',monospace}
+.sr-reasons-list{list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:.4rem}
+.sr-reason-item{display:flex;align-items:flex-start;gap:.5rem;
+  font-size:.82rem;color:var(--text-secondary);line-height:1.45}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   User, Search, AlertCircle, Award, BarChart2, ClipboardList,
   Shield, Landmark, CheckCircle2, ArrowRight, ChevronRight,
@@ -599,98 +599,205 @@ function ComplaintTab({ showToast }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  TAB 4 – SCHEME CHECKER
+//  TAB 4 – SCHEME RECOMMENDATIONS  (API-powered)
 // ═══════════════════════════════════════════════════════════════════════════
+const API_BASE = 'http://localhost:8080'
+
+function ScoreBar({ score }) {
+  const pct = Math.round(score * 100)
+  const color = score >= 0.65 ? '#10b981' : score >= 0.4 ? '#3b82f6' : '#94a3b8'
+  return (
+    <div className="sr-score-wrap">
+      <div className="sr-score-bar-bg">
+        <div className="sr-score-bar-fill" style={{ width: `${pct}%`, background: color }} />
+      </div>
+      <span className="sr-score-label" style={{ color }}>{pct}%</span>
+    </div>
+  )
+}
+
 function SchemesTab() {
-  const [profile, setProfile] = useState({ category: '', income: '', age: '', gender: '' })
-  const [errors, setErrors] = useState({})
-  const [results, setResults] = useState(null)
-  const set = (k, v) => setProfile(p => ({ ...p, [k]: v }))
+  const [recs, setRecs]     = useState(null)   // null = not loaded
+  const [loading, setLoading] = useState(false)
+  const [error, setError]   = useState('')
+  const [expanded, setExpanded] = useState({})
+  const fetched = useRef(false)
 
-  const check = () => {
-    const e = {}
-    if (!profile.category) e.category = 'Select category'
-    const income = Number(profile.income.replace(/[,\s]/g, ''))
-    if (!profile.income || isNaN(income) || income < 0) e.income = 'Enter valid annual family income in ₹'
-    if (!profile.age || isNaN(Number(profile.age)) || Number(profile.age) < 18 || Number(profile.age) > 120) e.age = 'Enter valid age (18+)'
-    setErrors(e)
-    if (Object.keys(e).length) return
+  // Read citizen profile stored in sessionStorage after login
+  const user = (() => {
+    try { return JSON.parse(sessionStorage.getItem('citizen_user')) } catch { return null }
+  })()
 
-    const age = Number(profile.age)
-    const res = Object.entries(SCHEMES).map(([name, s]) => {
-      const catOk = s.cats.some(c => {
-        if (c === profile.category) return true
-        if (c === 'Senior Citizen' && age >= 60) return true
-        if (c === 'Student' && age >= 18 && age <= 25) return true
-        return false
-      })
-      return { name, ...s, eligible: catOk && income <= s.maxIncome, reason: !catOk ? 'Category does not match' : income > s.maxIncome ? `Income exceeds ₹${s.maxIncome.toLocaleString('en-IN')} limit` : '' }
-    }).sort((a, b) => b.eligible - a.eligible)
+  const voterId = user?.voterId?.trim()
 
-    setResults(res)
+  const fetchRecs = async () => {
+    if (!voterId) {
+      setError('Voter ID not found in your profile. Please log out and log in again.')
+      return
+    }
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch(`${API_BASE}/api/recommendations/${encodeURIComponent(voterId)}`)
+      if (res.status === 404) {
+        setError(`No voter record found for Voter ID "${voterId}" in the database. Please ensure your profile is synced.`)
+        setRecs([])
+      } else if (!res.ok) {
+        throw new Error(`Server error ${res.status}`)
+      } else {
+        const data = await res.json()
+        setRecs(data)
+      }
+    } catch (err) {
+      setError('Could not connect to the recommendation engine. Please ensure the backend is running on port 8080.')
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const eligibleCount = results?.filter(r => r.eligible).length ?? 0
+  // Auto-fetch once on mount
+  useEffect(() => {
+    if (!fetched.current) { fetched.current = true; fetchRecs() }
+  }, [])
+
+  const toggle = (idx) => setExpanded(e => ({ ...e, [idx]: !e[idx] }))
+
+  // ── Loading state ────────────────────────────────────────────────
+  if (loading) return (
+    <div className="cpf-form">
+      <div className="cpf-section">
+        <div className="sr-loading">
+          <div className="sr-spinner" />
+          <p>Analysing your voter profile against {'>'}50 government schemes…</p>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── Error state ──────────────────────────────────────────────────
+  if (error) return (
+    <div className="cpf-form">
+      <div className="cpf-section">
+        <div className="sr-error-block">
+          <AlertCircle size={32} />
+          <strong>Could not load recommendations</strong>
+          <p>{error}</p>
+          <button className="cpf-btn primary" onClick={fetchRecs}>Retry</button>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── Not yet loaded ───────────────────────────────────────────────
+  if (recs === null) return (
+    <div className="cpf-form">
+      <div className="cpf-section">
+        <div className="cpf-sec-title"><Award size={15} /> Your Scheme Recommendations</div>
+        <button className="cpf-btn primary" onClick={fetchRecs}>
+          Load My Recommendations <ArrowRight size={15} />
+        </button>
+      </div>
+    </div>
+  )
+
+  // ── Empty state ──────────────────────────────────────────────────
+  if (recs.length === 0) return (
+    <div className="cpf-form">
+      <div className="cpf-section">
+        <div className="cpf-no-result">
+          <X size={36} strokeWidth={1.5} />
+          <strong>No Matching Schemes Found</strong>
+          <p>Your current profile does not reach the relevance threshold for any scheme. This may change as new schemes are added.</p>
+          <button className="cpf-btn secondary" onClick={fetchRecs} style={{ marginTop: '.5rem' }}>Refresh</button>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── Results ──────────────────────────────────────────────────────
+  const highlyRelevant = recs.filter(r => r.eligibilityStatus === 'Highly Relevant')
+  const relevant = recs.filter(r => r.eligibilityStatus === 'Relevant')
 
   return (
     <div className="cpf-form">
-      <div className="cpf-section">
-        <div className="cpf-sec-title"><Award size={15} /> Check Government Scheme Eligibility</div>
-        <div className="cpf-grid">
-          <Field label="Your Category*" error={errors.category}>
-            <Sel error={errors.category} value={profile.category} onChange={e => set('category', e.target.value)}>
-              <option value="">Select</option>
-              {CATEGORIES.map(c => <option key={c}>{c}</option>)}
-            </Sel>
-          </Field>
-          <Field label="Age*" error={errors.age}>
-            <Inp type="number" error={errors.age} placeholder="e.g. 45" min={18} max={120}
-              value={profile.age} onChange={e => set('age', e.target.value)} />
-          </Field>
-          <Field label="Gender" hint="Required for some schemes like PMUJJWALA, BBBP">
-            <Sel value={profile.gender} onChange={e => set('gender', e.target.value)}>
-              <option value="">Select (optional)</option>
-              <option>Male</option><option>Female</option><option>Transgender</option>
-            </Sel>
-          </Field>
-          <Field label="Annual Family Income (₹)*" error={errors.income}
-            hint="Total household income before tax (approximate is fine)">
-            <Inp error={errors.income} placeholder="e.g. 1,50,000" value={profile.income}
-              onChange={e => set('income', e.target.value)} />
-          </Field>
+      {/* Header */}
+      <div className="cpf-section" style={{ borderBottom: '1px solid var(--border)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '.75rem' }}>
+          <div>
+            <div className="cpf-sec-title" style={{ marginBottom: '.2rem' }}>
+              <Award size={15} /> Personalised Scheme Recommendations
+            </div>
+            <p style={{ fontSize: '.8rem', color: 'var(--text-muted)', margin: 0 }}>
+              Based on your voter profile · Voter ID: <strong style={{ fontFamily: 'IBM Plex Mono, monospace' }}>{voterId}</strong>
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <span className="sr-badge highly-relevant">{highlyRelevant.length} Highly Relevant</span>
+            <span className="sr-badge relevant">{relevant.length} Relevant</span>
+            <button className="cpf-btn secondary" onClick={fetchRecs} style={{ fontSize: '.78rem', padding: '.38rem .8rem' }}>
+              ↻ Refresh
+            </button>
+          </div>
         </div>
-        <button className="cpf-btn secondary" onClick={check}>
-          Check Eligibility <ChevronRight size={15} />
-        </button>
       </div>
 
-      {results && (
-        <div className="cpf-schemes-out">
-          <div className="cpf-schemes-summary">
-            <div className="cpf-scheme-count eligible"><CheckCircle2 size={18} />{eligibleCount} Schemes You Qualify For</div>
-            <div className="cpf-scheme-count ineligible"><X size={18} />{results.length - eligibleCount} Not Eligible</div>
-          </div>
-          <div className="cpf-schemes-list">
-            {results.map(r => (
-              <div key={r.name} className={`cpf-scheme-row${r.eligible ? ' ok' : ' no'}`}>
-                <div className={`cpf-scheme-icon${r.eligible ? ' ok' : ' no'}`}>
-                  {r.eligible ? <Check size={15} /> : <X size={15} />}
+      {/* Scheme cards */}
+      <div style={{ padding: '1.25rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '.85rem' }}>
+        {recs.map((rec, idx) => {
+          const isHighly = rec.eligibilityStatus === 'Highly Relevant'
+          const isOpen = expanded[idx]
+          return (
+            <div key={idx} className={`sr-card${isHighly ? ' sr-card-high' : ''}`}>
+              {/* Top row */}
+              <div className="sr-card-top">
+                <div className="sr-card-rank">{idx + 1}</div>
+                <div className="sr-card-info">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', flexWrap: 'wrap' }}>
+                    <span className="sr-scheme-name">{rec.schemeName}</span>
+                    {rec.abbreviation && <span className="sr-abbr">{rec.abbreviation}</span>}
+                    <span className={`sr-badge ${isHighly ? 'highly-relevant' : 'relevant'}`}>
+                      {rec.eligibilityStatus}
+                    </span>
+                  </div>
+                  <ScoreBar score={rec.matchScore} />
                 </div>
-                <div className="cpf-scheme-body">
-                  <div className="cpf-scheme-name">{r.name}</div>
-                  <div className="cpf-scheme-desc">{r.desc}</div>
-                  {!r.eligible && <div className="cpf-scheme-reason">{r.reason}</div>}
-                </div>
-                {r.eligible && (
-                  <button className="cpf-btn xs primary" onClick={() => {}}>
-                    Apply <ArrowRight size={11} />
-                  </button>
-                )}
+                <button
+                  className="cpf-btn secondary"
+                  onClick={() => toggle(idx)}
+                  style={{ fontSize: '.75rem', padding: '.3rem .7rem', flexShrink: 0 }}
+                >
+                  {isOpen ? 'Hide' : 'Details'} <ChevronRight size={12} style={{ transform: isOpen ? 'rotate(90deg)' : 'rotate(0)', transition: 'transform .2s' }} />
+                </button>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+
+              {/* Expandable reasons */}
+              {isOpen && (
+                <div className="sr-reasons">
+                  <div className="sr-reasons-title">Why this scheme matches your profile:</div>
+                  <ul className="sr-reasons-list">
+                    {rec.reasons.map((r, i) => (
+                      <li key={i} className="sr-reason-item">
+                        <CheckCircle2 size={13} style={{ color: '#10b981', flexShrink: 0, marginTop: '1px' }} />
+                        <span>{r}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Footer note */}
+      <div className="cpf-section" style={{ borderTop: '1px solid var(--border)', borderBottom: 'none' }}>
+        <p style={{ fontSize: '.75rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+          <Info size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
+          Recommendations are generated by a deterministic algorithm based on your registered voter profile.
+          Actual eligibility is subject to scheme-specific verification by the relevant ministry.
+          For assistance, contact your Booth Officer or call Helpline <strong>1950</strong>.
+        </p>
+      </div>
     </div>
   )
 }
