@@ -29,3 +29,4 @@ backend/src/main/resources/application.properties
 # ── Backend: Maven build output ───────────────────────────────────────────
 backend/target/
 !backend/.mvn/wrapper/maven-wrapper.properties
+backend/src/main/resources/application.properties
