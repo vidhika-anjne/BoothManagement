@@ -2,7 +2,8 @@ import { useApp } from '../../context/AppContext.jsx'
 import {
   LayoutDashboard, Map, Users, AlertTriangle, Megaphone,
   BrainCircuit, MessageSquare, Bell, Settings, ChevronLeft,
-  ChevronRight, MoreVertical, Zap, Globe, Award
+  ChevronRight, MoreVertical, Zap, Globe, Award, LogOut,
+  FileText, ShieldAlert
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -10,6 +11,7 @@ const NAV_ITEMS = [
   { id: 'boothmap',      label: 'Booth Map',      icon: Map,             badge: null },
   { id: 'voters',        label: 'Voters',         icon: Users,           badge: null },
   { id: 'issues',        label: 'Issues',         icon: AlertTriangle,   badge: '5', badgeClass: 'alert' },
+  { id: 'triage',        label: 'AI Triage',      icon: ShieldAlert,     badge: 'NEW', badgeClass: 'new' },
   { id: 'campaigns',     label: 'Campaigns',      icon: Megaphone,       badge: null },
   { id: 'aiinsights',    label: 'AI Insights',    icon: BrainCircuit,    badge: '3', badgeClass: 'new' },
   { id: 'beneficiaries', label: 'Beneficiaries',  icon: Award,           badge: null },
@@ -25,9 +27,7 @@ export default function Sidebar() {
   const mobileClass = mobileSidebarOpen ? ' mobile-open' : ''
 
   const handleSignOut = () => {
-    if (window.confirm('Are you sure you want to sign out?')) {
-      signOut()
-    }
+    signOut()
   }
 
   return (
@@ -51,11 +51,11 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         {!collapsed && <div className="nav-section-label">MAIN MENU</div>}
-        {NAV_ITEMS.slice(0, 8).map(item => (
+        {NAV_ITEMS.slice(0, 9).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
         {!collapsed && <div className="nav-section-label">SYSTEM</div>}
-        {NAV_ITEMS.slice(8).map(item => (
+        {NAV_ITEMS.slice(9).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
       </nav>
@@ -69,16 +69,26 @@ export default function Sidebar() {
         <div className="user-card">
           <div className="user-avatar">{user?.name?.split(' ').map(n => n[0]).join('') || 'A'}</div>
           <div className="user-info">
-            <span className="user-name">{user?.name || 'Admin'}</span>
-            <span className="user-role">{user?.boothId || 'Officer'}</span>
+            <span className="user-name" style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{user?.name || 'Booth Officer'}</span>
+            <span className="user-role" style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>{user?.boothId || 'Unauthorized'}</span>
           </div>
           <button
             className="user-menu-btn"
             onClick={handleSignOut}
             title="Sign Out"
-            style={{ color: 'var(--text-muted)', cursor: 'pointer' }}
+            style={{ 
+              color: 'var(--danger)', 
+              cursor: 'pointer', 
+              border: 'none', 
+              background: 'rgba(239, 68, 68, 0.1)',
+              padding: '0.4rem',
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <MoreVertical size={15}/>
+            <LogOut size={16}/>
           </button>
         </div>
       </div>

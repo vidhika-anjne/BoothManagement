@@ -10,16 +10,15 @@ import java.util.List;
  * For Delhi Cantt (AC 38), the associated sections are stored in BoothSection.
  */
 @Entity
-@Table(name = "booth_parts",
-       uniqueConstraints = @UniqueConstraint(columnNames = "part_id"))
+@Table(name = "booth_parts")
 public class BoothPart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** Unique identifier from the source JSON (e.g. 14321) */
-    @Column(name = "part_id", nullable = false, unique = true)
+    /** Source identifier from the JSON (not unique across districts) */
+    @Column(name = "part_id", nullable = false)
     private Long partId;
 
     @Column(name = "part_number", nullable = false)

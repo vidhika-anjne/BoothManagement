@@ -1,220 +1,626 @@
-import { useEffect, useRef, useState } from 'react'
-import { Bar, Doughnut, Line } from 'react-chartjs-2'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import {
-  Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement,
-  ArcElement, Title, Tooltip, Legend, Filler
+  Chart as ChartJS, CategoryScale, LinearScale, BarElement,
+  ArcElement, Title, Tooltip, Legend
 } from 'chart.js'
-import { Users, MapPin, TrendingUp, AlertTriangle, CheckCircle, ArrowUpRight, ArrowDownRight, Download, RefreshCw } from 'lucide-react'
+import { Bar as BarChartJS, Doughnut } from 'react-chartjs-2'
+import {
+  Users, MapPin, BookOpen, MessageSquare,
+  ArrowUpRight, RefreshCw, Send, ChevronDown, 
+  Wifi, WifiOff, TrendingUp, Activity, Trash2
+} from 'lucide-react'
+import {
+  ResponsiveContainer, BarChart, Bar, XAxis, YAxis,
+  CartesianGrid, Tooltip as RechartsTooltip, Legend as RechartsLegend, Cell
+} from 'recharts'
 import { useApp } from '../context/AppContext.jsx'
-import { BOOTHS, ACTIVITY } from '../data/mockData.js'
+import dashboardService from '../services/dashboardService.js'
+import { connectWebSocket, disconnectWebSocket } from '../services/websocketService.js'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Title, Tooltip, Legend, Filler)
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend)
 
-const KPIs = [
-  { label: 'Total Voters',   value: 18420, delta: '+4.2%', up: true,  icon: Users,         color: '#6366f1', bg: 'rgba(99,102,241,.12)',  accent: '#6366f1' },
-  { label: 'Active Booths',  value: 6,     delta: '100%',  up: true,  icon: MapPin,        color: '#10b981', bg: 'rgba(16,185,129,.12)',  accent: '#10b981' },
-  { label: 'Survey Complete',value: 72,    delta: '+8.1%', up: true,  icon: TrendingUp,    color: '#f59e0b', bg: 'rgba(245,158,11,.12)',  accent: '#f59e0b', suffix: '%' },
-  { label: 'Open Issues',    value: 5,     delta: '-2',    up: false, icon: AlertTriangle, color: '#ef4444', bg: 'rgba(239,68,68,.12)',   accent: '#ef4444' },
-  { label: 'Resolved Today', value: 24,    delta: '+6',    up: true,  icon: CheckCircle,   color: '#3b82f6', bg: 'rgba(59,130,246,.12)',  accent: '#3b82f6' },
-]
-
-function animateCount(from, to, duration, cb) {
+// ── Animate number ──────────────────────────────────────────────────────────
+function animateCount(to, duration, cb) {
   const start = performance.now()
   const step = (now) => {
     const p = Math.min((now - start) / duration, 1)
-    cb(Math.round(from + (to - from) * p))
+    cb(Math.round(to * p))
     if (p < 1) requestAnimationFrame(step)
   }
   requestAnimationFrame(step)
 }
 
-function KpiCard({ item }) {
-  const [val, setVal] = useState(0)
-  useEffect(() => { animateCount(0, item.value, 1200, setVal) }, [item.value])
-  const Icon = item.icon
+// ── KPI Card ────────────────────────────────────────────────────────────────
+function KpiCard({ label, value, icon: Icon, color, bg, accent }) {
+  const [display, setDisplay] = useState(0)
+  useEffect(() => { animateCount(value, 1000, setDisplay) }, [value])
   return (
-    <div className="kpi-card" style={{ '--kpi-accent': item.accent }}>
-      <div className="kpi-icon" style={{ background: item.bg }}>
-        <Icon size={20} color={item.color} />
+    <div className="kpi-card" style={{ '--kpi-accent': accent }}>
+      <div className="kpi-icon" style={{ background: bg }}>
+        <Icon size={20} color={color} />
       </div>
       <div className="kpi-body">
-        <div className="kpi-label">{item.label}</div>
-        <div className="kpi-value">{val.toLocaleString()}{item.suffix || ''}</div>
-        <div className={`kpi-delta ${item.up ? 'positive' : 'negative'}`}>
-          {item.up ? <ArrowUpRight size={12}/> : <ArrowDownRight size={12}/>}
-          {item.delta} vs last week
+        <div className="kpi-label">{label}</div>
+        <div className="kpi-value">{display.toLocaleString()}</div>
+        <div className="kpi-delta positive">
+          <ArrowUpRight size={12} /> Live
         </div>
       </div>
     </div>
   )
 }
 
-const chartOpts = (dark) => ({
-  responsive: true, maintainAspectRatio: false,
-  plugins: { legend: { display: false }, tooltip: { bodyColor: '#fff', backgroundColor: dark ? '#1c2330' : '#0f1724' } },
-  scales: {
-    x: { grid: { color: dark ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.06)' }, ticks: { color: dark ? '#8b949e' : '#9099ae', font: { size: 11 } } },
-    y: { grid: { color: dark ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.06)' }, ticks: { color: dark ? '#8b949e' : '#9099ae', font: { size: 11 } } },
+// ── Chart theme helper ───────────────────────────────────────────────────────
+function chartOpts(dark, stacked = false) {
+  const gridColor = dark ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.06)'
+  const tickColor = dark ? '#8b949e' : '#9099ae'
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: stacked, position: 'top', labels: { color: tickColor, boxWidth: 10, font: { size: 11 } } },
+      tooltip: { backgroundColor: dark ? '#1c2330' : '#0f1724', bodyColor: '#fff' },
+    },
+    scales: {
+      x: {
+        stacked,
+        grid: { color: gridColor },
+        ticks: { color: tickColor, font: { size: 10 }, maxRotation: 35, minRotation: 0 },
+      },
+      y: {
+        stacked,
+        grid: { color: gridColor },
+        ticks: { color: tickColor, font: { size: 10 } },
+      },
+    },
   }
-})
+}
 
+const PALETTE = ['#2563eb','#6366f1','#3b82f6','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6']
+
+const SEGMENT_FILTERS = [
+  { value: 'gender',        label: 'Gender' },
+  { value: 'age',           label: 'Age Group' },
+  { value: 'occupation',    label: 'Occupation' },
+  { value: 'castecategory', label: 'Caste Category' },
+  { value: 'area',          label: 'Area Type' },
+]
+
+// ── Main Dashboard ───────────────────────────────────────────────────────────
 export default function Dashboard() {
   const { darkMode, showToast } = useApp()
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul']
 
-  const engagementData = {
-    labels: BOOTHS.map(b => b.name.replace('Booth ','B')),
-    datasets: [{
-      label: 'Engagement %',
-      data: BOOTHS.map(b => b.engagement),
-      backgroundColor: BOOTHS.map(b =>
-        b.engagement >= 80 ? 'rgba(99,102,241,.85)' : b.engagement >= 65 ? 'rgba(99,102,241,.55)' : 'rgba(99,102,241,.35)'
-      ),
-      borderRadius: 6, borderSkipped: false,
-    }]
-  }
+  // State
+  const [stats,         setStats]         = useState(null)
+  const [segments,      setSegments]      = useState([])
+  const [segFilter,     setSegFilter]     = useState('gender')
+  const [boothParts,    setBoothParts]    = useState([])
+  const [boothPerformance, setBoothPerformance] = useState([])
+  const [issueData,     setIssueData]     = useState(null)
+  const [issueFilter,   setIssueFilter]   = useState('summary') // 'summary' or 'detailed'
+  const [feedbackList,  setFeedbackList]  = useState([])
+  const [fbAuthor,      setFbAuthor]      = useState('')
+  const [fbMessage,     setFbMessage]     = useState('')
+  const [fbBooth,       setFbBooth]       = useState('')
+  const [fbSubmitting,  setFbSubmitting]  = useState(false)
+  const [wsConnected,   setWsConnected]   = useState(false)
+  const [loading,       setLoading]       = useState(true)
+  const pollRef = useRef(null)
 
-  const trendData = {
-    labels: months,
-    datasets: [{
-      label: 'Voter Coverage',
-      data: [42, 55, 61, 68, 72, 77, 83],
-      borderColor: '#6366f1', backgroundColor: 'rgba(99,102,241,.12)',
-      borderWidth: 2.5, tension: .4, fill: true, pointRadius: 4, pointBackgroundColor: '#6366f1'
-    },{
-      label: 'Issue Resolution',
-      data: [30, 38, 50, 58, 65, 71, 78],
-      borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,.08)',
-      borderWidth: 2.5, tension: .4, fill: true, pointRadius: 4, pointBackgroundColor: '#10b981'
-    }]
-  }
+  // ── Data fetchers ──────────────────────────────────────────────────────────
+  const fetchAll = useCallback(async () => {
+    try {
+      const [voters, parts, perf, fb] = await Promise.all([
+        dashboardService.getStats(),
+        dashboardService.getBoothParts(),
+        dashboardService.getBoothPerformance(),
+        dashboardService.getFeedback()
+      ])
+      setStats(voters) // Assuming 'stats' is the correct state for 'voters'
+      setBoothParts(parts)
+      setBoothPerformance(perf)
+      setFeedbackList(fb)
+    } catch (e) {
+      showToast('Failed to load dashboard data — retrying…')
+    } finally {
+      setLoading(false)
+    }
+  }, [showToast])
 
-  const segmentData = {
-    labels: ['Farmers','Students','Senior','Women','Business'],
-    datasets: [{
-      data: [4200, 3100, 2800, 5200, 3120],
-      backgroundColor: ['#6366f1','#10b981','#f59e0b','#ec4899','#3b82f6'],
-      borderWidth: 0, hoverOffset: 8,
-    }]
-  }
+  const fetchIssues = useCallback(async (detailed = false) => {
+    try {
+      const data = await dashboardService.getIssueDistribution(detailed)
+      setIssueData(data)
+    } catch (e) {
+      console.error('Failed to fetch issues:', e)
+    }
+  }, [])
 
-  const issueData = {
-    labels: ['Water','Roads','Electric','Health','Schools','Safety'],
-    datasets: [{
-      label: 'Count',
-      data: [12, 19, 8, 15, 7, 10],
-      backgroundColor: 'rgba(239,68,68,.75)', borderRadius: 6, borderSkipped: false,
-    }]
-  }
+  const fetchSegments = useCallback(async (filter) => {
+    try {
+      const data = await dashboardService.getVoterSegments(filter)
+      setSegments(data)
+    } catch (e) { /* fallback handled by poll */ }
+  }, [])
 
-  const lineOpts = {
-    ...chartOpts(darkMode),
-    plugins: {
-      ...chartOpts(darkMode).plugins,
-      legend: {
-        display: true, position: 'top',
-        labels: { color: darkMode ? '#8b949e' : '#5a6478', boxWidth: 12, font: { size: 11 } }
-      }
+  // ── WebSocket + fallback poll ──────────────────────────────────────────────
+  useEffect(() => {
+    fetchAll()
+    fetchSegments(segFilter)
+
+    connectWebSocket(
+      (payload) => { 
+        if (payload.stats) setStats(payload.stats);
+        if (payload.performance) setBoothPerformance(payload.performance);
+        setWsConnected(true);
+      },
+      (freshFeedback) => { setFeedbackList(freshFeedback); setWsConnected(true) },
+    )
+    setWsConnected(true)
+
+    // Fallback: poll every 5 s
+    pollRef.current = setInterval(() => {
+      fetchAll()
+    }, 5000)
+
+    return () => {
+      disconnectWebSocket()
+      clearInterval(pollRef.current)
+    }
+  }, []) // eslint-disable-line
+
+  // Re-fetch segments/issues when filter changes
+  useEffect(() => { fetchSegments(segFilter) }, [segFilter, fetchSegments])
+  useEffect(() => { fetchIssues(issueFilter === 'detailed') }, [issueFilter, fetchIssues])
+
+  // ── Feedback Management ───────────────────────────────────────────────────
+  const handleFeedbackSubmit = async (e) => {
+    e.preventDefault()
+    if (!fbMessage.trim()) return
+    setFbSubmitting(true)
+    try {
+      await dashboardService.submitFeedback(
+        fbAuthor || 'Anonymous', 
+        fbMessage, 
+        fbBooth || null
+      )
+      setFbMessage('')
+      setFbAuthor('')
+      setFbBooth('')
+      showToast('Feedback submitted successfully!')
+      const fb = await dashboardService.getFeedback()
+      setFeedbackList(fb)
+    } catch (e) {
+      showToast('Failed to submit feedback.')
+    } finally {
+      setFbSubmitting(false)
     }
   }
 
-  const doughnutOpts = {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'right', labels: { color: darkMode ? '#8b949e' : '#5a6478', boxWidth: 10, font: { size: 11 }, padding: 14 } },
-      tooltip: { bodyColor: '#fff', backgroundColor: darkMode ? '#1c2330' : '#0f1724' }
-    },
-    cutout: '68%'
+  const handleDeleteFeedback = async (id) => {
+    try {
+      await dashboardService.deleteFeedback(id)
+      setFeedbackList(prev => prev.filter(item => item.id !== id))
+      showToast('Feedback deleted')
+    } catch (e) {
+      showToast('Failed to delete feedback')
+    }
   }
 
+  // ── Chart data builders ────────────────────────────────────────────────────
+  const segChartData = {
+    labels: segments.map(s => s.label),
+    datasets: [{
+      label: 'Voters',
+      data: segments.map(s => s.count),
+      backgroundColor: segments.map((_, i) => PALETTE[i % PALETTE.length] + 'cc'),
+      borderRadius: 6,
+      borderSkipped: false,
+      maxBarThickness: 80,
+    }]
+  }
+
+  const partsChartData = boothParts && boothParts.length ? {
+    labels: boothParts.map(b => b.partName),
+    datasets: [{
+      label: 'Voters',
+      data: boothParts.map(b => b.voterCount),
+      backgroundColor: boothParts.map((_, i) => PALETTE[i % PALETTE.length]),
+      borderColor: 'rgba(255,255,255,0.1)',
+      borderWidth: 1,
+      borderRadius: 6,
+      barThickness: 40,
+    }]
+  } : null
+
+  const issueChartColors = [
+    '#3B82F6', // Water -> Blue
+    '#F97316', // Roads -> Orange
+    '#EAB308', // Electricity -> Yellow
+    '#22C55E', // Health -> Green
+    '#EF4444', // Safety -> Red
+  ]
+
+  const issueChartData = (issueData && issueData.labels && issueData.labels.length) ? {
+    labels: issueData.labels,
+    datasets: [
+      {
+        label: 'Resolved',
+        data: issueData.resolved || [],
+        backgroundColor: '#3b82f6', // Consistent Blue for Resolved
+        borderRadius: 4,
+      },
+      {
+        label: 'Open',
+        data: issueData.open || [],
+        backgroundColor: '#f87171', // Redish for Open
+        borderRadius: 4,
+      }
+    ]
+  } : null
+
+  // ── Skeleton ────────────────────────────────────────────────────────────────
+  if (loading) {
+    return (
+      <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+        <div style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>Loading dashboard…</div>
+        <div style={{ fontSize: '0.8rem' }}>Connecting to backend</div>
+      </div>
+    )
+  }
+
+  // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <div>
+      {/* ── Header ── */}
       <div className="page-header">
         <div>
           <div className="page-title">Command Dashboard</div>
           <div className="page-subtitle">Real-time overview of all booth operations</div>
         </div>
-        <div className="page-actions">
-          <button className="btn btn-secondary" onClick={() => showToast('Data refreshed')}><RefreshCw size={14}/>Refresh</button>
-          <button className="btn btn-primary" onClick={() => showToast('Report downloaded!')}><Download size={14}/>Export Report</button>
+        <div className="page-actions" style={{ alignItems: 'center', gap: '0.75rem', display: 'flex' }}>
+          <span style={{
+            display: 'flex', alignItems: 'center', gap: '0.3rem',
+            fontSize: '0.72rem', color: wsConnected ? '#10b981' : '#f59e0b',
+            background: wsConnected ? 'rgba(16,185,129,.1)' : 'rgba(245,158,11,.1)',
+            padding: '0.25rem 0.6rem', borderRadius: '999px',
+          }}>
+            {wsConnected ? <Wifi size={12}/> : <WifiOff size={12}/>}
+            {wsConnected ? 'Live' : 'Polling'}
+          </span>
+          <button className="btn btn-secondary" onClick={() => { fetchAll(); fetchSegments(segFilter); showToast('Refreshed') }}>
+            <RefreshCw size={14}/> Refresh
+          </button>
         </div>
       </div>
 
-      {/* KPIs */}
-      <div className="kpi-grid">
-        {KPIs.map(k => <KpiCard key={k.label} item={k} />)}
-      </div>
-
-      {/* Charts Row 1 */}
-      <div className="charts-grid" style={{ gridTemplateRows: 'auto' }}>
-        <div className="chart-card" style={{ gridColumn:'1/3' }}>
-          <div className="chart-card-header">
-            <div>
-              <div className="chart-title">Voter Coverage Trend</div>
-              <div className="chart-subtitle">Monthly progression across all booths</div>
-            </div>
-          </div>
-          <div style={{ height: 200 }}><Line data={trendData} options={lineOpts} /></div>
+      {/* ── KPI Cards ── */}
+      {stats && (
+        <div className="kpi-grid">
+          <KpiCard label="Total Voters"   value={stats.totalVoters}   icon={Users}         color="#6366f1" bg="rgba(99,102,241,.12)"  accent="#6366f1" />
+          <KpiCard label="Total Booths"   value={stats.totalBooths}   icon={MapPin}         color="#10b981" bg="rgba(16,185,129,.12)"  accent="#10b981" />
+          <KpiCard label="Total Schemes"  value={stats.totalSchemes}  icon={BookOpen}       color="#f59e0b" bg="rgba(245,158,11,.12)"  accent="#f59e0b" />
+          <KpiCard label="Total Feedback" value={stats.totalFeedback} icon={MessageSquare}  color="#3b82f6" bg="rgba(59,130,246,.12)"  accent="#3b82f6" />
         </div>
+      )}
 
-        <div className="chart-card">
-          <div className="chart-card-header">
-            <div>
-              <div className="chart-title">Voter Segments</div>
-              <div className="chart-subtitle">Distribution by category</div>
-            </div>
-          </div>
-          <div style={{ height: 200 }}><Doughnut data={segmentData} options={doughnutOpts} /></div>
-        </div>
-      </div>
-
-      {/* Charts Row 2 */}
+      {/* ── Row 1: Voter Segmentation + Booth Parts ── */}
       <div className="two-col-grid" style={{ marginBottom: '1.5rem' }}>
+        {/* Dynamic Voter Segmentation */}
         <div className="chart-card">
-          <div className="chart-card-header">
-            <div className="chart-title">Booth Engagement</div>
+          <div className="chart-card-header" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
+            <div>
+              <div className="chart-title">Dynamic Voter Segmentation</div>
+              <div className="chart-subtitle">Filter voters by demographic</div>
+            </div>
+            <div style={{ position: 'relative' }}>
+              <select
+                value={segFilter}
+                onChange={e => setSegFilter(e.target.value)}
+                style={{
+                  appearance: 'none', padding: '0.35rem 2rem 0.35rem 0.75rem',
+                  border: '1px solid var(--border)', borderRadius: '8px',
+                  background: 'var(--surface)', color: 'var(--text)',
+                  fontSize: '0.78rem', cursor: 'pointer',
+                }}
+              >
+                {SEGMENT_FILTERS.map(f => <option key={f.value} value={f.value}>{f.label}</option>)}
+              </select>
+              <ChevronDown size={13} style={{ position: 'absolute', right: '0.5rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-muted)' }}/>
+            </div>
           </div>
-          <div style={{ height: 200 }}><Bar data={engagementData} options={chartOpts(darkMode)} /></div>
+          <div style={{ height: 260, position: 'relative' }}>
+            {segments && segments.length > 0 ? (
+              <BarChartJS data={segChartData} options={chartOpts(darkMode)} />
+            ) : (
+              <div style={{ 
+                display: 'flex', flexDirection: 'column', alignItems: 'center', 
+                justifyContent: 'center', height: '100%', color: 'var(--text-muted)', 
+                fontSize: '0.85rem', gap: '0.5rem', background: 'var(--surface-2)',
+                borderRadius: '8px'
+              }}>
+                <Activity size={24} opacity={0.5} />
+                <span>No data available for this segment</span>
+              </div>
+            )}
+          </div>
         </div>
+
+        {/* Booth Parts Visualization */}
         <div className="chart-card">
           <div className="chart-card-header">
-            <div className="chart-title">Issue Distribution</div>
+            <div>
+              <div className="chart-title">Booth Parts Distribution</div>
+              <div className="chart-subtitle">Voters per booth part (top 20)</div>
+            </div>
           </div>
-          <div style={{ height: 200 }}><Bar data={issueData} options={chartOpts(darkMode)} /></div>
+          <div style={{ height: 260 }}>
+            {partsChartData ? (
+              <BarChartJS data={partsChartData} options={chartOpts(darkMode)} />
+            ) : (
+              <div style={{ display:'flex', alignItems:'center', justifyContent:'center', height:'100%', color:'var(--text-muted)', fontSize:'0.85rem' }}>Loading booth data…</div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Bottom Row */}
-      <div className="two-col-grid">
-        {/* Activity */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">Recent Activity</span>
-          </div>
-          <div className="activity-list">
-            {ACTIVITY.map((a, i) => (
-              <div className="activity-item" key={i}>
-                <div className="activity-dot" style={{ background: a.color }} />
-                <div className="activity-text" dangerouslySetInnerHTML={{ __html: a.text }} />
-                <div className="activity-time">{a.time}</div>
+      {/* ── Row 2: Issue Distribution + Booth Performance ── */}
+      <div className="two-col-grid" style={{ marginBottom: '1.5rem' }}>
+        {/* Issue Distribution */}
+        <div className="chart-card">
+          <div className="chart-card-header">
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+              <div>
+                <div className="chart-title">Issue Distribution</div>
+                <div className="chart-subtitle">{issueFilter === 'summary' ? 'Open vs resolved by category' : 'Detailed booth-level analysis'}</div>
               </div>
-            ))}
+              <select 
+                value={issueFilter}
+                onChange={(e) => setIssueFilter(e.target.value)}
+                style={{
+                  appearance: 'none', padding: '0.2rem 1.5rem 0.2rem 0.5rem',
+                  border: '1px solid var(--border)', borderRadius: '6px',
+                  background: 'var(--surface-2)', color: 'var(--text)',
+                  fontSize: '0.7rem', cursor: 'pointer',
+                }}
+              >
+                <option value="summary">Summary</option>
+                <option value="detailed">Detailed</option>
+              </select>
+            </div>
+          </div>
+          <div style={{ height: 260 }}>
+            {issueFilter === 'summary' ? (
+              issueChartData ? (
+                issueData.totalVoters > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={issueChartData.labels.map((l, i) => ({
+                      name: l,
+                      resolved: issueChartData.datasets[0].data[i],
+                      open: issueChartData.datasets[1].data[i]
+                    }))} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                      <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={10} tickLine={false} axisLine={false} />
+                      <YAxis stroke="var(--text-muted)" fontSize={10} tickLine={false} axisLine={false} />
+                      <RechartsTooltip 
+                        cursor={{ fill: 'var(--primary)', fillOpacity: 0.05 }}
+                        contentStyle={{ 
+                          backgroundColor: 'var(--surface)', 
+                          borderColor: 'var(--border)', 
+                          color: 'var(--text-primary)', 
+                          fontSize: '11px',
+                          borderRadius: '4px',
+                          boxShadow: 'var(--shadow-md)'
+                        }} 
+                      />
+                      <RechartsLegend verticalAlign="top" align="right" iconType="circle" wrapperStyle={{ fontSize: '10px', paddingBottom: '10px' }} />
+                      <Bar dataKey="resolved" stackId="a" barSize={60} fill="#2563eb" radius={[0, 0, 0, 0]}>
+                        {issueChartData.labels.map((label, index) => (
+                          <Cell key={`res-${index}`} fill="#2563eb" fillOpacity={0.9} />
+                        ))}
+                      </Bar>
+                      <Bar dataKey="open" stackId="a" radius={[4, 4, 0, 0]} barSize={60} fill="#818cf8">
+                        {issueChartData.labels.map((label, index) => (
+                          <Cell key={`open-${index}`} fill="#818cf8" fillOpacity={0.8} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div style={{ 
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', 
+                    justifyContent: 'center', height: '100%', color: 'var(--text-muted)', 
+                    fontSize: '0.85rem', gap: '0.5rem', background: 'var(--surface-2)',
+                    borderRadius: '8px'
+                  }}>
+                    <Activity size={24} opacity={0.5} />
+                    <span>No data available for issue distribution</span>
+                  </div>
+                )
+              ) : <div className="loading-faded">Loading summary…</div>
+            ) : (
+              <div style={{ overflowY: 'auto', maxHeight: '100%' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.75rem' }}>
+                  <thead style={{ background: 'var(--surface-2)', position: 'sticky', top: 0 }}>
+                    <tr>
+                      <th style={{ padding: '0.5rem', textAlign: 'left', borderBottom: '1px solid var(--border)' }}>Booth</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'left', borderBottom: '1px solid var(--border)' }}>Type</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'center', borderBottom: '1px solid var(--border)' }}>Sev</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'right', borderBottom: '1px solid var(--border)' }}>Count</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {issueData?.detailedData ? issueData.detailedData.map((item, idx) => (
+                      <tr key={idx} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                        <td style={{ padding: '0.4rem 0.5rem' }}>{item.booth}</td>
+                        <td style={{ padding: '0.4rem 0.5rem' }}>{item.type}</td>
+                        <td style={{ padding: '0.4rem 0.5rem', textAlign: 'center' }}>
+                          <span style={{ 
+                            padding:'1px 5px', borderRadius:'4px', fontSize:'0.6rem', fontWeight: 600,
+                            background: item.severity === 'High' ? '#fee2e2' : item.severity === 'Medium' ? '#fef3c7' : '#d1fae5',
+                            color: item.severity === 'High' ? '#991b1b' : item.severity === 'Medium' ? '#92400e' : '#065f46'
+                          }}>{item.severity}</span>
+                        </td>
+                        <td style={{ padding: '0.4rem 0.5rem', textAlign: 'right', fontWeight: 600 }}>{item.count}</td>
+                      </tr>
+                    )) : <tr><td colSpan="4" style={{ textAlign:'center', padding:'2rem' }}>No detailed data available</td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Booth Performance */}
         <div className="card">
           <div className="card-header">
-            <span className="card-title">Booth Performance</span>
+            <span className="card-title" style={{ display:'flex', alignItems:'center', gap:'0.4rem' }}>
+              <Activity size={16} color="#6366f1"/> Booth Performance
+            </span>
           </div>
-          <div className="booth-perf-list">
-            {BOOTHS.map(b => (
-              <div className="booth-perf-row" key={b.id}>
-                <div className="booth-perf-name">{b.name.replace('Booth ','B-')}</div>
-                <div className="booth-bar-bg">
-                  <div className="booth-bar-fill" style={{ width: b.engagement + '%', background: b.engagement >= 80 ? '#10b981' : b.engagement >= 65 ? '#f59e0b' : '#ef4444' }} />
+          <div style={{ overflowY: 'auto', maxHeight: 240, padding: '0 0.5rem' }}>
+            {boothPerformance.length ? boothPerformance.map((b, i) => {
+              const score = b.performanceScore || 0;
+              const resRate = b.resolutionRate || 0;
+              const color = score >= 70 ? '#4f46e5' : score >= 30 ? '#0ea5e9' : '#94a3b8';
+              
+              return (
+                <div key={i} className="booth-perf-row" style={{ padding: '0.75rem 0', borderBottom: '1px solid var(--border-subtle)' }}>
+                  <div style={{ display:'flex', justifyContent:'space-between', marginBottom:'0.3rem', alignItems:'center' }}>
+                    <div>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 600, color:'var(--text)' }}>{b.boothName}</span>
+                      <div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>Load: {b.issueLoad} issues</div>
+                    </div>
+                    <div style={{ textAlign:'right' }}>
+                      <span style={{ color, fontWeight: 700, fontSize: '0.85rem' }}>{score.toFixed(1)}%</span>
+                      <div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>Res: {resRate}%</div>
+                    </div>
+                  </div>
+                  <div className="booth-bar-bg" style={{ background: 'var(--surface-2)', height: '6px', borderRadius: '3px' }}>
+                    <div
+                      style={{ 
+                        width: `${Math.min(score, 100)}%`, background: color, height: '100%', 
+                        borderRadius: '3px', transition: 'width 0.8s ease' 
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="booth-perf-score">{b.engagement}%</div>
+              );
+            }) : (
+              <div style={{ padding:'2rem', color:'var(--text-muted)', fontSize:'0.85rem', textAlign:'center' }}>Calculating real-time scores…</div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Feedback Section ── */}
+      <div className="two-col-grid">
+        {/* Submit Feedback */}
+        <div className="card">
+          <div className="card-header">
+            <span className="card-title" style={{ display:'flex', alignItems:'center', gap:'0.4rem' }}>
+              <MessageSquare size={16} color="#6366f1"/> Submit Feedback
+            </span>
+          </div>
+          <form onSubmit={handleFeedbackSubmit} style={{ display:'flex', flexDirection:'column', gap:'0.75rem', padding:'0.25rem 0' }}>
+            <input
+              type="text"
+              placeholder="Your name (optional)"
+              value={fbAuthor}
+              onChange={e => setFbAuthor(e.target.value)}
+              style={{
+                padding: '0.5rem 0.75rem', borderRadius: '8px',
+                border: '1px solid var(--border)', background: 'var(--surface)',
+                color: 'var(--text)', fontSize: '0.85rem',
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Booth ID (optional)"
+              value={fbBooth}
+              onChange={e => setFbBooth(e.target.value)}
+              style={{
+                padding: '0.5rem 0.75rem', borderRadius: '8px',
+                border: '1px solid var(--border)', background: 'var(--surface)',
+                color: 'var(--text)', fontSize: '0.85rem',
+              }}
+            />
+            <textarea
+              placeholder="Write your feedback here…"
+              value={fbMessage}
+              onChange={e => setFbMessage(e.target.value)}
+              rows={4}
+              required
+              style={{
+                padding: '0.5rem 0.75rem', borderRadius: '8px', resize: 'vertical',
+                border: '1px solid var(--border)', background: 'var(--surface)',
+                color: 'var(--text)', fontSize: '0.85rem', fontFamily: 'inherit',
+              }}
+            />
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={fbSubmitting || !fbMessage.trim()}
+              style={{ alignSelf: 'flex-start' }}
+            >
+              <Send size={14}/> {fbSubmitting ? 'Sending…' : 'Submit Feedback'}
+            </button>
+          </form>
+        </div>
+
+        {/* Feedback List (live) */}
+        <div className="card">
+          <div className="card-header">
+            <span className="card-title" style={{ display:'flex', alignItems:'center', gap:'0.4rem' }}>
+              <TrendingUp size={16} color="#10b981"/> Live Feedback
+              <span style={{
+                fontSize:'0.7rem', background:'rgba(16,185,129,.15)', color:'#10b981',
+                borderRadius:'999px', padding:'0.1rem 0.5rem', marginLeft:'0.3rem'
+              }}>
+                {feedbackList.length}
+              </span>
+            </span>
+          </div>
+          <div style={{ overflowY: 'auto', maxHeight: 270, display:'flex', flexDirection:'column', gap:'0.6rem' }}>
+            {feedbackList.length === 0 && (
+              <div style={{ padding:'1rem', color:'var(--text-muted)', fontSize:'0.85rem', textAlign:'center' }}>
+                No feedback yet. Be the first!
+              </div>
+            )}
+            {feedbackList.map((fb, i) => (
+              <div key={fb.id || i} style={{
+                padding: '0.65rem 0.8rem',
+                background: 'var(--surface)',
+                borderRadius: '10px',
+                border: '1px solid var(--border)',
+                borderLeft: '4px solid var(--primary)',
+                position: 'relative',
+                group: 'true'
+              }} className="feedback-item">
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'0.3rem' }}>
+                  <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text-primary)' }}>
+                    {fb.author || 'Anonymous'}
+                    {fb.boothId && <span style={{ fontWeight:400, color:'var(--text-muted)', marginLeft:'0.4rem', fontSize:'0.75rem' }}>· Booth {fb.boothId}</span>}
+                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                      {fb.createdAt ? new Date(fb.createdAt).toLocaleString('en-IN', { hour:'2-digit', minute:'2-digit' }) : '—'}
+                    </span>
+                    <button 
+                      onClick={() => handleDeleteFeedback(fb.id)}
+                      className="delete-fb-btn"
+                      style={{ 
+                        border:'none', background:'none', padding:0, 
+                        color: 'var(--danger)', cursor:'pointer', opacity: 0.6,
+                        display: 'flex', alignItems: 'center'
+                      }}
+                      title="Delete Feedback"
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  </div>
+                </div>
+                <div style={{ fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{fb.message}</div>
               </div>
             ))}
           </div>

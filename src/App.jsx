@@ -6,6 +6,8 @@ import Toast from './components/shared/Toast.jsx'
 import NotificationsPanel from './components/shared/NotificationsPanel.jsx'
 import AdminSignIn from './pages/AdminSignIn.jsx'
 
+import IntelligentTriage from './components/complaints/IntelligentTriage.jsx'
+
 const Dashboard     = lazy(() => import('./pages/Dashboard.jsx'))
 const BoothMap      = lazy(() => import('./pages/BoothMap.jsx'))
 const Voters        = lazy(() => import('./pages/Voters.jsx'))
@@ -16,6 +18,7 @@ const Communication = lazy(() => import('./pages/Communication.jsx'))
 const Notifications = lazy(() => import('./pages/Notifications.jsx'))
 const Settings      = lazy(() => import('./pages/Settings.jsx'))
 const BeneficiaryLinkage = lazy(() => import('./pages/BeneficiaryLinkage.jsx'))
+// const IntelligentTriage = lazy(() => import('./components/complaints/IntelligentTriage.jsx'))
 
 const PAGE_MAP = {
   dashboard:     Dashboard,
@@ -28,6 +31,7 @@ const PAGE_MAP = {
   notifications: Notifications,
   settings:      Settings,
   beneficiaries: BeneficiaryLinkage,
+  triage:        IntelligentTriage,
 }
 
 function App() {

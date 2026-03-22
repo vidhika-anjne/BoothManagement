@@ -1,12 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import {
   User, Search, AlertCircle, Award, BarChart2, ClipboardList,
   Shield, Landmark, CheckCircle2, ArrowRight, ChevronRight,
-  Info, Check, X, Star, Phone, Home, FileText, Bell
+  Info, Check, X, Star, Phone, Home, FileText, Bell, Sparkles
 } from 'lucide-react'
 import { useApp } from '../context/AppContext.jsx'
 import { BOOTHS, ISSUES, NOTIFICATIONS, VOTER_DB } from '../data/mockData.js'
 import BeforeAfterVisual from '../components/shared/BeforeAfterVisual.jsx'
+
+const AICOMPLAINT = lazy(() => import('../components/complaints/ComplaintSubmission.jsx'))
 
 // ─── Indian ID Validators ───────────────────────────────────────────────────
 const AADHAAR_RE = /^\d{12}$/
@@ -601,7 +603,7 @@ function ComplaintTab({ showToast }) {
 // ═══════════════════════════════════════════════════════════════════════════
 //  TAB 4 – SCHEME RECOMMENDATIONS  (API-powered)
 // ═══════════════════════════════════════════════════════════════════════════
-const API_BASE = 'http://localhost:8080'
+const API_BASE = 'http://localhost:8081'
 
 function ScoreBar({ score }) {
   const pct = Math.round(score * 100)
@@ -1109,12 +1111,12 @@ function HistoryTab() {
 const TABS = [
   { id: 'register',      label: 'Voter Registration', icon: User },
   { id: 'status',        label: 'Check Status',        icon: Search },
+  { id: 'ai-complaint',  label: 'AI Complaint',        icon: Sparkles },
   { id: 'complaint',     label: 'File Complaint',      icon: AlertCircle },
   { id: 'schemes',       label: 'Scheme Eligibility',  icon: Award },
   { id: 'survey',        label: 'Citizen Survey',      icon: BarChart2 },
   { id: 'track',         label: 'Track Issues',        icon: ClipboardList },
   { id: 'history',       label: 'My Complaints',       icon: FileText },
-  { id: 'notifications', label: 'Ward Alerts',         icon: Bell },
 ]
 
 export default function CitizenPortal() {
@@ -1125,12 +1127,16 @@ export default function CitizenPortal() {
     switch (activeTab) {
       case 'register':  return <RegisterTab showToast={showToast} />
       case 'status':    return <StatusTab />
+      case 'ai-complaint': return (
+        <Suspense fallback={<div>Loading AI Intelligence...</div>}>
+          <AICOMPLAINT />
+        </Suspense>
+      )
       case 'complaint': return <ComplaintTab showToast={showToast} />
       case 'schemes':   return <SchemesTab />
       case 'survey':    return <SurveyTab showToast={showToast} />
       case 'track':     return <TrackTab />
       case 'history':   return <HistoryTab />
-      case 'notifications': return <WardAlertsTab />
       default:          return null
     }
   }

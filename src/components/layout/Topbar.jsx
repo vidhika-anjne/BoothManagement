@@ -61,7 +61,13 @@ export default function Topbar() {
             {darkMode ? 'Light' : 'Dark'}
           </button>
 
-          <div className="topbar-avatar" title={`${user?.name || 'Admin'}`}>{user?.name?.split(' ').map(n => n[0]).join('') || 'A'}</div>
+          <div className="topbar-avatar" title={`${user?.name || 'Admin'}`}>
+            {user?.name?.split(' ').map(n => n[0]).join('') || 'A'}
+          </div>
+          <div className="user-header-info" style={{ display: 'flex', flexDirection: 'column', marginLeft: '0.25rem' }}>
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1 }}>{user?.name || 'Admin'}</span>
+            <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '2px' }}>{user?.role || 'Booth Admin'}</span>
+          </div>
         </div>
       </header>
     </>
