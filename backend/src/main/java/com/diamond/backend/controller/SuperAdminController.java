@@ -1,6 +1,5 @@
 package com.diamond.backend.controller;
 
-import com.diamond.backend.model.BoothPart;
 import com.diamond.backend.model.BoothSection;
 import com.diamond.backend.model.Scheme;
 import com.diamond.backend.model.Voter;
@@ -56,6 +55,7 @@ public class SuperAdminController {
         return ResponseEntity.ok(superAdminService.getAnalytics());
     }
 
+    // ── Legacy segmentation (kept for backward compat) ─────────────────────
     @GetMapping("/segmentation")
     public ResponseEntity<Object> getSegmentationData(
             @RequestParam(required = false) String ageGroup,
@@ -65,11 +65,40 @@ public class SuperAdminController {
         return ResponseEntity.ok(superAdminService.getSegmentationData(ageGroup, gender, occupation, view));
     }
 
+    // ── NEW: Hierarchical segmentation ─────────────────────────────────────
+    /**
+     * GET /superadmin/dashboard/segmentation
+     * Params: district, ac, partNumber (all optional, cascading)
+     * Case 1: no params   → All Delhi (hardcoded constants)
+     * Case 2: ac = "Delhi Cantt" → real DB query
+     * Case 3: anything else   → deterministic mock data
+     */
     @GetMapping("/dashboard/segmentation")
-    public ResponseEntity<Map<String, Object>> getDashboardSegmentation(
-            @RequestParam(required = false, defaultValue = "overall") String view,
-            @RequestParam(required = false) Integer partNumber,
-            @RequestParam(required = false) String acName) {
-        return ResponseEntity.ok(superAdminService.getDashboardSegmentation(view, partNumber, acName));
+    public ResponseEntity<Map<String, Object>> getHierarchicalSegmentation(
+            @RequestParam(required = false) String district,
+            @RequestParam(required = false) String ac,
+            @RequestParam(required = false) Integer partNumber) {
+        return ResponseEntity.ok(superAdminService.getHierarchicalSegmentation(district, ac, partNumber));
+    }
+
+    // ── NEW: Hierarchy dropdown endpoints ──────────────────────────────────
+    /** Returns list of distinct district names */
+    @GetMapping("/segments/districts")
+    public ResponseEntity<List<String>> getDistricts() {
+        return ResponseEntity.ok(superAdminService.getDistinctDistricts());
+    }
+
+    /** Returns AC names for a given district */
+    @GetMapping("/segments/acs")
+    public ResponseEntity<List<String>> getAcs(
+            @RequestParam String district) {
+        return ResponseEntity.ok(superAdminService.getAcsByDistrict(district));
+    }
+
+    /** Returns part number + name list for a given AC */
+    @GetMapping("/segments/parts")
+    public ResponseEntity<List<Map<String, Object>>> getParts(
+            @RequestParam String ac) {
+        return ResponseEntity.ok(superAdminService.getPartsByAc(ac));
     }
 }

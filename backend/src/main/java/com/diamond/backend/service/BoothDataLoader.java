@@ -6,6 +6,7 @@ import com.diamond.backend.repository.BoothPartRepository;
 import com.diamond.backend.repository.BoothSectionRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -21,12 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Seeds booth_parts (from booths.json) and booth_sections (from delhi_cantt.json)
- * on first startup when tables are empty.
- *
- * KEY INSIGHT: booths.json and delhi_cantt.json use DIFFERENT partId values for the
- * same Delhi Cantt parts (AC 38). The common key is partNumber (1..40 within AC 38).
- * We match delhi_cantt.json parts to persisted BoothPart rows using (acNumber=38, partNumber).
+ * Seeds booth_parts (from final_data (1).json) and booth_sections (from delhi_cantt.json)
+ * on startup. Uses TRUNCATE CASCADE on first run with stale data to avoid unique
+ * constraint violations when the source JSON changes.
  */
 @Service
 @Order(2)
@@ -36,22 +34,35 @@ public class BoothDataLoader implements CommandLineRunner {
     @Autowired private BoothSectionRepository boothSectionRepository;
     @Autowired private ResourceLoader resourceLoader;
     @Autowired private ObjectMapper objectMapper;
+    @Autowired private EntityManager entityManager;
 
     private static final int DELHI_CANTT_AC = 38;
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        if (boothPartRepository.count() > 0) {
-            System.out.println("[BoothDataLoader] booth_parts already populated — skipping.");
+        // Wipe stale data and reload from final_data (1).json
+        long existing = boothPartRepository.count();
+
+        // If the correct data (~143k rows from final_data) is already loaded, skip
+        if (existing > 100000) {
+            System.out.println("[BoothDataLoader] booth_parts already populated with " + existing + " rows — skipping.");
             return;
         }
 
-        // STEP 1: Persist all parts from booths.json and flush to get DB ids
+        // Wipe stale data (from old booths.json) before reloading
+        if (existing > 0) {
+            System.out.println("[BoothDataLoader] Truncating stale booth tables (" + existing + " rows) for fresh reload...");
+            entityManager.createNativeQuery("TRUNCATE TABLE booth_sections, booth_parts CASCADE").executeUpdate();
+            entityManager.flush();
+            entityManager.clear();
+        }
+
+        // STEP 1: Persist all parts from final_data (1).json and flush to get DB ids
         List<BoothPart> allParts = loadAllBooths();
         boothPartRepository.saveAll(allParts);
         boothPartRepository.flush();
-        System.out.println("[BoothDataLoader] Saved " + allParts.size() + " booth parts from booths.json.");
+        System.out.println("[BoothDataLoader] Saved " + allParts.size() + " booth parts from final_data (1).json.");
 
         // STEP 2: Build partNumber → persisted BoothPart lookup for AC 38
         //         (booths.json and delhi_cantt.json share the same partNumbers 1..40 for AC 38,
@@ -78,7 +89,7 @@ public class BoothDataLoader implements CommandLineRunner {
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private List<BoothPart> loadAllBooths() throws Exception {
-        Resource resource = resourceLoader.getResource("classpath:json/booths.json");
+        Resource resource = resourceLoader.getResource("classpath:json/final_data (1).json");
         List<BoothPart> parts = new ArrayList<>();
 
         try (InputStream is = resource.getInputStream()) {
