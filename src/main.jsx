@@ -1,3 +1,8 @@
+// Vite/SockJS/Stompjs shim
+if (typeof window !== 'undefined' && !window.global) {
+    window.global = window;
+}
+
 import { StrictMode, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/globals.css'

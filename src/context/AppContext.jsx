@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
 const AppContext = createContext(null);
 
@@ -35,6 +35,21 @@ export function AppProvider({ children }) {
     setUser(null);
     setIsAuthenticated(false);
     setActivePage('dashboard');
+  }, []);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const profile = await dashboardService.getUserProfile();
+        setUser(profile);
+        setIsAuthenticated(true); // Set authenticated if profile is fetched successfully
+      } catch (e) {
+        // Not logged in or session expired
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    };
+    fetchProfile();
   }, []);
 
   return (

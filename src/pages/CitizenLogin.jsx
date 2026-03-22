@@ -4,7 +4,7 @@ import {
   AlertCircle
 } from 'lucide-react'
 
-const API_BASE = 'http://localhost:8080'
+const API_BASE = 'http://localhost:8081'
 
 export default function CitizenLogin({ onLogin }) {
   const [step, setStep]         = useState('mobile')   // 'mobile' | 'otp' | 'success'

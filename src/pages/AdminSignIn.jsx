@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { Lock, Mail, MapPin, Settings } from 'lucide-react'
-
-const ADMIN_NAME = 'Neha Diwedi'
+import { useState } from 'react';
+import { Lock, Mail, MapPin } from 'lucide-react';
+import { dashboardService } from '../services/dashboardService';
+import { useApp } from '../context/AppContext';
 
 export default function AdminSignIn({ onSignIn }) {
   const [email, setEmail] = useState('')
@@ -10,17 +10,25 @@ export default function AdminSignIn({ onSignIn }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const { showToast, navigate } = useApp()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
-    // Simulate authentication
     if (email && password && boothId) {
-      setTimeout(() => {
-        onSignIn({ email, boothId, name: ADMIN_NAME })
+      try {
+        const data = await dashboardService.login(email, password, boothId);
+        onSignIn(data.user);
+        showToast(`Welcome back, ${data.user.name}!`);
+        navigate('dashboard');
+      } catch (err) {
+        setError('Invalid credentials. Please try again.');
+        showToast('Login failed');
+      } finally {
         setLoading(false)
-      }, 800)
+      }
     } else {
       setError('All fields are required')
       setLoading(false)
@@ -260,7 +268,7 @@ export default function AdminSignIn({ onSignIn }) {
           color: 'var(--text-muted)',
           lineHeight: '1.5'
         }}>
-          <strong style={{ color: 'var(--text-secondary)', fontFamily: "'IBM Plex Mono', monospace" }}>Demo:</strong> Use any email, booth ID (B-141 to B-152), and password to sign in as {ADMIN_NAME}.
+          <strong style={{ color: 'var(--text-secondary)', fontFamily: "'IBM Plex Mono', monospace" }}>Demo:</strong> Use any email, booth ID (B-141 to B-152), and password to sign in to the portal.
         </div>
       </div>
     </div>

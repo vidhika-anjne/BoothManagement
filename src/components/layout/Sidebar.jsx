@@ -2,7 +2,7 @@ import { useApp } from '../../context/AppContext.jsx'
 import {
   LayoutDashboard, Map, Users, AlertTriangle, Megaphone,
   BrainCircuit, MessageSquare, Bell, Settings, ChevronLeft,
-  ChevronRight, MoreVertical, Zap, Globe, Award
+  ChevronRight, MoreVertical, Zap, Globe, Award, LogOut
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -25,9 +25,7 @@ export default function Sidebar() {
   const mobileClass = mobileSidebarOpen ? ' mobile-open' : ''
 
   const handleSignOut = () => {
-    if (window.confirm('Are you sure you want to sign out?')) {
-      signOut()
-    }
+    signOut()
   }
 
   return (
@@ -69,16 +67,26 @@ export default function Sidebar() {
         <div className="user-card">
           <div className="user-avatar">{user?.name?.split(' ').map(n => n[0]).join('') || 'A'}</div>
           <div className="user-info">
-            <span className="user-name">{user?.name || 'Admin'}</span>
-            <span className="user-role">{user?.boothId || 'Officer'}</span>
+            <span className="user-name" style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{user?.name || 'Booth Officer'}</span>
+            <span className="user-role" style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>{user?.boothId || 'Unauthorized'}</span>
           </div>
           <button
             className="user-menu-btn"
             onClick={handleSignOut}
             title="Sign Out"
-            style={{ color: 'var(--text-muted)', cursor: 'pointer' }}
+            style={{ 
+              color: 'var(--danger)', 
+              cursor: 'pointer', 
+              border: 'none', 
+              background: 'rgba(239, 68, 68, 0.1)',
+              padding: '0.4rem',
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <MoreVertical size={15}/>
+            <LogOut size={16}/>
           </button>
         </div>
       </div>

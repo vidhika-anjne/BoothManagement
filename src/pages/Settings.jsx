@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext.jsx'
-import { Settings as SettingsIcon, User, Bell, Shield, Database, Save } from 'lucide-react'
+import { Settings as SettingsIcon, User, Bell, Shield, Database, Save, Loader2 } from 'lucide-react'
+import dashboardService from '../services/dashboardService'
 
 function Toggle({ on, onToggle }) {
   return <div className={`toggle${on?' on':''}`} onClick={onToggle} role="switch" aria-checked={on} />
@@ -8,8 +9,28 @@ function Toggle({ on, onToggle }) {
 
 export default function Settings() {
   const { showToast } = useApp()
+  const [loading, setLoading] = useState(true)
+  const [profile, setProfile] = useState({ name: '', email: '', phone: '', role: '', constituency: '' })
 
-  const [profile, setProfile] = useState({ name: 'Neha Diwedi', email: 'neha@boothmanagement.gov', phone: '+91 98765 43210', role: 'Senior Booth Manager', constituency: 'Ward 8, Delhi' })
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await dashboardService.getUserProfile()
+        setProfile({
+          name: data.name || '',
+          email: data.email || '',
+          phone: data.phone || '+91 98765 43210',
+          role: data.role || 'Officer',
+          constituency: data.boothId || 'Ward 8, Delhi'
+        })
+      } catch (e) {
+        showToast('Failed to load profile data')
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProfile()
+  }, [showToast])
 
   const [notifs, setNotifs] = useState({ email: true, sms: false, push: true, issueAlerts: true, campaignUpdates: false, dailyReport: true })
   const [privacy, setPrivacy] = useState({ twoFactor: true, sessionLog: true, dataExport: false })
