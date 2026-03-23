@@ -5,628 +5,429 @@
   "acName": "DELHI CANTT",
   "parts": [
     {
-      "partId": 14321,
+      "partId": 31843,
       "partNumber": 1,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "1- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "Indira Market Naraina, Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "Near Indira Market Naraina, Delhi Cantt"
-        },
-        {
-          "sectionId": 3,
-          "sectionName": "W 102 Block Indira Market Naraina, Delhi Cantt"
-        },
-        {
-          "sectionId": 4,
-          "sectionName": "COD, M.E. Line Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14322,
+      "partId": 31844,
       "partNumber": 2,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "2- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "COD, M.E. Line Naraina, Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "Taurus Army Boys Hostel COD Complex, Delhi Cantt"
-        },
-        {
-          "sectionId": 3,
-          "sectionName": "15, Grenadiers Near COD Naraina, Delhi Cantt"
-        },
-        {
-          "sectionId": 4,
-          "sectionName": "Staff Quarter KV-3 Naraina, Delhi Cantt"
-        },
-        {
-          "sectionId": 5,
-          "sectionName": "Nau Sena Bagh-2 Naraina, Delhi Cantt"
-        },
-        {
-          "sectionId": 6,
-          "sectionName": "Seema Sadak Bhawan, Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14323,
+      "partId": 31845,
       "partNumber": 3,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "3- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "CB Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14324,
+      "partId": 31846,
       "partNumber": 4,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "4- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "CB Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14325,
+      "partId": 31847,
       "partNumber": 5,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "5- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "CB Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14326,
+      "partId": 31848,
       "partNumber": 6,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "6- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "CB Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14327,
+      "partId": 31849,
       "partNumber": 7,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "7- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "CB Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14328,
+      "partId": 31850,
       "partNumber": 8,
-      "pollingStationName": "CB NARAINA",
-      "pollingStationAddress": "8- CB Naraina",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "CB Naraina, Delhi Cantt"
-        }
-      ]
+      "partName": "CB NARAINA"
     },
     {
-      "partId": 14329,
+      "partId": 31851,
       "partNumber": 9,
-      "pollingStationName": "OLD NANGAL",
-      "pollingStationAddress": "9- Old Nangal",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "V Block Old Nangal, Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "C Block Old Nangal, Delhi Cantt"
-        },
-        {
-          "sectionId": 3,
-          "sectionName": "Fodder Line, Delhi Cantt"
-        },
-        {
-          "sectionId": 4,
-          "sectionName": "Fuel Depot, Near Pankha Road, Delhi Cantt"
-        },
-        {
-          "sectionId": 5,
-          "sectionName": "C.A.M.S. Officer Mess Old Nangal, Delhi Cantt"
-        },
-        {
-          "sectionId": 6,
-          "sectionName": "Engineer Store Depot, Delhi Cantt"
-        },
-        {
-          "sectionId": 7,
-          "sectionName": "1811 Pioneer Unit, Near Old Nangal, Delhi Cantt"
-        }
-      ]
+      "partName": "OLD NANGAL"
     },
     {
-      "partId": 14330,
+      "partId": 31852,
       "partNumber": 10,
-      "pollingStationName": "OLD NANGAL",
-      "pollingStationAddress": "10- Old Nangal",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "V Block Old Nangal, Delhi Cantt"
-        }
-      ]
+      "partName": "OLD NANGAL"
     },
     {
-      "partId": 14311,
+      "partId": 31853,
       "partNumber": 11,
-      "pollingStationName": "OLD NANGAL",
-      "pollingStationAddress": "Indira Gandhi CB Sr Sec School, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "V Block Old Nangal Delhi Cantt"
-        }
-      ]
+      "partName": "OLD NANGAL"
     },
     {
-      "partId": 14312,
+      "partId": 31854,
       "partNumber": 12,
-      "pollingStationName": "OLD NANGAL",
-      "pollingStationAddress": "Indira Gandhi CB Sr Sec School, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "T Block Old Nangal Delhi Cantt"
-        }
-      ]
+      "partName": "OLD NANGAL"
     },
     {
-      "partId": 14313,
+      "partId": 31855,
       "partNumber": 13,
-      "pollingStationName": "OLD NANGAL",
-      "pollingStationAddress": "Indira Gandhi CB Sr Sec School, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "T Block Old Nangal Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "Railway Colony Old Nangal Delhi Cantt"
-        }
-      ]
+      "partName": "OLD NANGAL"
     },
     {
-      "partId": 14314,
+      "partId": 31856,
       "partNumber": 14,
-      "pollingStationName": "PANCHVATI",
-      "pollingStationAddress": "Community Centre Panchvati, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "Block 1 Type IV Panchvati Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "Block 2 Type III Panchvati Delhi Cantt"
-        },
-        {
-          "sectionId": 3,
-          "sectionName": "Block 3 Type III Panchvati Delhi Cantt"
-        },
-        {
-          "sectionId": 4,
-          "sectionName": "Block 4 Type III Panchvati Delhi Cantt"
-        },
-        {
-          "sectionId": 5,
-          "sectionName": "Block 5 Type II Panchvati Delhi Cantt"
-        }
-      ]
+      "partName": "PANCHVATI"
     },
     {
-      "partId": 14315,
+      "partId": 31857,
       "partNumber": 15,
-      "pollingStationName": "PINTO PARK",
-      "pollingStationAddress": "Community Centre Panchvati, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "Prahlad Pur Village Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "IOF BBE Camp Line Delhi Cantt"
-        },
-        {
-          "sectionId": 3,
-          "sectionName": "Field Post Office Delhi Cantt"
-        },
-        {
-          "sectionId": 4,
-          "sectionName": "CGO Block Sports Ground Delhi Cantt"
-        },
-        {
-          "sectionId": 5,
-          "sectionName": "Anurakshan Officers Mess Delhi Cantt"
-        },
-        {
-          "sectionId": 6,
-          "sectionName": "10 Sikh Line Near Palam Station Delhi Cantt"
-        },
-        {
-          "sectionId": 7,
-          "sectionName": "285 FD WKSP COY EME Delhi Cantt"
-        },
-        {
-          "sectionId": 8,
-          "sectionName": "Old Pinto Park Delhi Cantt"
-        },
-        {
-          "sectionId": 9,
-          "sectionName": "New Pinto Park Delhi Cantt"
-        }
-      ]
+      "partName": "PINTO PARK"
     },
     {
-      "partId": 14316,
+      "partId": 31858,
       "partNumber": 16,
-      "pollingStationName": "SADAR BAZAR",
-      "pollingStationAddress": "Sardar Vallabhbhai Patel CB Sr Sec School, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "CB Primary School, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "24 Qtrs, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 3,
-          "sectionName": "Fire Staff Qtrs, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 4,
-          "sectionName": "32 Qtrs, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 5,
-          "sectionName": "Main Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 6,
-          "sectionName": "16 Qtrs Sadar Bazar Delhi Cantt"
-        }
-      ]
+      "partName": "SADAR BAZAR"
     },
     {
-      "partId": 14317,
+      "partId": 31859,
       "partNumber": 17,
-      "pollingStationName": "CVD LINE SADAR BAZAR",
-      "pollingStationAddress": "Sardar Vallabhbhai Patel CB Sr Sec School, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "New CVD Line Delhi Cantt"
-        }
-      ]
+      "partName": "CVD LINE SADAR BAZAR"
     },
     {
-      "partId": 14318,
+      "partId": 31860,
       "partNumber": 18,
-      "pollingStationName": "CVD LINE SADAR BAZAR",
-      "pollingStationAddress": "Sardar Vallabhbhai Patel CB Sr Sec School, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "Peeru Vihar Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "Basantra Line, Sadar Bazar Delhi Cantt"
-        }
-      ]
+      "partName": "CVD LINE SADAR BAZAR"
     },
     {
-      "partId": 14319,
+      "partId": 31861,
       "partNumber": 19,
-      "pollingStationName": "SADAR BAZAR",
-      "pollingStationAddress": "Office of Cantonment Board, Sadar Bazar Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "Masjid Qtrs, Sadar Bazar Delhi Cantt"
-        }
-      ]
+      "partName": "SADAR BAZAR"
     },
     {
-      "partId": 14320,
+      "partId": 31862,
       "partNumber": 20,
-      "pollingStationName": "SADAR BAZAR",
-      "pollingStationAddress": "PM SHRI Kendriya Vidyalaya No.-1, Sadar Bazar Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "Tanga Stand, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 2,
-          "sectionName": "Main Market, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 3,
-          "sectionName": "S.D. Mandir, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 4,
-          "sectionName": "Near S.D Mandir, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 5,
-          "sectionName": "Prabhu Dayal Building, Delhi Cantt"
-        },
-        {
-          "sectionId": 6,
-          "sectionName": "Back Side Jain Mandir, Delhi Cantt"
-        },
-        {
-          "sectionId": 7,
-          "sectionName": "Near Water Tank Jain Mandir, Delhi Cantt"
-        },
-        {
-          "sectionId": 8,
-          "sectionName": "Near Sabzi Mandi, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 9,
-          "sectionName": "Behind Market, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 10,
-          "sectionName": "Masjid Near Transit Camp, Delhi Cantt"
-        },
-        {
-          "sectionId": 11,
-          "sectionName": "NPG Line, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 12,
-          "sectionName": "Sumran Line, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 13,
-          "sectionName": "Shekhawati Line, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 14,
-          "sectionName": "Hazipur Line, Sadar Bazar Delhi Cantt"
-        },
-        {
-          "sectionId": 15,
-          "sectionName": "CASD Delhi Cantt"
-        }
-      ]
+      "partName": "SADAR BAZAR"
     },
     {
-      "partId": 14341,
+      "partId": 31863,
       "partNumber": 21,
-      "pollingStationName": "SADAR BAZAR PM SHRI KENDRIYA VIDYALAYA NO.-1, SADAR BAZAR, DELHI CANTT",
-      "pollingStationAddress": "21-SADAR BAZAR PM Shri Kendriya Vidyalaya No.-1, Sadar Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. Near Jain Mandir, Sadar Bazar2. Kendriya Vidyalaya-I, Sadar Bazar3. Sher Singh Building, Sadar Bazar4. Brar Bldg., Sadar Bazar5. Near Sood Building, Sadar Bazar6. Hari Singh Building, Sadar Bazar7. Singhal Building, Sadar Bazar8. Gurdwara, Sadar Bazar9. Geeta Ashram, Sadar Bazar10. Tall Jhuggi, Sadar Bazar11. Kandhar Line, Sadar Bazar12. Brijwasi House Near CGH, Sadar Bazar13. Karam Vihar, Sadar Bazar14. 422 Field Hospital, COD"
-        }
-      ]
+      "partName": "SADAR BAZAR"
     },
     {
-      "partId": 14342,
+      "partId": 31864,
       "partNumber": 22,
-      "pollingStationName": "SADAR BAZAR SARDAR VALLABHBHAI PATEL CANTONMENT BOARD SR. SEC. SCHOOL, SADAR BAZAR, DELHI CANTT",
-      "pollingStationAddress": "22-SADAR BAZAR Sardar Vallabhbhai Patel Cantonment Board Sr. Sec. School, Sadar Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. Old CVD Line, Sadar Bazaar2. Chitral Line, Sadar Bazaar3. Kabristan Huts, Old CVD Line4. Old DRDO Camp Near CVD5. JCO Accn, CVD Line6. Clk P1, CVD"
-        }
-      ]
+      "partName": "SADAR BAZAR"
     },
     {
-      "partId": 14343,
+      "partId": 31865,
       "partNumber": 23,
-      "pollingStationName": "SADAR BAZAR OFFICE OF CANTONMENT BOARD, SADAR BAZAR, DELHI CANTT",
-      "pollingStationAddress": "23-SADAR BAZAR Office of Cantonment Board, Sadar Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. New Market, Sadar Bazar II/2 to II/1212. Market, Sadar Bazar II3. Dalip Singh Building, Sadar Bazar II4. II Sadar Bazar5. Type-III DCB Staff Qtr, Sadar Bazar6. Dr. Flats, CG Hospital7. CGH Staff Qtrs W-189/1 to 189/188. Police Station Qtrs9. Type-II DCB Staff Qtrs, Sadar Bazar10. Type-4 DCB Staff Qtrs, Sadar Bazar"
-        }
-      ]
+      "partName": "SADAR BAZAR"
     },
     {
-      "partId": 14344,
+      "partId": 31866,
       "partNumber": 24,
-      "pollingStationName": "DHOBI GHAT KIRBY PLACE ARMY PUBLIC SCHOOL, SADAR BAZAR, DELHI CANTT",
-      "pollingStationAddress": "24-DHOBI GHAT KIRBY PLACE Army Public School, Sadar Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. A-Block Huts, Dhobi Ghat, Kirby Place"
-        }
-      ]
+      "partName": "DHOBI GHAT KIRBY PLACE"
     },
     {
-      "partId": 14345,
+      "partId": 31867,
       "partNumber": 25,
-      "pollingStationName": "DHOBI GHAT KIRBY PLACE ARMY PUBLIC SCHOOL, SADAR BAZAR, DELHI CANTT",
-      "pollingStationAddress": "25-DHOBI GHAT KIRBY PLACE Army Public School, Sadar Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. S-Block Huts, Dhobi Ghat, Kirby Place2. A-Block Huts, Dhobi Ghat, Kirby Place"
-        }
-      ]
+      "partName": "DHOBI GHAT KIRBY PLACE"
     },
     {
-      "partId": 14346,
+      "partId": 31868,
       "partNumber": 26,
-      "pollingStationName": "DHOBI GHAT KIRBY PLACE ARMY PUBLIC SCHOOL, SADAR BAZAR, DELHI CANTT",
-      "pollingStationAddress": "26-DHOBI GHAT KIRBY PLACE Army Public School, Sadar Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. A-Block Huts, Dhobi Ghat, Kirby Place2. Godowns, Dhobi Ghat, Kirby Place3. CSD Complex, Kirby Place4. HQ Tech Gp EME5. Army Public School, Kirby Place"
-        }
-      ]
+      "partName": "DHOBI GHAT KIRBY PLACE"
     },
     {
-      "partId": 14347,
+      "partId": 31869,
       "partNumber": 27,
-      "pollingStationName": "DHOBI GHAT KIRBY PLACE ARMY PUBLIC SCHOOL, SADAR BAZAR, DELHI CANTT",
-      "pollingStationAddress": "27-DHOBI GHAT KIRBY PLACE Army Public School, Sadar Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. A-Block Huts, Dhobi Ghat, Kirby Place"
-        }
-      ]
+      "partName": "DHOBI GHAT KIRBY PLACE"
     },
     {
-      "partId": 14349,
+      "partId": 31870,
+      "partNumber": 28,
+      "partName": "COD ME LINE KIRBY PLACE"
+    },
+    {
+      "partId": 31871,
       "partNumber": 29,
-      "pollingStationName": "BRAR SQUARE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL, URI ENCLAVE, DELHI CANTT",
-      "pollingStationAddress": "29-BRAR SQUARE St. Mother Teresa Cantonment Board Sr. Sec. School, Uri Enclave, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. D-Block Huts, Brar Square2. S-Block Huts, Brar Square"
-        }
-      ]
+      "partName": "BRAR SQUARE"
     },
     {
-      "partId": 14350,
+      "partId": 31872,
       "partNumber": 30,
-      "pollingStationName": "URI ENCLAVE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL, URI ENCLAVE, DELHI CANTT",
-      "pollingStationAddress": "30-URI ENCLAVE St. Mother Teresa Cantonment Board Sr. Sec. School, Uri Enclave, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. Block-P, Uri Enclave2. 1 WEC, Brar Square3. Railway Qrts, Brar Square4. Brar Square, War Cemetery5. MH Line, Brar Square6. Air Force Station Naraina, Brar Square"
-        }
-      ]
+      "partName": "URI ENCLAVE"
     },
     {
-      "partId": 14352,
+      "partId": 31873,
+      "partNumber": 31,
+      "partName": "URI ENCLAVE"
+    },
+    {
+      "partId": 31874,
       "partNumber": 32,
-      "pollingStationName": "URI ENCLAVE ST. MOTHER TERESA CANTONMENT BOARD SR. SEC. SCHOOL, URI ENCLAVE, DELHI CANTT",
-      "pollingStationAddress": "32-URI ENCLAVE St. Mother Teresa Cantonment Board Sr. Sec. School, Uri Enclave, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. Block-T, Uri Enclave 2. Block P, Uri Enclave 3. Piggery Farms, Uri Enclave 4. R.R. Colony 5. Karamchari Vihar 6. CB School, Uri Enclave"
-        }
-      ]
+      "partName": "URI ENCLAVE"
     },
     {
-      "partId": 14353,
+      "partId": 31875,
       "partNumber": 33,
-      "pollingStationName": "KABUL LINE SARVODAYA BAL VIDYALAYA, KABUL LINE, DELHI CANTT",
-      "pollingStationAddress": "33-KABUL LINE Sarvodaya Bal Vidyalaya, Kabul Line, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1–11. Kabul Line Blocks A, B, C, D, E, F, G, P-50, P-51, P-52, P-53 12. Single Storey, Kabul Line 13. T Block, Kabul Line 14. MES Staff Qtrs Type-1 15. MES Staff Qtrs Type II"
-        }
-      ]
+      "partName": "KABUL LINE"
     },
     {
-      "partId": 14354,
+      "partId": 31876,
       "partNumber": 34,
-      "pollingStationName": "GOPI NATH BAZAR DR. APJ ABDUL KALAM CANTONMENT BOARD SR. SEC. SCHOOL, SHASTRI BAZAR, DELHI CANTT",
-      "pollingStationAddress": "34-GOPI NATH BAZAR Dr. APJ Abdul Kalam Cantonment Board Sr. Sec. School, Shastri Bazar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1–6. Gopi Nath Bazar Type-III Blocks 1–6 7. Type-IV/1, Gopi Nath Bazar 8. P & T Quarters 9. Old DID Line 10. C.B. Secondary School 11. New DID Line 12. Delhi Area Servant Line 13. Delhi Area Provost Unit 14. 10 PARS HQ Delhi Area 15. Zonal Engg. Officer Mess"
-        }
-      ]
+      "partName": "GOPI NATH BAZAR"
     },
     {
-      "partId": 14356,
+      "partId": 31877,
+      "partNumber": 35,
+      "partName": "ROCK  VIEW"
+    },
+    {
+      "partId": 31878,
       "partNumber": 36,
-      "pollingStationName": "MEHRAM NAGAR GOVT SARVODAYA CO-ED SCHOOL, MEHRAM NAGAR EAST",
-      "pollingStationAddress": "36-MEHRAM NAGAR Govt Sarvodaya Co-Ed School, Mehram Nagar East",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. 60 Qtrs, East Mehram Nagar"
-        }
-      ]
+      "partName": "MEHRAM NAGAR"
     },
     {
-      "partId": 14357,
+      "partId": 31879,
       "partNumber": 37,
-      "pollingStationName": "MEHRAM NAGAR GOVT SARVODAYA CO-ED SCHOOL, MEHRAM NAGAR EAST",
-      "pollingStationAddress": "37-MEHRAM NAGAR Govt Sarvodaya Co-Ed School, Mehram Nagar East",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. J Series, East Mehram Nagar 2. NSG HQ, Mehram Nagar 3. Police Colony, East Mehram Nagar"
-        }
-      ]
+      "partName": "MEHRAM NAGAR"
     },
     {
-      "partId": 14358,
+      "partId": 31880,
       "partNumber": 38,
-      "pollingStationName": "MEHRAM NAGAR DR. B.R. AMBEDKAR CANTONMENT BOARD SR. SEC. SCHOOL, MEHRAM NAGAR, DELHI CANTT",
-      "pollingStationAddress": "38-MEHRAM NAGAR Dr. B.R. Ambedkar Cantonment Board Sr. Sec. School, Mehram Nagar, Delhi Cantt",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. Series-VIII, Mehram Nagar Village"
-        }
-      ]
+      "partName": "MEHRAM NAGAR"
     },
     {
-      "partId": 14360,
+      "partId": 31881,
+      "partNumber": 39,
+      "partName": "MEHRAM NAGAR"
+    },
+    {
+      "partId": 31882,
       "partNumber": 40,
-      "pollingStationName": "MEHRAM NAGAR GOVT SARVODAYA CO-ED SCHOOL, MEHRAM NAGAR EAST",
-      "pollingStationAddress": "40-MEHRAM NAGAR Govt Sarvodaya Co-Ed School, Mehram Nagar East",
-      "sections": [
-        {
-          "sectionId": 1,
-          "sectionName": "1. T-Series, 60 Qtrs, East Mehram Nagar 2. R-Series, East Mehram Nagar 3. S-Series, East Mehram Nagar 4. S.D. Mandir, East Mehram Nagar"
-        }
-      ]
+      "partName": "MEHRAM NAGAR"
+    },
+    {
+      "partId": 31883,
+      "partNumber": 41,
+      "partName": "MEHRAM NAGAR"
+    },
+    {
+      "partId": 31884,
+      "partNumber": 42,
+      "partName": "JHARERA VILLAGE"
+    },
+    {
+      "partId": 31885,
+      "partNumber": 43,
+      "partName": "JHARERA VILLAGE"
+    },
+    {
+      "partId": 31886,
+      "partNumber": 44,
+      "partName": "JHARERA VILLAGE"
+    },
+    {
+      "partId": 31887,
+      "partNumber": 45,
+      "partName": "JHARERA VILLAGE"
+    },
+    {
+      "partId": 31888,
+      "partNumber": 46,
+      "partName": "JHARERA VILLAGE"
+    },
+    {
+      "partId": 31889,
+      "partNumber": 47,
+      "partName": "JHARERA VILLAGE"
+    },
+    {
+      "partId": 31890,
+      "partNumber": 48,
+      "partName": "JHARERA VILLAGE"
+    },
+    {
+      "partId": 31891,
+      "partNumber": 49,
+      "partName": "ARJUN VIHAR"
+    },
+    {
+      "partId": 31892,
+      "partNumber": 50,
+      "partName": "GOPINATH BAZAR"
+    },
+    {
+      "partId": 31893,
+      "partNumber": 51,
+      "partName": "SUBROTO PARK"
+    },
+    {
+      "partId": 31894,
+      "partNumber": 52,
+      "partName": "SUBROTO PARK"
+    },
+    {
+      "partId": 31895,
+      "partNumber": 53,
+      "partName": "SUBROTO PARK"
+    },
+    {
+      "partId": 31896,
+      "partNumber": 54,
+      "partName": "SUBROTO PARK"
+    },
+    {
+      "partId": 31897,
+      "partNumber": 55,
+      "partName": "SUBROTO PARK"
+    },
+    {
+      "partId": 31898,
+      "partNumber": 56,
+      "partName": "DHAULA KUAN"
+    },
+    {
+      "partId": 31899,
+      "partNumber": 57,
+      "partName": "MANAS MARG BAPU DHAM"
+    },
+    {
+      "partId": 31900,
+      "partNumber": 58,
+      "partName": "BAPU DHAM CHANAKYA PURI"
+    },
+    {
+      "partId": 31901,
+      "partNumber": 59,
+      "partName": "BAPU DHAM"
+    },
+    {
+      "partId": 31902,
+      "partNumber": 60,
+      "partName": "VINAY MARG"
+    },
+    {
+      "partId": 31903,
+      "partNumber": 61,
+      "partName": "MOTI BAGH - I"
+    },
+    {
+      "partId": 31904,
+      "partNumber": 62,
+      "partName": "MOTI BAGH - I"
+    },
+    {
+      "partId": 31905,
+      "partNumber": 63,
+      "partName": "MOTI BAGH - I"
+    },
+    {
+      "partId": 31906,
+      "partNumber": 64,
+      "partName": "MOTI BAGH -1"
+    },
+    {
+      "partId": 31907,
+      "partNumber": 65,
+      "partName": "MOTI BAGH - I"
+    },
+    {
+      "partId": 31908,
+      "partNumber": 66,
+      "partName": "RK PURAM SECTOR-13"
+    },
+    {
+      "partId": 31909,
+      "partNumber": 67,
+      "partName": "MOTI BAGH -1"
+    },
+    {
+      "partId": 31910,
+      "partNumber": 68,
+      "partName": "RK PURAM SECTOR-13"
+    },
+    {
+      "partId": 31911,
+      "partNumber": 69,
+      "partName": "NETAJI NAGAR"
+    },
+    {
+      "partId": 31912,
+      "partNumber": 70,
+      "partName": "NEW MOTI BAGH"
+    },
+    {
+      "partId": 31927,
+      "partNumber": 71,
+      "partName": "NEW MOTI BAGH"
+    },
+    {
+      "partId": 31913,
+      "partNumber": 72,
+      "partName": "NETAJI NAGAR"
+    },
+    {
+      "partId": 31914,
+      "partNumber": 73,
+      "partName": "BAPU DHAM CHANAKYA PURI"
+    },
+    {
+      "partId": 31915,
+      "partNumber": 74,
+      "partName": "BAPU DHAM CHANAKYA PURI"
+    },
+    {
+      "partId": 31916,
+      "partNumber": 75,
+      "partName": "BAPU DHAM CHANAKYA PURI"
+    },
+    {
+      "partId": 31917,
+      "partNumber": 76,
+      "partName": "BAPU DHAM"
+    },
+    {
+      "partId": 31918,
+      "partNumber": 77,
+      "partName": "BAPU DHAM"
+    },
+    {
+      "partId": 31919,
+      "partNumber": 78,
+      "partName": "SARDAR PATEL MARG"
+    },
+    {
+      "partId": 31920,
+      "partNumber": 79,
+      "partName": "SARDAR PATEL MARG"
+    },
+    {
+      "partId": 31921,
+      "partNumber": 80,
+      "partName": "CHANAKYA PURI"
+    },
+    {
+      "partId": 31922,
+      "partNumber": 81,
+      "partName": "CHANAKYA PURI"
+    },
+    {
+      "partId": 31923,
+      "partNumber": 82,
+      "partName": "KAUTILYA MARG"
+    },
+    {
+      "partId": 31924,
+      "partNumber": 83,
+      "partName": "CHANAKYA PURI"
+    },
+    {
+      "partId": 31925,
+      "partNumber": 84,
+      "partName": "SATYA MARG"
+    },
+    {
+      "partId": 31926,
+      "partNumber": 85,
+      "partName": "SATYA MARG"
     }
   ]
 }

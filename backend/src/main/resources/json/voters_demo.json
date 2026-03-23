@@ -7,7 +7,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-1",
     "houseNumber": "W-102",
     "partNumber": 1,
     "partName": "CB NARAINA",
@@ -22,7 +21,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "SAFAI_KARAMCHARI",
-    "mobile_number": "9810000001"
+    "mobile_number": "9810000001",
+    "partId": 31850
   },
   {
     "voterId": "DL002",
@@ -32,7 +32,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-2",
     "houseNumber": "COD-15",
     "partNumber": 2,
     "partName": "CB NARAINA",
@@ -47,7 +46,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000002"
+    "mobile_number": "9810000002",
+    "partId": 31850
   },
   {
     "voterId": "DL003",
@@ -57,7 +57,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-2",
     "houseNumber": "KV-3/12",
     "partNumber": 2,
     "partName": "CB NARAINA",
@@ -72,7 +71,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "TEACHER_OR_FACULTY",
-    "mobile_number": "9810000003"
+    "mobile_number": "9810000003",
+    "partId": 31850
   },
   {
     "voterId": "DL004",
@@ -82,7 +82,6 @@
     "maritalStatus": "Single",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-2",
     "houseNumber": "NSB-2/4",
     "partNumber": 2,
     "partName": "CB NARAINA",
@@ -97,7 +96,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "HEALTH_WORKER",
-    "mobile_number": "9810000004"
+    "mobile_number": "9810000004",
+    "partId": 31850
   },
   {
     "voterId": "DL005",
@@ -107,7 +107,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-3",
     "houseNumber": "CB-N/7",
     "partNumber": 3,
     "partName": "CB NARAINA",
@@ -122,7 +121,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "ORGANIZED_WORKER",
-    "mobile_number": "9810000005"
+    "mobile_number": "9810000005",
+    "partId": 31850
   },
   {
     "voterId": "DL006",
@@ -132,7 +132,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-9",
     "houseNumber": "VB-ON/3",
     "partNumber": 9,
     "partName": "OLD NANGAL",
@@ -147,7 +146,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000006"
+    "mobile_number": "9810000006",
+    "partId": 31855
   },
   {
     "voterId": "DL007",
@@ -157,7 +157,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-9",
     "houseNumber": "CB-ON/11",
     "partNumber": 9,
     "partName": "OLD NANGAL",
@@ -172,7 +171,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "UNORGANIZED_WORKER",
-    "mobile_number": "9810000007"
+    "mobile_number": "9810000007",
+    "partId": 31855
   },
   {
     "voterId": "DL008",
@@ -182,7 +182,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-9",
     "houseNumber": "ESD/22",
     "partNumber": 9,
     "partName": "OLD NANGAL",
@@ -197,7 +196,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000008"
+    "mobile_number": "9810000008",
+    "partId": 31855
   },
   {
     "voterId": "DL009",
@@ -207,7 +207,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-9",
     "houseNumber": "1811-PU/5",
     "partNumber": 9,
     "partName": "OLD NANGAL",
@@ -222,7 +221,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000009"
+    "mobile_number": "9810000009",
+    "partId": 31855
   },
   {
     "voterId": "DL010",
@@ -232,7 +232,6 @@
     "maritalStatus": "Widowed",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-11",
     "houseNumber": "VB-ON/19",
     "partNumber": 11,
     "partName": "OLD NANGAL",
@@ -247,7 +246,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "SAFAI_KARAMCHARI",
-    "mobile_number": "9810000010"
+    "mobile_number": "9810000010",
+    "partId": 31855
   },
   {
     "voterId": "DL011",
@@ -257,7 +257,6 @@
     "maritalStatus": "Single",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-12",
     "houseNumber": "TB-ON/8",
     "partNumber": 12,
     "partName": "OLD NANGAL",
@@ -272,7 +271,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "STREET_VENDOR",
-    "mobile_number": "9810000011"
+    "mobile_number": "9810000011",
+    "partId": 31855
   },
   {
     "voterId": "DL012",
@@ -282,7 +282,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-13",
     "houseNumber": "RC-ON/3",
     "partNumber": 13,
     "partName": "OLD NANGAL",
@@ -297,7 +296,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "TEACHER_OR_FACULTY",
-    "mobile_number": "9810000012"
+    "mobile_number": "9810000012",
+    "partId": 31855
   },
   {
     "voterId": "DL013",
@@ -307,7 +307,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-14",
     "houseNumber": "PV-B1/14",
     "partNumber": 14,
     "partName": "PANCHVATI",
@@ -322,7 +321,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000013"
+    "mobile_number": "9810000013",
+    "partId": 31856
   },
   {
     "voterId": "DL014",
@@ -332,7 +332,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-14",
     "houseNumber": "PV-B3/7",
     "partNumber": 14,
     "partName": "PANCHVATI",
@@ -347,7 +346,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "HEALTH_WORKER",
-    "mobile_number": "9810000014"
+    "mobile_number": "9810000014",
+    "partId": 31856
   },
   {
     "voterId": "DL015",
@@ -357,7 +357,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-14",
     "houseNumber": "PV-B5/2",
     "partNumber": 14,
     "partName": "PANCHVATI",
@@ -372,7 +371,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "ORGANIZED_WORKER",
-    "mobile_number": "9810000015"
+    "mobile_number": "9810000015",
+    "partId": 31856
   },
   {
     "voterId": "DL016",
@@ -382,7 +382,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-15",
     "houseNumber": "PV-12",
     "partNumber": 15,
     "partName": "PINTO PARK",
@@ -397,7 +396,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "UNORGANIZED_WORKER",
-    "mobile_number": "9810000016"
+    "mobile_number": "9810000016",
+    "partId": 31857
   },
   {
     "voterId": "DL017",
@@ -407,7 +407,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-15",
     "houseNumber": "PP-OLD/5",
     "partNumber": 15,
     "partName": "PINTO PARK",
@@ -422,7 +421,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000017"
+    "mobile_number": "9810000017",
+    "partId": 31857
   },
   {
     "voterId": "DL018",
@@ -432,7 +432,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-15",
     "houseNumber": "PP-NEW/8",
     "partNumber": 15,
     "partName": "PINTO PARK",
@@ -447,7 +446,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "HEALTH_WORKER",
-    "mobile_number": "9810000018"
+    "mobile_number": "9810000018",
+    "partId": 31857
   },
   {
     "voterId": "DL019",
@@ -457,7 +457,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-16",
     "houseNumber": "SB-24/6",
     "partNumber": 16,
     "partName": "SADAR BAZAR",
@@ -472,7 +471,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "SAFAI_KARAMCHARI",
-    "mobile_number": "9810000019"
+    "mobile_number": "9810000019",
+    "partId": 31865
   },
   {
     "voterId": "DL020",
@@ -482,7 +482,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-16",
     "houseNumber": "SB-MAIN/15",
     "partNumber": 16,
     "partName": "SADAR BAZAR",
@@ -497,7 +496,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "STREET_VENDOR",
-    "mobile_number": "9810000020"
+    "mobile_number": "9810000020",
+    "partId": 31865
   },
   {
     "voterId": "DL021",
@@ -507,7 +507,6 @@
     "maritalStatus": "Single",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-17",
     "houseNumber": "CVD-NEW/9",
     "partNumber": 17,
     "partName": "CVD LINE SADAR BAZAR",
@@ -522,7 +521,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000021"
+    "mobile_number": "9810000021",
+    "partId": 31860
   },
   {
     "voterId": "DL022",
@@ -532,7 +532,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-18",
     "houseNumber": "PV-3",
     "partNumber": 18,
     "partName": "CVD LINE SADAR BAZAR",
@@ -547,7 +546,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "UNORGANIZED_WORKER",
-    "mobile_number": "9810000022"
+    "mobile_number": "9810000022",
+    "partId": 31860
   },
   {
     "voterId": "DL023",
@@ -557,7 +557,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-19",
     "houseNumber": "SB2-11",
     "partNumber": 19,
     "partName": "SADAR BAZAR",
@@ -572,7 +571,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "STREET_VENDOR",
-    "mobile_number": "9810000023"
+    "mobile_number": "9810000023",
+    "partId": 31865
   },
   {
     "voterId": "DL024",
@@ -582,7 +582,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-20",
     "houseNumber": "TS-SB/4",
     "partNumber": 20,
     "partName": "SADAR BAZAR",
@@ -597,7 +596,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "ARTISANS_SPINNERS_AND_WEAVERS",
-    "mobile_number": "9810000024"
+    "mobile_number": "9810000024",
+    "partId": 31865
   },
   {
     "voterId": "DL025",
@@ -607,7 +607,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-20",
     "houseNumber": "MM-SB/7",
     "partNumber": 20,
     "partName": "SADAR BAZAR",
@@ -622,7 +621,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "KHADI_ARTISAN",
-    "mobile_number": "9810000025"
+    "mobile_number": "9810000025",
+    "partId": 31865
   },
   {
     "voterId": "DL026",
@@ -632,7 +632,6 @@
     "maritalStatus": "Widowed",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-20",
     "houseNumber": "NPG-SB/3",
     "partNumber": 20,
     "partName": "SADAR BAZAR",
@@ -647,7 +646,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "SAFAI_KARAMCHARI",
-    "mobile_number": "9810000026"
+    "mobile_number": "9810000026",
+    "partId": 31865
   },
   {
     "voterId": "DL027",
@@ -657,7 +657,6 @@
     "maritalStatus": "Single",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-20",
     "houseNumber": "SL-SB/6",
     "partNumber": 20,
     "partName": "SADAR BAZAR",
@@ -672,7 +671,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "JOURNALIST",
-    "mobile_number": "9810000027"
+    "mobile_number": "9810000027",
+    "partId": 31865
   },
   {
     "voterId": "DL028",
@@ -682,7 +682,6 @@
     "maritalStatus": "Single",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-21",
     "houseNumber": "KV1-SB/2",
     "partNumber": 21,
     "partName": "SADAR BAZAR PM SHRI KENDRIYA VIDYALAYA NO.-1",
@@ -697,7 +696,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "TEACHER_OR_FACULTY",
-    "mobile_number": "9810000028"
+    "mobile_number": "9810000028",
+    "partId": 31865
   },
   {
     "voterId": "DL029",
@@ -707,7 +707,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-22",
     "houseNumber": "CVD-OLD/14",
     "partNumber": 22,
     "partName": "SADAR BAZAR SARDAR VALLABHBHAI PATEL CANTONMENT BOARD SR. SEC. SCHOOL",
@@ -722,7 +721,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "ORGANIZED_WORKER",
-    "mobile_number": "9810000029"
+    "mobile_number": "9810000029",
+    "partId": 31865
   },
   {
     "voterId": "DL030",
@@ -732,7 +732,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-23",
     "houseNumber": "SB2-NM/5",
     "partNumber": 23,
     "partName": "SADAR BAZAR OFFICE OF CANTONMENT BOARD",
@@ -747,7 +746,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "STREET_VENDOR",
-    "mobile_number": "9810000030"
+    "mobile_number": "9810000030",
+    "partId": 31865
   },
   {
     "voterId": "DL031",
@@ -757,7 +757,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-23",
     "houseNumber": "CGH-W189/4",
     "partNumber": 23,
     "partName": "SADAR BAZAR OFFICE OF CANTONMENT BOARD",
@@ -772,7 +771,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "HEALTH_WORKER",
-    "mobile_number": "9810000031"
+    "mobile_number": "9810000031",
+    "partId": 31865
   },
   {
     "voterId": "DL032",
@@ -782,7 +782,6 @@
     "maritalStatus": "Divorced",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-24",
     "houseNumber": "DG-KP/A3",
     "partNumber": 24,
     "partName": "DHOBI GHAT KIRBY PLACE",
@@ -797,7 +796,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "UNORGANIZED_WORKER",
-    "mobile_number": "9810000032"
+    "mobile_number": "9810000032",
+    "partId": 31869
   },
   {
     "voterId": "DL033",
@@ -807,7 +807,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-25",
     "houseNumber": "DG-KP/S7",
     "partNumber": 25,
     "partName": "DHOBI GHAT KIRBY PLACE",
@@ -822,7 +821,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "ARTISANS_SPINNERS_AND_WEAVERS",
-    "mobile_number": "9810000033"
+    "mobile_number": "9810000033",
+    "partId": 31869
   },
   {
     "voterId": "DL034",
@@ -832,7 +832,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-25",
     "houseNumber": "DG-KP/T4",
     "partNumber": 25,
     "partName": "DHOBI GHAT KIRBY PLACE",
@@ -847,7 +846,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "SAFAI_KARAMCHARI",
-    "mobile_number": "9810000034"
+    "mobile_number": "9810000034",
+    "partId": 31869
   },
   {
     "voterId": "DL035",
@@ -857,7 +857,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-26",
     "houseNumber": "KP-MAR/9",
     "partNumber": 26,
     "partName": "KIRBY PLACE",
@@ -872,7 +871,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000035"
+    "mobile_number": "9810000035",
+    "partId": 31869
   },
   {
     "voterId": "DL036",
@@ -882,7 +882,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-27",
     "houseNumber": "KP-STF/14",
     "partNumber": 27,
     "partName": "KIRBY PLACE",
@@ -897,7 +896,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "TEACHER_OR_FACULTY",
-    "mobile_number": "9810000036"
+    "mobile_number": "9810000036",
+    "partId": 31869
   },
   {
     "voterId": "DL037",
@@ -907,7 +907,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-28",
     "houseNumber": "MN-A/3",
     "partNumber": 28,
     "partName": "MEHRAM NAGAR",
@@ -922,7 +921,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "UNORGANIZED_WORKER",
-    "mobile_number": "9810000037"
+    "mobile_number": "9810000037",
+    "partId": 31883
   },
   {
     "voterId": "DL038",
@@ -932,7 +932,6 @@
     "maritalStatus": "Widowed",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-29",
     "houseNumber": "MN-B/6",
     "partNumber": 29,
     "partName": "MEHRAM NAGAR",
@@ -947,7 +946,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "SAFAI_KARAMCHARI",
-    "mobile_number": "9810000038"
+    "mobile_number": "9810000038",
+    "partId": 31883
   },
   {
     "voterId": "DL039",
@@ -957,7 +957,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-30",
     "houseNumber": "MN-C/11",
     "partNumber": 30,
     "partName": "MEHRAM NAGAR",
@@ -972,7 +971,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "FARMER",
-    "mobile_number": "9810000039"
+    "mobile_number": "9810000039",
+    "partId": 31883
   },
   {
     "voterId": "DL040",
@@ -982,7 +982,6 @@
     "maritalStatus": "Single",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-31",
     "houseNumber": "MN-D/2",
     "partNumber": 31,
     "partName": "MEHRAM NAGAR",
@@ -997,7 +996,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "TEACHER_OR_FACULTY",
-    "mobile_number": "9810000040"
+    "mobile_number": "9810000040",
+    "partId": 31883
   },
   {
     "voterId": "DL041",
@@ -1007,7 +1007,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-32",
     "houseNumber": "MN-E/8",
     "partNumber": 32,
     "partName": "MEHRAM NAGAR",
@@ -1022,7 +1021,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "FARMER",
-    "mobile_number": "9810000041"
+    "mobile_number": "9810000041",
+    "partId": 31883
   },
   {
     "voterId": "DL042",
@@ -1032,7 +1032,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-33",
     "houseNumber": "MN-F/5",
     "partNumber": 33,
     "partName": "MEHRAM NAGAR",
@@ -1047,7 +1046,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "UNORGANIZED_WORKER",
-    "mobile_number": "9810000042"
+    "mobile_number": "9810000042",
+    "partId": 31883
   },
   {
     "voterId": "DL043",
@@ -1057,7 +1057,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-34",
     "houseNumber": "MN-G/13",
     "partNumber": 34,
     "partName": "MEHRAM NAGAR",
@@ -1072,7 +1071,8 @@
     "employmentStatus": "Self_Employed",
     "governmentEmployee": false,
     "occupation": "STREET_VENDOR",
-    "mobile_number": "9810000043"
+    "mobile_number": "9810000043",
+    "partId": 31883
   },
   {
     "voterId": "DL044",
@@ -1082,7 +1082,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-35",
     "houseNumber": "MN-H/7",
     "partNumber": 35,
     "partName": "MEHRAM NAGAR",
@@ -1097,7 +1096,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "HEALTH_WORKER",
-    "mobile_number": "9810000044"
+    "mobile_number": "9810000044",
+    "partId": 31883
   },
   {
     "voterId": "DL045",
@@ -1107,7 +1107,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-36",
     "houseNumber": "MN-I/4",
     "partNumber": 36,
     "partName": "MEHRAM NAGAR",
@@ -1122,7 +1121,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000045"
+    "mobile_number": "9810000045",
+    "partId": 31883
   },
   {
     "voterId": "DL046",
@@ -1132,7 +1132,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-37",
     "houseNumber": "MN-J/1",
     "partNumber": 37,
     "partName": "MEHRAM NAGAR",
@@ -1147,7 +1146,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "SAFAI_KARAMCHARI",
-    "mobile_number": "9810000046"
+    "mobile_number": "9810000046",
+    "partId": 31883
   },
   {
     "voterId": "DL047",
@@ -1157,7 +1157,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-37",
     "houseNumber": "MN-K/9",
     "partNumber": 37,
     "partName": "MEHRAM NAGAR",
@@ -1172,7 +1171,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": true,
     "occupation": "EX_SERVICEMEN",
-    "mobile_number": "9810000047"
+    "mobile_number": "9810000047",
+    "partId": 31883
   },
   {
     "voterId": "DL048",
@@ -1182,7 +1182,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-38",
     "houseNumber": "MNV-6/3",
     "partNumber": 38,
     "partName": "MEHRAM NAGAR DR. B.R. AMBEDKAR CANTONMENT BOARD SR. SEC. SCHOOL",
@@ -1197,7 +1196,8 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "HEALTH_WORKER",
-    "mobile_number": "9810000048"
+    "mobile_number": "9810000048",
+    "partId": 31878
   },
   {
     "voterId": "DL049",
@@ -1207,7 +1207,6 @@
     "maritalStatus": "Single",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-38",
     "houseNumber": "MNV-8/6",
     "partNumber": 38,
     "partName": "MEHRAM NAGAR DR. B.R. AMBEDKAR CANTONMENT BOARD SR. SEC. SCHOOL",
@@ -1222,7 +1221,8 @@
     "employmentStatus": "Unemployed",
     "governmentEmployee": false,
     "occupation": "FARMER",
-    "mobile_number": "9810000049"
+    "mobile_number": "9810000049",
+    "partId": 31878
   },
   {
     "voterId": "DL050",
@@ -1232,7 +1232,6 @@
     "maritalStatus": "Married",
     "district": "NEW DELHI",
     "assemblyConstituencyAc": "DELHI CANTT",
-    "boothId": "B-40",
     "houseNumber": "MN-T/11",
     "partNumber": 40,
     "partName": "MEHRAM NAGAR",
@@ -1247,6 +1246,7 @@
     "employmentStatus": "Employed",
     "governmentEmployee": false,
     "occupation": "TEACHER_OR_FACULTY",
-    "mobile_number": "9810000050"
+    "mobile_number": "9810000050",
+    "partId": 31883
   }
 ]

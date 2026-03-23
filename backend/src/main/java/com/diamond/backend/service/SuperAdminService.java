@@ -89,21 +89,21 @@ public class SuperAdminService {
         systemSnapshot.put("totalKeyVoters", totalKeyVoters);
         systemSnapshot.put("totalBeneficiaries", totalBeneficiaries);
 
-        Map<String, Long> boothCounts = allVoters.stream()
-                .filter(v -> v.getBoothId() != null)
-                .collect(Collectors.groupingBy(Voter::getBoothId, Collectors.counting()));
+        Map<Long, Long> boothCounts = allVoters.stream()
+                .filter(v -> v.getPartId() != null)
+                .collect(Collectors.groupingBy(Voter::getPartId, Collectors.counting()));
 
         String topBooth = "N/A";
         String weakBooth = "N/A";
         if (!boothCounts.isEmpty()) {
-            Map.Entry<String, Long> max = boothCounts.entrySet().iterator().next();
-            Map.Entry<String, Long> min = max;
-            for (Map.Entry<String, Long> entry : boothCounts.entrySet()) {
+            Map.Entry<Long, Long> max = boothCounts.entrySet().iterator().next();
+            Map.Entry<Long, Long> min = max;
+            for (Map.Entry<Long, Long> entry : boothCounts.entrySet()) {
                 if (entry.getValue() > max.getValue()) max = entry;
                 if (entry.getValue() < min.getValue()) min = entry;
             }
-            topBooth = "Booth " + max.getKey();
-            weakBooth = "Booth " + min.getKey();
+            topBooth = "Part " + max.getKey();
+            weakBooth = "Part " + min.getKey();
         }
 
         Map<String, Object> boothIntelligence = new HashMap<>();
@@ -362,10 +362,16 @@ public class SuperAdminService {
         return boothSectionRepository.findAll();
     }
 
-    public List<Voter> getVoters(String boothId, String sectionId, Voter.Gender gender, Voter.CasteCategory casteCategory) {
+    public List<Voter> getVoters(String partId, String sectionId, Voter.Gender gender, Voter.CasteCategory casteCategory) {
         Specification<Voter> spec = Specification.where(null);
-        if (boothId != null && !boothId.isEmpty())
-            spec = spec.and((root, query, cb) -> cb.equal(root.get("boothId"), boothId));
+        if (partId != null && !partId.isEmpty()) {
+            try {
+                Long partIdLong = Long.parseLong(partId);
+                spec = spec.and((root, query, cb) -> cb.equal(root.get("partId"), partIdLong));
+            } catch (NumberFormatException e) {
+                // Invalid partId format, skip this filter
+            }
+        }
         if (sectionId != null && !sectionId.isEmpty())
             spec = spec.and((root, query, cb) -> cb.equal(root.get("section"), sectionId));
         if (gender != null)
@@ -387,8 +393,8 @@ public class SuperAdminService {
                 .filter(v -> v.getCasteCategory() != null)
                 .collect(Collectors.groupingBy(v -> v.getCasteCategory().name(), Collectors.counting())));
         analytics.put("votersPerBooth", allVoters.stream()
-                .filter(v -> v.getBoothId() != null)
-                .collect(Collectors.groupingBy(Voter::getBoothId, Collectors.counting())));
+                .filter(v -> v.getPartId() != null)
+                .collect(Collectors.groupingBy(Voter::getPartId, Collectors.counting())));
         analytics.put("votersPerSection", allVoters.stream()
                 .filter(v -> v.getSection() != null)
                 .collect(Collectors.groupingBy(Voter::getSection, Collectors.counting())));

@@ -61,7 +61,7 @@ public class VoterDataLoader implements CommandLineRunner {
                 voter.setAge(node.path("age").asInt());
                 voter.setDistrict(node.path("district").asText());
                 voter.setAssemblyConstituencyAc(node.path("assemblyConstituencyAc").asText());
-                voter.setBoothId(node.path("boothId").asText());
+                voter.setPartId(node.path("partId").asLong());
                 voter.setHouseNumber(node.path("houseNumber").asText());
                 voter.setPartNumber(node.path("partNumber").asInt());
                 voter.setPartName(node.path("partName").asText());

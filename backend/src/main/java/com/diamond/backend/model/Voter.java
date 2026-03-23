@@ -33,7 +33,7 @@ public class Voter {
     private String assemblyConstituencyAc;
 
     @Column(nullable = false)
-    private String boothId;
+    private Long partId;
 
     private String houseNumber;
     private Integer partNumber;
@@ -129,8 +129,8 @@ public class Voter {
     public void setDistrict(String district) { this.district = district; }
     public String getAssemblyConstituencyAc() { return assemblyConstituencyAc; }
     public void setAssemblyConstituencyAc(String assemblyConstituencyAc) { this.assemblyConstituencyAc = assemblyConstituencyAc; }
-    public String getBoothId() { return boothId; }
-    public void setBoothId(String boothId) { this.boothId = boothId; }
+    public Long getPartId() { return partId; }
+    public void setPartId(Long partId) { this.partId = partId; }
     public String getHouseNumber() { return houseNumber; }
     public void setHouseNumber(String houseNumber) { this.houseNumber = houseNumber; }
     public Integer getPartNumber() { return partNumber; }

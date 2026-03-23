@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface VoterRepository extends JpaRepository<Voter, Long>, JpaSpecificationExecutor<Voter> {
     Optional<Voter> findByVoterId(String voterId);
     Optional<Voter> findByMobileNumber(String mobileNumber);
-    List<Voter> findByBoothId(String boothId);
+    List<Voter> findByPartId(Long partId);
     List<Voter> findByAssemblyConstituencyAc(String ac);
 }
