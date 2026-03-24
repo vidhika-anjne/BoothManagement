@@ -31,6 +31,12 @@ public class ComplaintController {
         return repository.findAllByOrderByAiScoreDesc(); 
     }
 
+    @PostMapping("/{id}/resolve")
+    public Complaint resolveComplaint(@PathVariable Long id, @RequestBody(required = false) Map<String, String> payload) {
+        String proofUrl = (payload != null) ? payload.get("resolutionProofUrl") : null;
+        return service.resolveComplaint(id, proofUrl);
+    }
+
     @GetMapping("/analytics")
     public Map<String, Object> getAnalytics() {
         return service.getAnalytics();

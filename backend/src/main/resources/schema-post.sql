@@ -9,3 +9,11 @@ BEGIN
     -- Note: Spring Boot creates tables automatically if spring.jpa.hibernate.ddl-auto=update
     -- These constraints can be added after table creation if needed.
 END $$;
+
+ALTER TABLE complaints
+ADD COLUMN IF NOT EXISTS ac VARCHAR(255),
+ADD COLUMN IF NOT EXISTS part_name VARCHAR(255),
+ADD COLUMN IF NOT EXISTS section VARCHAR(255),
+ADD COLUMN IF NOT EXISTS user_image_url VARCHAR(255),
+ADD COLUMN IF NOT EXISTS resolution_proof_url VARCHAR(255),
+ADD COLUMN IF NOT EXISTS resolved_at TIMESTAMP;

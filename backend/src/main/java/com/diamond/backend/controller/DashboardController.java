@@ -39,7 +39,7 @@ public class DashboardController {
     }
 
     // ── Booth Parts Distribution ─────────────────────────────────────────────
-    @GetMapping("/api/booths/parts")
+    @GetMapping("/api/dashboard/booth-parts")
     public ResponseEntity<List<Map<String, Object>>> getBoothParts() {
         return ResponseEntity.ok(dashboardService.getBoothParts());
     }

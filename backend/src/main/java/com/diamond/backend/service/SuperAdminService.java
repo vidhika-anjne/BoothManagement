@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -147,15 +148,18 @@ public class SuperAdminService {
     }
 
     /** Parts for a given AC */
+    public List<Map<String, Object>> getParts(
+            @RequestParam String ac) {
+        SuperAdminService superAdminService = this;
+        return superAdminService.getPartsByAc(ac);
+    }
+
     public List<Map<String, Object>> getPartsByAc(String ac) {
-        String sql = "SELECT DISTINCT part_number, part_name FROM booth_parts WHERE ac_name ILIKE :ac AND part_number IS NOT NULL ORDER BY part_number";
-        MapSqlParameterSource params = new MapSqlParameterSource("ac", "%" + ac + "%");
-        return jdbcTemplate.queryForList(sql, params).stream().map(row -> {
-            Map<String, Object> m = new HashMap<>();
-            m.put("partNumber", ((Number) row.get("part_number")).intValue());
-            m.put("partName", row.get("part_name"));
-            return m;
-        }).collect(Collectors.toList());
+        return boothPartRepository.findPartsByAc(ac);
+    }
+
+    public List<String> getSectionsByAcAndPart(String ac, String part) {
+        return boothSectionRepository.findSectionsByAcAndPart(ac, part);
     }
 
     // ── Main Segmentation Dispatcher ─────────────────────────────────────────

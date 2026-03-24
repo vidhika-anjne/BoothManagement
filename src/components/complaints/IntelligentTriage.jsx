@@ -204,10 +204,10 @@ const IntelligentTriage = () => {
                                                             </span>
                                                             <span className="text-xs font-mono text-slate-400">#{c.id.toString().padStart(4, '0')}</span>
                                                         </div>
-                                                        <h3 className="text-lg font-bold text-slate-800 tracking-tight">{c.description}</h3>
+                                                        <h3 className="text-lg font-bold text-slate-800 tracking-tight break-words">{c.description}</h3>
                                                     </div>
                                                     <div className="sm:text-right shrink-0">
-                                                        <div className="text-sm font-bold text-blue-600 font-mono bg-blue-50 px-2 py-1 rounded inline-block">{c.boothId}</div>
+                                                        <div className="text-sm font-bold text-blue-600 font-mono bg-blue-50 px-2 py-1 rounded inline-block break-all">{c.boothId}</div>
                                                         <div className="text-[10px] text-slate-400 uppercase mt-1">Booth Ref</div>
                                                     </div>
                                                 </div>
@@ -224,8 +224,8 @@ const IntelligentTriage = () => {
                                                                 SCORE: <span className="text-slate-800 font-mono">{c.aiScore}/10</span>
                                                             </span>
                                                         </div>
-                                                        <p className="text-sm italic text-slate-700 leading-relaxed">"{c.aiSummary}"</p>
-                                                        <div className="mt-3 text-[10px] font-mono text-indigo-500 font-bold uppercase overflow-hidden text-ellipsis whitespace-nowrap opacity-80">
+                                                        <p className="text-sm italic text-slate-700 leading-relaxed break-words">"{c.aiSummary}"</p>
+                                                        <div className="mt-3 text-[10px] font-mono text-indigo-500 font-bold uppercase overflow-hidden text-ellipsis whitespace-normal opacity-80 break-words">
                                                             Reasoning: {c.aiReason}
                                                         </div>
                                                     </div>

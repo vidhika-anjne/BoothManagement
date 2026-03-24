@@ -23,10 +23,15 @@ public class Complaint {
     private String details;
     
     private String boothId;
-    private String imageUrl;
+    private String ac;
+    private String partName;
+    private String section;
+    private String userImageUrl;
+    private String resolutionProofUrl;
     
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime resolvedAt;
     
     // AI Fields
     private String aiCategory;
@@ -70,14 +75,29 @@ public class Complaint {
     public String getBoothId() { return boothId; }
     public void setBoothId(String boothId) { this.boothId = boothId; }
 
-    public String getImageUrl() { return imageUrl; }
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public String getAc() { return ac; }
+    public void setAc(String ac) { this.ac = ac; }
+
+    public String getPartName() { return partName; }
+    public void setPartName(String partName) { this.partName = partName; }
+
+    public String getSection() { return section; }
+    public void setSection(String section) { this.section = section; }
+
+    public String getUserImageUrl() { return userImageUrl; }
+    public void setUserImageUrl(String userImageUrl) { this.userImageUrl = userImageUrl; }
+
+    public String getResolutionProofUrl() { return resolutionProofUrl; }
+    public void setResolutionProofUrl(String resolutionProofUrl) { this.resolutionProofUrl = resolutionProofUrl; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public LocalDateTime getResolvedAt() { return resolvedAt; }
+    public void setResolvedAt(LocalDateTime resolvedAt) { this.resolvedAt = resolvedAt; }
 
     public String getAiCategory() { return aiCategory; }
     public void setAiCategory(String aiCategory) { this.aiCategory = aiCategory; }
@@ -99,4 +119,12 @@ public class Complaint {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    @Transient
+    public Long getResolutionTime() {
+        if (createdAt != null && resolvedAt != null) {
+            return java.time.Duration.between(createdAt, resolvedAt).toMinutes();
+        }
+        return null;
+    }
 }

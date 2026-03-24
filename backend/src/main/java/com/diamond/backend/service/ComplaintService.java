@@ -5,6 +5,7 @@ import com.diamond.backend.model.Complaint;
 import com.diamond.backend.repository.ComplaintRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,19 @@ public class ComplaintService {
                 complaint.setAiProcessed(true);
             }
         }
+        return repository.save(complaint);
+    }
+
+    public Complaint resolveComplaint(Long complaintId, String proofUrl) {
+        Complaint complaint = repository.findById(complaintId)
+                .orElseThrow(() -> new RuntimeException("Complaint not found with id: " + complaintId));
+        
+        complaint.setStatus("RESOLVED");
+        complaint.setResolvedAt(LocalDateTime.now());
+        if (proofUrl != null && !proofUrl.isEmpty()) {
+            complaint.setResolutionProofUrl(proofUrl);
+        }
+        
         return repository.save(complaint);
     }
 

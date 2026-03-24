@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     MessageSquare, 
     Clock, 
@@ -10,31 +10,80 @@ import {
     AlertCircle,
     CheckCircle2,
     BrainCircuit,
-    RefreshCw
+    RefreshCw,
+    ListTree,
+    Camera
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ComplaintSubmission = () => {
     const [form, setForm] = useState({
-        category: '', description: '', duration: '', impact: '', details: '', boothId: ''
+        category: '', description: '', duration: '', impact: '', details: '', ac: 'delhi cantt', partName: '', section: '', userImageUrl: ''
     });
+    const [parts, setParts] = useState([]);
+    const [sections, setSections] = useState([]);
     const [status, setStatus] = useState({ type: '', message: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        // Fetch parts for Delhi Cantt
+        const fetchParts = async () => {
+            try {
+                const res = await fetch('http://localhost:8081/api/booths/parts?ac=delhi%20cantt');
+                if (res.ok) {
+                    const data = await res.json();
+                    setParts(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch parts:", error);
+            }
+        };
+        fetchParts();
+    }, []);
+
+    useEffect(() => {
+        if (form.partName) {
+            // Fetch sections for the selected part
+            const fetchSections = async () => {
+                try {
+                    const res = await fetch(`http://localhost:8081/api/booths/sections`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ac: 'delhi cantt', part: form.partName }),
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        setSections(data);
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch sections:", error);
+                }
+            };
+            fetchSections();
+        } else {
+            setSections([]);
+        }
+    }, [form.partName]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         setStatus({ type: 'info', message: 'AI Analysis in progress...' });
         
+        const complaintData = { ...form, boothId: `${form.ac}-${form.partName}-${form.section}` };
+
         try {
             const res = await fetch('http://localhost:8081/api/complaints', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form)
+                body: JSON.stringify(complaintData)
             });
             if (res.ok) {
                 setStatus({ type: 'success', message: 'Grievance recorded. AI has prioritized your request for immediate attention.' });
-                setForm({ category: '', description: '', duration: '', impact: '', details: '', boothId: '' });
+                setForm({ category: '', description: '', duration: '', impact: '', details: '', ac: 'delhi cantt', partName: '', section: '', userImageUrl: '' });
             } else {
                 setStatus({ type: 'error', message: 'Submission failed. Please verify connection to helpdesk.' });
             }
@@ -118,19 +167,34 @@ const ComplaintSubmission = () => {
                                         <option>Other / Complex</option>
                                     </select>
                                 </div>
-                                <div className="space-y-2">
+                                                                <div className="space-y-2">
                                     <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">
                                         <MapPin className="w-4 h-4 text-blue-500" />
-                                        Booth ID / Locality
+                                        Part Name
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        placeholder="e.g. DEL-45" 
+                                    <select 
                                         className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none"
-                                        value={form.boothId} 
-                                        onChange={e => setForm({...form, boothId: e.target.value})} 
+                                        value={form.partName} 
+                                        onChange={e => setForm({...form, partName: e.target.value, section: ''})}
+                                        required>
+                                        <option value="">Select Part</option>
+                                        {parts.map((part, index) => <option key={`${part.partName}-${index}`} value={part.partName}>{part.partName}</option>)}
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                                        <ListTree className="w-4 h-4 text-blue-500" />
+                                        Section
+                                    </label>
+                                    <select 
+                                        className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none"
+                                        value={form.section} 
+                                        onChange={e => setForm({...form, section: e.target.value})}
                                         required
-                                    />
+                                        disabled={!form.partName || sections.length === 0}>
+                                        <option value="">Select Section</option>
+                                        {sections.map(section => <option key={section} value={section}>{section}</option>)}
+                                    </select>
                                 </div>
                             </div>
 
@@ -185,6 +249,20 @@ const ComplaintSubmission = () => {
                                         <option>Whole locality</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                                    <Camera className="w-4 h-4 text-blue-500" />
+                                    Photo URL (Optional)
+                                </label>
+                                <input 
+                                    type="text" 
+                                    placeholder="https://example.com/image.jpg" 
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none"
+                                    value={form.userImageUrl} 
+                                    onChange={e => setForm({...form, userImageUrl: e.target.value})} 
+                                />
                             </div>
 
                             <button 
