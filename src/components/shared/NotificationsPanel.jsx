@@ -1,8 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { X, Bell, CheckCircle2, Clock, AlertCircle, ArrowRight } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { NOTIFICATIONS } from '../../data/mockData.js'
 import BeforeAfterVisual from './BeforeAfterVisual.jsx'
+
+const LIVE_NOTIF_STORAGE_KEY = 'bm_live_notifications'
+
+function getLiveNotifications() {
+  try {
+    const raw = localStorage.getItem(LIVE_NOTIF_STORAGE_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
+
+function mergeNotifications(live, mock) {
+  const seen = new Set()
+  return [...live, ...mock].filter(n => {
+    if (!n?.id || seen.has(n.id)) return false
+    seen.add(n.id)
+    return true
+  })
+}
 
 const TYPE_CFG = {
   resolved:     { label: 'Resolved',    bg: 'rgba(16,185,129,.12)', color: '#10b981', Icon: CheckCircle2 },
@@ -12,8 +34,24 @@ const TYPE_CFG = {
 
 export default function NotificationsPanel() {
   const { notifPanelOpen, setNotifPanelOpen, navigate } = useApp()
-  const [notifs, setNotifs] = useState(NOTIFICATIONS)
+  const [notifs, setNotifs] = useState(() => mergeNotifications(getLiveNotifications(), NOTIFICATIONS))
   const [expanded, setExpanded] = useState(null)
+
+  useEffect(() => {
+    if (!notifPanelOpen) return
+
+    const refresh = () => {
+      const merged = mergeNotifications(getLiveNotifications(), NOTIFICATIONS)
+      setNotifs(prev => {
+        const readById = new Map(prev.map(n => [n.id, !!n.read]))
+        return merged.map(n => ({ ...n, read: readById.has(n.id) ? readById.get(n.id) : !!n.read }))
+      })
+    }
+
+    refresh()
+    const timer = setInterval(refresh, 2000)
+    return () => clearInterval(timer)
+  }, [notifPanelOpen])
 
   const unread = notifs.filter(n => !n.read).length
 

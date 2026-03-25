@@ -964,7 +964,90 @@ const NOTIF_TYPE_CFG = {
   update:        { label: 'Update',      bg: 'rgba(59,130,246,.12)', color: '#3b82f6' },
 }
 
+const LIVE_NOTIF_STORAGE_KEY = 'bm_live_notifications'
+
 function WardAlertsTab() {
+  const [liveNotifs, setLiveNotifs] = useState([])
+  const [localNotifs, setLocalNotifs] = useState([])
+
+  useEffect(() => {
+    let disposed = false
+
+    const normalizeType = (type) => {
+      const t = String(type || '').toLowerCase()
+      if (t.includes('progress')) return 'in-progress'
+      if (t.includes('resolve')) return 'resolved'
+      return 'update'
+    }
+
+    const mapBackendNotif = (n) => ({
+      id: `API-${n.id}`,
+      type: normalizeType(n.type),
+      title: n.title || 'Ward update',
+      body: n.messageBody || 'New notification for your ward.',
+      booth: n.boothId ? `Booth ${n.boothId}` : (n.area || 'Ward 8'),
+      time: n.createdAt
+        ? new Date(n.createdAt).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+        : 'Just now',
+      resolvedBy: n.responsibleDepartment || 'Booth Office',
+      sentTo: Number(n.successCount ?? n.estimatedRecipients ?? 0),
+      channels: Array.isArray(n.channels) ? n.channels : [],
+      beforeDesc: n.beforeDescription || 'Before status not provided',
+      afterDesc: n.afterDescription || 'Outcome update shared',
+      visualType: n.visualType || 'other',
+      resolvedDate: n.sentAt || n.createdAt || '',
+      read: false,
+    })
+
+    const loadLocalNotifications = () => {
+      try {
+        const raw = localStorage.getItem(LIVE_NOTIF_STORAGE_KEY)
+        const parsed = raw ? JSON.parse(raw) : []
+        const safe = Array.isArray(parsed) ? parsed : []
+        if (!disposed) setLocalNotifs(safe)
+      } catch {
+        if (!disposed) setLocalNotifs([])
+      }
+    }
+
+    const loadBackendNotifications = async () => {
+      try {
+        const user = JSON.parse(sessionStorage.getItem('citizen_user') || '{}')
+        const boothId = user?.boothId ?? user?.partId
+        const url = boothId
+          ? `http://localhost:8081/api/notifications?boothId=${encodeURIComponent(boothId)}`
+          : 'http://localhost:8081/api/notifications'
+
+        const res = await fetch(url)
+        if (!res.ok) return
+
+        const data = await res.json()
+        if (disposed) return
+
+        const mapped = Array.isArray(data) ? data.map(mapBackendNotif) : []
+        setLiveNotifs(mapped)
+      } catch {
+        // Keep showing mock notifications if backend is unavailable.
+      }
+    }
+
+    loadLocalNotifications()
+    loadBackendNotifications()
+    const backendTimer = setInterval(loadBackendNotifications, 15000)
+    const localTimer = setInterval(loadLocalNotifications, 2000)
+
+    return () => {
+      disposed = true
+      clearInterval(backendTimer)
+      clearInterval(localTimer)
+    }
+  }, [])
+
+  const mergedNotifications = [...localNotifs, ...liveNotifs, ...NOTIFICATIONS].filter((n, i, arr) => {
+    if (!n?.id) return false
+    return arr.findIndex(x => x.id === n.id) === i
+  })
+
   return (
     <div className="cpf-form">
       <div className="cpf-section">
@@ -974,7 +1057,7 @@ function WardAlertsTab() {
           with before &amp; after photo proof from the responsible department.
         </p>
         <div className="citizen-notif-feed">
-          {NOTIFICATIONS.map(n => {
+          {mergedNotifications.map(n => {
             const tc = NOTIF_TYPE_CFG[n.type] || NOTIF_TYPE_CFG.update
             return (
               <div key={n.id} className="citizen-notif-card">
@@ -1115,6 +1198,7 @@ const TABS = [
   { id: 'complaint',     label: 'File Complaint',      icon: AlertCircle },
   { id: 'schemes',       label: 'Scheme Eligibility',  icon: Award },
   { id: 'survey',        label: 'Citizen Survey',      icon: BarChart2 },
+  { id: 'alerts',        label: 'Ward Alerts',         icon: Bell },
   { id: 'track',         label: 'Track Issues',        icon: ClipboardList },
   { id: 'history',       label: 'My Complaints',       icon: FileText },
 ]
@@ -1135,6 +1219,7 @@ export default function CitizenPortal() {
       case 'complaint': return <ComplaintTab showToast={showToast} />
       case 'schemes':   return <SchemesTab />
       case 'survey':    return <SurveyTab showToast={showToast} />
+      case 'alerts':    return <WardAlertsTab />
       case 'track':     return <TrackTab />
       case 'history':   return <HistoryTab />
       default:          return null

@@ -23,11 +23,44 @@ const CHANNEL_META = {
   Voice:    { color: '#f59e0b', bg: 'rgba(245,158,11,.1)'  },
 }
 
+const LIVE_NOTIF_STORAGE_KEY = 'bm_live_notifications'
+
+function getLiveNotifications() {
+  try {
+    const raw = localStorage.getItem(LIVE_NOTIF_STORAGE_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
+
+function mergeNotifications(live, mock) {
+  const seen = new Set()
+  return [...live, ...mock].filter(n => {
+    if (!n?.id || seen.has(n.id)) return false
+    seen.add(n.id)
+    return true
+  })
+}
+
 // ── Compose form ────────────────────────────────────────────────────────────
 const BLANK = {
   title: '', body: '', issueRef: '', booth: '', type: 'resolved',
   channels: ['SMS'], beforeDesc: '', afterDesc: '', visualType: 'other',
   resolvedBy: '', sentTo: '',
+}
+
+function ComposeField({ label, err, hint, children, full }) {
+  return (
+    <div className={`notif-cf-field${full ? ' full' : ''}`}>
+      <label>{label}</label>
+      {children}
+      {err  && <span className="notif-cf-error">{err}</span>}
+      {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+    </div>
+  )
 }
 
 function ComposeForm({ onSubmit, onCancel }) {
@@ -70,14 +103,6 @@ function ComposeForm({ onSubmit, onCancel }) {
     })
   }
 
-  const F = ({ label, err, hint, children, full }) => (
-    <div className={`notif-cf-field${full ? ' full' : ''}`}>
-      <label>{label}</label>
-      {children}
-      {err  && <span className="notif-cf-error">{err}</span>}
-      {hint && !err && <span className="notif-cf-hint">{hint}</span>}
-    </div>
-  )
   const inp = (k, props = {}) => (
     <input className={`notif-cf-input${errors[k] ? ' error' : ''}`}
       value={form[k]} onChange={e => set(k, e.target.value)} {...props} />
@@ -96,49 +121,49 @@ function ComposeForm({ onSubmit, onCancel }) {
       </div>
 
       <div className="notif-cf-grid">
-        <F label="Notification Title*" err={errors.title} full>
+        <ComposeField label="Notification Title*" err={errors.title} full>
           {inp('title', { placeholder: 'e.g. Road pothole repaired — Booth 141' })}
-        </F>
-        <F label="Type*" err={errors.type}>
+        </ComposeField>
+        <ComposeField label="Type*" err={errors.type}>
           {sel('type', <>
             <option value="resolved">Resolved</option>
             <option value="in-progress">In Progress</option>
             <option value="update">Update</option>
           </>)}
-        </F>
-        <F label="Booth / Area*" err={errors.booth}>
+        </ComposeField>
+        <ComposeField label="Booth / Area*" err={errors.booth}>
           {sel('booth', <>
             <option value="">Select booth</option>
             {BOOTHS.map(b => <option key={b.id} value={b.name}>{b.name}</option>)}
           </>)}
-        </F>
-        <F label="Linked Issue (optional)">
+        </ComposeField>
+        <ComposeField label="Linked Issue (optional)">
           {sel('issueRef', <>
             <option value="">None</option>
             {ISSUES.map(i => <option key={i.id} value={i.id}>{i.id} – {i.title.slice(0,40)}</option>)}
           </>)}
-        </F>
-        <F label="Responsible Department / Agency*" err={errors.resolvedBy}>
+        </ComposeField>
+        <ComposeField label="Responsible Department / Agency*" err={errors.resolvedBy}>
           {inp('resolvedBy', { placeholder: 'e.g. PWD Delhi, MCD Dept.' })}
-        </F>
-        <F label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
+        </ComposeField>
+        <ComposeField label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
           {inp('sentTo', { type: 'number', placeholder: 'e.g. 800' })}
-        </F>
-        <F label="Message Body*" err={errors.body} full>
+        </ComposeField>
+        <ComposeField label="Message Body*" err={errors.body} full>
           <textarea className={`notif-cf-input${errors.body ? ' error' : ''}`}
             rows={3} placeholder="Provide a clear, informative update for residents…"
             value={form.body} onChange={e => set('body', e.target.value)} />
-        </F>
-        <F label="Visual Type" hint="Generates the before/after illustration">
+        </ComposeField>
+        <ComposeField label="Visual Type" hint="Generates the before/after illustration">
           {sel('visualType', VISUAL_TYPES.map(v => <option key={v}>{v}</option>))}
-        </F>
-        <F label="" /> {/* spacer */}
-        <F label="Before — Situation Description*" err={errors.beforeDesc}>
+        </ComposeField>
+        <ComposeField label="" /> {/* spacer */}
+        <ComposeField label="Before — Situation Description*" err={errors.beforeDesc}>
           {inp('beforeDesc', { placeholder: 'e.g. 6 street lights non-functional since Feb 26' })}
-        </F>
-        <F label="After — Outcome Description*" err={errors.afterDesc}>
+        </ComposeField>
+        <ComposeField label="After — Outcome Description*" err={errors.afterDesc}>
           {inp('afterDesc', { placeholder: 'e.g. All lights repaired and commissioned' })}
-        </F>
+        </ComposeField>
       </div>
 
       {/* Channel selection */}
@@ -242,7 +267,7 @@ function NotifDetail({ notif }) {
 // ── Main page ───────────────────────────────────────────────────────────────
 export default function Notifications() {
   const { showToast } = useApp()
-  const [notifs, setNotifs] = useState(NOTIFICATIONS)
+  const [notifs, setNotifs] = useState(() => mergeNotifications(getLiveNotifications(), NOTIFICATIONS))
   const [filter, setFilter] = useState('all')
   const [selected, setSelected] = useState(NOTIFICATIONS[0]?.id ?? null)
   const [mode, setMode] = useState('detail') // 'detail' | 'compose'
@@ -256,6 +281,8 @@ export default function Notifications() {
 
   const addNotif = (n) => {
     setNotifs(prev => [n, ...prev])
+    const live = [n, ...getLiveNotifications()].filter((x, i, arr) => arr.findIndex(y => y.id === x.id) === i)
+    localStorage.setItem(LIVE_NOTIF_STORAGE_KEY, JSON.stringify(live))
     setSelected(n.id)
     setMode('detail')
     showToast(`Notification "${n.title}" sent to ${n.sentTo.toLocaleString()} residents!`)
