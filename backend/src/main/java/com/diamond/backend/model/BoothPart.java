@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "booth_parts")
+@com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BoothPart {
 
     @Id
@@ -18,7 +19,7 @@ public class BoothPart {
     private Long id;
 
     /** Source identifier from the JSON (not unique across districts) */
-    @Column(name = "part_id", nullable = false)
+   @Column(name = "part_id", nullable = false, unique = true)
     private Long partId;
 
     @Column(name = "part_number", nullable = false)
@@ -28,18 +29,9 @@ public class BoothPart {
     private String partName;
 
     // ── Assembly Constituency ──────────────────────────────────────────────────
-    @Column(name = "ac_number")
-    private Integer acNumber;
-
-    @Column(name = "ac_name")
-    private String acName;
-
-    // ── District ───────────────────────────────────────────────────────────────
-    @Column(name = "district_id")
-    private String districtId;
-
-    @Column(name = "district_name")
-    private String districtName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ac_number", referencedColumnName = "ac_number")
+    private AC ac;
 
     // ── Polling station details (only populated for Delhi Cantt parts) ─────────
     @Column(name = "polling_station_name")
@@ -68,17 +60,8 @@ public class BoothPart {
     public String getPartName() { return partName; }
     public void setPartName(String partName) { this.partName = partName; }
 
-    public Integer getAcNumber() { return acNumber; }
-    public void setAcNumber(Integer acNumber) { this.acNumber = acNumber; }
-
-    public String getAcName() { return acName; }
-    public void setAcName(String acName) { this.acName = acName; }
-
-    public String getDistrictId() { return districtId; }
-    public void setDistrictId(String districtId) { this.districtId = districtId; }
-
-    public String getDistrictName() { return districtName; }
-    public void setDistrictName(String districtName) { this.districtName = districtName; }
+    public AC getAc() { return ac; }
+    public void setAc(AC ac) { this.ac = ac; }
 
     public String getPollingStationName() { return pollingStationName; }
     public void setPollingStationName(String pollingStationName) { this.pollingStationName = pollingStationName; }

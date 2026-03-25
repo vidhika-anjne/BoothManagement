@@ -9,6 +9,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "booth_sections")
+@com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BoothSection {
 
     @Id
@@ -23,6 +24,7 @@ public class BoothSection {
     private String sectionName;
 
     /** Many sections belong to one booth part */
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booth_part_id", nullable = false)
     private BoothPart boothPart;

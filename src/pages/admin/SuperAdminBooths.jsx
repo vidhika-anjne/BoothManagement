@@ -37,8 +37,8 @@ export default function SuperAdminBooths() {
                 <td style={{ padding: '1rem' }}>{booth.partId}</td>
                 <td style={{ padding: '1rem' }}>{booth.partNumber}</td>
                 <td style={{ padding: '1rem' }}>{booth.partName}</td>
-                <td style={{ padding: '1rem' }}>{booth.acNumber} - {booth.acName}</td>
-                <td style={{ padding: '1rem' }}>{booth.districtName}</td>
+                <td style={{ padding: '1rem' }}>{booth.ac?.acNumber} - {booth.ac?.name}</td>
+                <td style={{ padding: '1rem' }}>{booth.ac?.district?.name}</td>
               </tr>
             ))}
             {(Array.isArray(booths) ? booths : []).length > 100 && (
