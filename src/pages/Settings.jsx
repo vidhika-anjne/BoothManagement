@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext.jsx'
-import { Settings as SettingsIcon, User, Bell, Shield, Database, Save, Loader2 } from 'lucide-react'
+import { Settings as SettingsIcon, User, Bell, Shield, Database, Save } from 'lucide-react'
 import dashboardService from '../services/dashboardService'
 
 function Toggle({ on, onToggle }) {
@@ -9,7 +9,6 @@ function Toggle({ on, onToggle }) {
 
 export default function Settings() {
   const { showToast } = useApp()
-  const [loading, setLoading] = useState(true)
   const [profile, setProfile] = useState({ name: '', email: '', phone: '', role: '', constituency: '' })
 
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function Settings() {
           role: data.role || 'Officer',
           constituency: data.boothId || 'Ward 8, Delhi'
         })
-      } catch (e) {
+      } catch {
         showToast('Failed to load profile data')
       } finally {
         setLoading(false)

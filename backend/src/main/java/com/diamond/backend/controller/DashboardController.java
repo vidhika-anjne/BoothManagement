@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -84,7 +83,7 @@ public class DashboardController {
     }
 
     @DeleteMapping("/api/feedback/{id}")
-    public ResponseEntity<Void> deleteFeedback(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteFeedback(@PathVariable("id") Long id) {
         dashboardService.deleteFeedback(id);
         
         // Broadcast updated feedback list
@@ -96,15 +95,15 @@ public class DashboardController {
         return ResponseEntity.noContent().build();
     }
 
-    // ── User Profile ─────────────────────────────────────────────────────────
     @GetMapping("/api/user/profile")
-    public ResponseEntity<Map<String, Object>> getUserProfile(jakarta.servlet.http.HttpSession session) {
-        String sessionEmail = (String) session.getAttribute("userEmail");
+    public ResponseEntity<Map<String, Object>> getUserProfile(jakarta.servlet.http.HttpServletRequest request) {
+        jakarta.servlet.http.HttpSession session = request.getSession(false);
+        String sessionEmail = session != null ? (String) session.getAttribute("userEmail") : null;
         return ResponseEntity.ok(dashboardService.getUserProfile(sessionEmail));
     }
 
-    // ── Scheduled Broadcast (every 2 seconds) ───────────────────────────────
-    @Scheduled(fixedRate = 2_000, initialDelay = 5_000)
+    // ── Scheduled Broadcast (every 30 seconds) ───────────────────────────────
+    @Scheduled(fixedRate = 30_000, initialDelay = 5_000)
     public void broadcastDashboardStats() {
         try {
             messagingTemplate.convertAndSend("/topic/dashboard", Map.of(

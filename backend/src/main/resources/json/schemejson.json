@@ -1,0 +1,850 @@
+{
+  "schemes": [
+    {
+      "scheme_name": "Agriculture Infrastructure Fund",
+      "abbreviation": "AIF",
+      "type": "central_sector_scheme",
+      "ministry": "agriculture_and_farmers_welfare",
+      "beneficiaries": [
+        "farmer",
+        "primary_agricultural_credit_society",
+        "farmer_producer_organization",
+        "self_help_group",
+        "state_agency"
+      ],
+      "beneficiaries_text": "Farmers, PACS, FPOs, SHGs, State Agencies/APMCs",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To mobilize medium-long term debt financing for post-harvest infrastructure and community farming assets",
+      "tenure_text": "Up to 2032-33"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Kisan Samman Nidhi",
+      "abbreviation": "PM-KISAN",
+      "type": "central_sector_scheme",
+      "ministry": "agriculture_and_farmers_welfare",
+      "beneficiaries": [
+        "farmer"
+      ],
+      "beneficiaries_text": "All landholding farmers, subject to exclusions",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide income support to farmer families",
+      "financial_benefit": {
+        "amount_per_year": 6000,
+        "installments": 3,
+        "amount_per_installment": 2000
+      }
+    },
+    {
+      "scheme_name": "Pradhan Mantri Fasal Bima Yojana",
+      "abbreviation": "PMFBY",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "agriculture_and_farmers_welfare",
+      "beneficiaries": [
+        "farmer",
+        "sharecropper",
+        "tenant_farmer"
+      ],
+      "beneficiaries_text": "All farmers including sharecroppers and tenant farmers",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide crop insurance and financial support to farmers",
+      "coverage": [
+        "pre_sowing",
+        "post_harvest",
+        "natural_disaster"
+      ]
+    },
+    {
+      "scheme_name": "Assistance to Medical Device Clusters for Common Facilities",
+      "abbreviation": "AMD_CF",
+      "type": "central_sector_scheme",
+      "ministry": "chemicals_and_fertilizers",
+      "beneficiaries": [
+        "medical_device_manufacturer",
+        "institution"
+      ],
+      "beneficiaries_text": "Medical device manufacturers and institutions",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To strengthen medical device clusters and testing facilities",
+      "tenure_text": "2023-2027"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Bharatiya Jan Aushadhi Pariyojana",
+      "abbreviation": "PMBJP",
+      "type": "central_sector_scheme",
+      "ministry": "chemicals_and_fertilizers",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "All citizens",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide affordable generic medicines to the public"
+    },
+    {
+      "scheme_name": "UDAN Regional Connectivity Scheme",
+      "abbreviation": "UDAN",
+      "type": "central_sector_scheme",
+      "ministry": "civil_aviation",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "Citizens across the country",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To make air travel affordable and improve regional connectivity"
+    },
+    {
+      "scheme_name": "BharatNet",
+      "type": "central_sector_scheme",
+      "ministry": "communications",
+      "beneficiaries": [
+        "rural_population"
+      ],
+      "beneficiaries_text": "Rural population in Gram Panchayats",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide high-speed broadband connectivity to all Gram Panchayats"
+    },
+    {
+      "scheme_name": "National Food Security Act",
+      "abbreviation": "NFSA",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "consumer_affairs_food_public_distribution",
+      "beneficiaries": [
+        "household"
+      ],
+      "beneficiaries_text": "Eligible households covering about 67% of population",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide food and nutritional security at affordable prices",
+      "coverage_percentage": 67
+    },
+    {
+      "scheme_name": "ADITI Scheme",
+      "full_form": "Acing Development of Innovative Technologies with iDEX",
+      "type": "central_sector_scheme",
+      "ministry": "defence",
+      "beneficiaries": [
+        "startup",
+        "micro_small_medium_enterprise",
+        "innovator"
+      ],
+      "beneficiaries_text": "Startups, MSMEs, and innovators",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To develop critical defence technologies",
+      "tenure_text": "2023-2026"
+    },
+    {
+      "scheme_name": "Digital India Programme",
+      "type": "umbrella_programme",
+      "ministry": "electronics_and_information_technology",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "All citizens",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To transform India into a digitally empowered society and knowledge economy"
+    },
+    {
+      "scheme_name": "Production Linked Incentive 2.0 for IT Hardware",
+      "abbreviation": "PLI_2_0_IT",
+      "type": "central_sector_scheme",
+      "ministry": "electronics_and_information_technology",
+      "beneficiaries": [
+        "global_company",
+        "domestic_company"
+      ],
+      "beneficiaries_text": "Global and domestic companies engaged in IT hardware manufacturing",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To boost domestic manufacturing and attract investments in IT hardware",
+      "incentive_text": "Up to around 5% on incremental sales"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Jan Dhan Yojana",
+      "abbreviation": "PMJDY",
+      "type": "central_sector_scheme",
+      "ministry": "finance",
+      "beneficiaries": [
+        "adult"
+      ],
+      "beneficiaries_text": "Unbanked adult population",
+      "age_min": 18,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To ensure access to financial services including banking and insurance",
+      "features": [
+        "zero_balance_account",
+        "overdraft_facility",
+        "insurance_cover"
+      ]
+    },
+    {
+      "scheme_name": "Sukanya Samriddhi Yojana",
+      "abbreviation": "SSY",
+      "type": "savings_scheme",
+      "ministry": "finance",
+      "beneficiaries": [
+        "girl_child"
+      ],
+      "beneficiaries_text": "Girl child below 10 years of age",
+      "age_min": 0,
+      "age_max": 10,
+      "gender": [
+        "female"
+      ],
+      "objective_text": "To promote savings for girl child education and marriage",
+      "max_deposit_per_year": 150000
+    },
+    {
+      "scheme_name": "Stand Up India Scheme",
+      "type": "central_sector_scheme",
+      "ministry": "finance",
+      "beneficiaries": [
+        "scheduled_caste",
+        "scheduled_tribe",
+        "woman"
+      ],
+      "beneficiaries_text": "SC/ST and women entrepreneurs",
+      "age_min": 18,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide bank loans for greenfield enterprises",
+      "loan_range": {
+        "min": 1000000,
+        "max": 10000000
+      }
+    },
+    {
+      "scheme_name": "Pradhan Mantri Matsya Sampada Yojana",
+      "abbreviation": "PMMSY",
+      "type": [
+        "central_sector_scheme",
+        "centrally_sponsored_scheme"
+      ],
+      "ministry": "fisheries_animal_husbandry_and_dairying",
+      "beneficiaries": [
+        "fisher",
+        "fish_farmer"
+      ],
+      "beneficiaries_text": "Fishers, fish farmers and related stakeholders",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To bring about blue revolution through sustainable fisheries development",
+      "tenure_text": "2020-2025"
+    },
+    {
+      "scheme_name": "Ayushman Bharat Pradhan Mantri Jan Arogya Yojana",
+      "abbreviation": "AB_PMJAY",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "health_and_family_welfare",
+      "beneficiaries": [
+        "family"
+      ],
+      "beneficiaries_text": "Poor and vulnerable families",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide health insurance coverage for secondary and tertiary care",
+      "coverage_amount": 500000
+    },
+    {
+      "scheme_name": "Ayushman Bharat Health Infrastructure Mission",
+      "abbreviation": "ABHIM",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "health_and_family_welfare",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "General population through improved health systems",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To strengthen public health infrastructure across India",
+      "tenure_text": "Up to 2026"
+    },
+    {
+      "scheme_name": "Ayushman Bharat Digital Mission",
+      "abbreviation": "ABDM",
+      "type": "central_sector_scheme",
+      "ministry": "health_and_family_welfare",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "All citizens using digital health services",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To create a digital health ecosystem with unique health IDs"
+    },
+    {
+      "scheme_name": "Electric Mobility Promotion Scheme",
+      "abbreviation": "EMPS",
+      "type": "central_sector_scheme",
+      "ministry": "heavy_industries",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "Citizens adopting electric vehicles",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To promote adoption of electric mobility in India"
+    },
+    {
+      "scheme_name": "CITIIS 2.0",
+      "full_form": "City Investments to Innovate Integrate and Sustain 2.0",
+      "type": "urban_development_scheme",
+      "ministry": "housing_and_urban_affairs",
+      "beneficiaries": [
+        "city"
+      ],
+      "beneficiaries_text": "Selected cities for urban development",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To support climate-resilient and sustainable urban infrastructure"
+    },
+    {
+      "scheme_name": "Smart Cities Mission",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "housing_and_urban_affairs",
+      "beneficiaries": [
+        "city"
+      ],
+      "beneficiaries_text": "Selected cities across India",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To promote sustainable and smart urban development"
+    },
+    {
+      "scheme_name": "Deen Dayal Antyodaya Yojana Urban",
+      "abbreviation": "DAY_NULM",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "housing_and_urban_affairs",
+      "beneficiaries": [
+        "urban_poor"
+      ],
+      "beneficiaries_text": "Urban poor households",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To enhance livelihood opportunities for the urban poor"
+    },
+    {
+      "scheme_name": "PM Street Vendor Atma Nirbhar Nidhi",
+      "abbreviation": "PM_SVANidhi",
+      "type": "central_sector_scheme",
+      "ministry": "housing_and_urban_affairs",
+      "beneficiaries": [
+        "street_vendor"
+      ],
+      "beneficiaries_text": "Street vendors affected by COVID-19",
+      "age_min": 18,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide working capital loans to street vendors"
+    },
+    {
+      "scheme_name": "Swachh Bharat Mission Urban 2.0",
+      "abbreviation": "SBM_Urban_2_0",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "housing_and_urban_affairs",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "Urban population",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To achieve garbage-free cities and improved sanitation"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Awas Yojana Urban",
+      "abbreviation": "PMAY_U",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "housing_and_urban_affairs",
+      "beneficiaries": [
+        "urban_poor"
+      ],
+      "beneficiaries_text": "Urban poor including economically weaker sections and low-income groups",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide affordable housing for all in urban areas"
+    },
+    {
+      "scheme_name": "Atal Bhujal Yojana",
+      "abbreviation": "ATAL_JAL",
+      "type": "central_sector_scheme",
+      "ministry": "jal_shakti",
+      "beneficiaries": [
+        "farmer",
+        "community"
+      ],
+      "beneficiaries_text": "Farmers and local communities in water-stressed areas",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To ensure sustainable groundwater management"
+    },
+    {
+      "scheme_name": "Jal Jeevan Mission",
+      "abbreviation": "JJM",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "jal_shakti",
+      "beneficiaries": [
+        "rural_household"
+      ],
+      "beneficiaries_text": "Rural households",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide functional household tap water connections"
+    },
+    {
+      "scheme_name": "Namami Gange Programme",
+      "type": "central_sector_scheme",
+      "ministry": "jal_shakti",
+      "beneficiaries": [
+        "citizen"
+      ],
+      "beneficiaries_text": "Citizens dependent on the Ganga river basin",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To clean and conserve the river Ganga"
+    },
+    {
+      "scheme_name": "Swachh Bharat Mission Grameen Phase II",
+      "abbreviation": "SBM_Grameen_2",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "jal_shakti",
+      "beneficiaries": [
+        "rural_population"
+      ],
+      "beneficiaries_text": "Rural population",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To sustain open defecation free status and improve solid and liquid waste management"
+    },
+    {
+      "scheme_name": "Atmanirbhar Bharat Rozgar Yojana",
+      "abbreviation": "ABRY",
+      "type": "central_sector_scheme",
+      "ministry": "labour_and_employment",
+      "beneficiaries": [
+        "employee",
+        "employer"
+      ],
+      "beneficiaries_text": "Employees and employers in the organized sector",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To incentivize employment generation and restore jobs lost during COVID-19"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Shram Yogi Maan Dhan",
+      "abbreviation": "PM_SYM",
+      "type": "central_sector_scheme",
+      "ministry": "labour_and_employment",
+      "beneficiaries": [
+        "unorganized_worker"
+      ],
+      "beneficiaries_text": "Unorganized sector workers",
+      "age_min": 18,
+      "age_max": 40,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide minimum assured pension to unorganized workers"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Jan Vikas Karyakram",
+      "abbreviation": "PMJVK",
+      "type": "central_sector_scheme",
+      "ministry": "minority_affairs",
+      "beneficiaries": [
+        "minority_community"
+      ],
+      "beneficiaries_text": "Minority communities in identified areas",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To create infrastructure and basic amenities in minority concentration areas"
+    },
+    {
+      "scheme_name": "Credit Guarantee Scheme for Micro and Small Enterprises",
+      "abbreviation": "CGTMSE",
+      "type": "central_sector_scheme",
+      "ministry": "micro_small_medium_enterprises",
+      "beneficiaries": [
+        "micro_small_medium_enterprise"
+      ],
+      "beneficiaries_text": "Micro and small enterprises",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide collateral-free credit guarantee support to MSMEs"
+    },
+    {
+      "scheme_name": "PM Vishwakarma Scheme",
+      "type": "central_sector_scheme",
+      "ministry": "micro_small_medium_enterprises",
+      "beneficiaries": [
+        "artisan",
+        "craft_worker"
+      ],
+      "beneficiaries_text": "Traditional artisans and craftspeople",
+      "age_min": 18,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To support traditional artisans with training, tools, and credit"
+    },
+    {
+      "scheme_name": "PM Surya Ghar Muft Bijli Yojana",
+      "type": "central_sector_scheme",
+      "ministry": "new_and_renewable_energy",
+      "beneficiaries": [
+        "household"
+      ],
+      "beneficiaries_text": "Households installing rooftop solar panels",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide free electricity through rooftop solar installations"
+    },
+    {
+      "scheme_name": "Mission Karmayogi",
+      "full_form": "National Programme for Civil Services Capacity Building",
+      "type": "central_sector_scheme",
+      "ministry": "personnel_public_grievances_and_pensions",
+      "beneficiaries": [
+        "civil_servant"
+      ],
+      "beneficiaries_text": "Government civil servants",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To build capacity and improve performance of civil services"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Ujjwala Yojana 2.0",
+      "abbreviation": "PMUY_2_0",
+      "type": "central_sector_scheme",
+      "ministry": "petroleum_and_natural_gas",
+      "beneficiaries": [
+        "woman"
+      ],
+      "beneficiaries_text": "Women from poor households",
+      "age_min": 18,
+      "age_max": null,
+      "gender": [
+        "female"
+      ],
+      "objective_text": "To provide LPG connections to women from economically weaker households"
+    },
+    {
+      "scheme_name": "SVAMITVA Scheme",
+      "full_form": "Survey of Villages Abadi and Mapping with Improvised Technology in Village Areas",
+      "type": "central_sector_scheme",
+      "ministry": "panchayati_raj",
+      "beneficiaries": [
+        "rural_household"
+      ],
+      "beneficiaries_text": "Rural households with residential properties",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide property ownership records using drone mapping"
+    },
+    {
+      "scheme_name": "Mission on Advanced and High Impact Research",
+      "abbreviation": "MAHIR",
+      "type": "central_sector_scheme",
+      "ministry": "power",
+      "beneficiaries": [
+        "researcher",
+        "institution"
+      ],
+      "beneficiaries_text": "Researchers and academic or research institutions",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To promote advanced research in the power sector"
+    },
+    {
+      "scheme_name": "Mahatma Gandhi National Rural Employment Guarantee Act",
+      "abbreviation": "MGNREGA",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "rural_development",
+      "beneficiaries": [
+        "rural_household"
+      ],
+      "beneficiaries_text": "Rural households willing to do unskilled manual work",
+      "age_min": 18,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide at least 100 days of guaranteed wage employment in rural areas"
+    },
+    {
+      "scheme_name": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+      "abbreviation": "DDU_GKY",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "rural_development",
+      "beneficiaries": [
+        "rural_youth"
+      ],
+      "beneficiaries_text": "Rural youth from poor households",
+      "age_min": 15,
+      "age_max": 35,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide skill training and placement for rural youth"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Gram Sadak Yojana",
+      "abbreviation": "PMGSY",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "rural_development",
+      "beneficiaries": [
+        "rural_population"
+      ],
+      "beneficiaries_text": "Rural population in unconnected habitations",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide all-weather road connectivity to rural areas"
+    },
+    {
+      "scheme_name": "National Social Assistance Programme",
+      "abbreviation": "NSAP",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "rural_development",
+      "beneficiaries": [
+        "elderly_person",
+        "widow",
+        "disabled_person"
+      ],
+      "beneficiaries_text": "Elderly, widows, and persons with disabilities belonging to poor households",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide social assistance and pension support"
+    },
+    {
+      "scheme_name": "Saubhagya Scheme",
+      "full_form": "Pradhan Mantri Sahaj Bijli Har Ghar Yojana",
+      "type": "central_sector_scheme",
+      "ministry": "power",
+      "beneficiaries": [
+        "household"
+      ],
+      "beneficiaries_text": "Unelectrified households",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide electricity connections to all households"
+    },
+    {
+      "scheme_name": "Pradhan Mantri Kaushal Vikas Yojana",
+      "abbreviation": "PMKVY",
+      "type": "central_sector_scheme",
+      "ministry": "skill_development_and_entrepreneurship",
+      "beneficiaries": [
+        "youth"
+      ],
+      "beneficiaries_text": "Youth seeking skill development training",
+      "age_min": 15,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide skill training and certification"
+    },
+    {
+      "scheme_name": "National Education Policy Implementation Programme",
+      "abbreviation": "NEP",
+      "type": "education_programme",
+      "ministry": "education",
+      "beneficiaries": [
+        "student",
+        "teacher"
+      ],
+      "beneficiaries_text": "Students and teachers across India",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To transform the education system as per NEP guidelines"
+    },
+    {
+      "scheme_name": "Mid Day Meal Scheme",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "education",
+      "beneficiaries": [
+        "student"
+      ],
+      "beneficiaries_text": "School children in government and aided schools",
+      "age_min": null,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To improve nutritional levels among school children"
+    },
+    {
+      "scheme_name": "Beti Bachao Beti Padhao",
+      "abbreviation": "BBBP",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "women_and_child_development",
+      "beneficiaries": [
+        "girl_child"
+      ],
+      "beneficiaries_text": "Girl children across India",
+      "age_min": 0,
+      "age_max": null,
+      "gender": [
+        "female"
+      ],
+      "objective_text": "To improve child sex ratio and promote education of girls"
+    },
+    {
+      "scheme_name": "Integrated Child Development Services",
+      "abbreviation": "ICDS",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "women_and_child_development",
+      "beneficiaries": [
+        "child",
+        "pregnant_woman",
+        "lactating_mother"
+      ],
+      "beneficiaries_text": "Children below 6 years, pregnant women and lactating mothers",
+      "age_min": 0,
+      "age_max": 6,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To provide nutrition, health, and early childhood education"
+    },
+    {
+      "scheme_name": "Poshan Abhiyaan",
+      "type": "centrally_sponsored_scheme",
+      "ministry": "women_and_child_development",
+      "beneficiaries": [
+        "child",
+        "pregnant_woman",
+        "lactating_mother"
+      ],
+      "beneficiaries_text": "Children, pregnant women and lactating mothers",
+      "age_min": 0,
+      "age_max": null,
+      "gender": [
+        "any"
+      ],
+      "objective_text": "To improve nutritional outcomes and reduce malnutrition"
+    }
+  ]
+}

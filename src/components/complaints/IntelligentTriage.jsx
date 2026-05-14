@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
-    BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
-    LineChart, Line
-} from 'recharts';
+  Chart as ChartJS, ArcElement, Tooltip as ChartTooltip, Legend 
+} from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, ChartTooltip, Legend);
 import { 
     Zap, 
     Clock, 
     BarChart3, 
     ArrowUpRight, 
     Activity, 
-    CheckCircle2, 
-    AlertCircle,
     BrainCircuit,
     Filter,
     Search,
-    ChevronRight,
     MessageSquare,
     RefreshCw,
     Sparkles
@@ -268,21 +267,35 @@ const IntelligentTriage = () => {
                             </div>
                             <h3 className="text-sm font-bold text-slate-700 uppercase tracking-widest">Load Distribution</h3>
                         </div>
-                        <ResponsiveContainer width="100%" height={240}>
-                            <BarChart data={stats}>
-                                <XAxis dataKey="name" hide />
-                                <YAxis hide />
-                                <Tooltip 
-                                    cursor={{fill: '#f8fafc'}}
-                                    contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', fontFamily: 'monospace', fontSize: '12px'}}
+                        
+                        <div style={{ height: 220, position: 'relative', display: 'flex', justifyContent: 'center' }}>
+                            {stats.length > 0 ? (
+                                <Doughnut 
+                                    data={{
+                                        labels: stats.map(s => s.name),
+                                        datasets: [{
+                                            data: stats.map(s => s.count),
+                                            backgroundColor: COLORS,
+                                            borderWidth: 0,
+                                            cutout: '75%'
+                                        }]
+                                    }}
+                                    options={{
+                                        plugins: { legend: { display: false } },
+                                        maintainAspectRatio: false
+                                    }}
                                 />
-                                <Bar dataKey="count" radius={[4, 4, 0, 0]}>
-                                    {stats.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                    ))}
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
+                            ) : (
+                                <div className="flex items-center justify-center text-slate-400 text-xs font-mono uppercase tracking-widest">
+                                    Awaiting Analytics...
+                                </div>
+                            )}
+                            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                <div className="text-2xl font-black text-slate-800 tracking-tight">{complaints.length}</div>
+                                <div className="text-[10px] text-slate-400 font-bold uppercase">Total</div>
+                            </div>
+                        </div>
+
                         <div className="mt-8 space-y-3 px-2">
                             {stats.map((s, idx) => (
                                 <div key={s.name} className="flex items-center justify-between text-xs font-mono">

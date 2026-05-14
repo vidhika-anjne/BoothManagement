@@ -55,7 +55,7 @@ public class CitizenAuthController {
                 Map.entry("age",              v.getAge() != null ? v.getAge() : 0),
                 Map.entry("maritalStatus",    v.getMaritalStatus() != null ? v.getMaritalStatus().name() : ""),
                 Map.entry("district",         v.getDistrict()),
-                Map.entry("assemblyConstituencyAc", v.getAssemblyConstituencyAc()),
+                Map.entry("assemblyConstituencyAc", v.getAssemblyConstituency()),
                 Map.entry("partId",           v.getPartId() != null ? v.getPartId() : 0),
                 Map.entry("houseNumber",      v.getHouseNumber() != null ? v.getHouseNumber() : ""),
                 Map.entry("partNumber",       v.getPartNumber() != null ? v.getPartNumber() : 0),

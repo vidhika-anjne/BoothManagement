@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import dashboardService from '../services/dashboardService';
 
 const AppContext = createContext(null);
 
@@ -43,7 +44,7 @@ export function AppProvider({ children }) {
         const profile = await dashboardService.getUserProfile();
         setUser(profile);
         setIsAuthenticated(true); // Set authenticated if profile is fetched successfully
-      } catch (e) {
+      } catch {
         // Not logged in or session expired
         setUser(null);
         setIsAuthenticated(false);

@@ -16,4 +16,6 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
     
     @Query("SELECT c.boothId, COUNT(c) FROM Complaint c GROUP BY c.boothId")
     List<Object[]> countByBooth();
+
+    List<Complaint> findByVoterId(String voterId);
 }

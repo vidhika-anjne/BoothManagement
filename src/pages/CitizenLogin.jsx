@@ -30,6 +30,7 @@ export default function CitizenLogin({ onLogin }) {
     if (step === 'success' && profile) {
       setTimeout(() => onLogin({ mobile, ...profile }), 1500)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step])
 
   // ── Step 1: Mobile number → backend lookup ────────────────────────

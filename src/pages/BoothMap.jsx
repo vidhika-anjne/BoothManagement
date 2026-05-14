@@ -22,7 +22,7 @@ const DENSITY_COLOR = { High: '#ef4444', Medium: '#f59e0b', Low: '#10b981' }
 
 export default function BoothMap() {
   const [filter, setFilter] = useState('All')
-  const { darkMode, showToast } = useApp()
+  const { boothFilters } = useApp();
 
   const filtered = filter === 'All' ? BOOTHS : BOOTHS.filter(b => b.density === filter)
 

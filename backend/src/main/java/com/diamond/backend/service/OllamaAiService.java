@@ -7,46 +7,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Service to interact with Ollama for AI-based scheme recommendations.
+ */
 @Service
 public class OllamaAiService {
-
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper mapper = new ObjectMapper();
 
     @Value("${ollama.url:http://localhost:11434/api/generate}")
     private String ollamaUrl;
 
-    public JsonNode analyzeComplaint(String desc, String duration, String impact, String details) {
-        String prompt = String.format(
-            "You are a civic complaint analysis system. ONLY return JSON.\n" +
-            "Analyze the complaint:\n" +
-            "Description: %s\n" +
-            "Duration: %s\n" +
-            "Impact: %s\n" +
-            "Details: %s\n\n" +
-            "Tasks:\n" +
-            "1. Identify category (Water, Electricity, Road, Sanitation, Healthcare, Other).\n" +
-            "2. Generate summary (1 sentence max).\n" +
-            "3. Assign priority score (0-10) where larger impact/duration = higher.\n" +
-            "4. Assign priority enum (High, Medium, Low).\n" +
-            "5. Give reasoning (1 sentence max).\n\n" +
-            "Return exactly in this JSON format: {\"category\":\"...\", \"summary\":\"...\", \"score\":..., \"priority\":\"...\", \"reason\":\"...\"}",
-            desc, duration, impact, details
-        );
+    private final RestTemplate restTemplate = new RestTemplate();
+    private final ObjectMapper mapper = new ObjectMapper();
 
-        Map<String, Object> request = Map.of(
-            "model", "deepseek-r1:1.5b",
-            "prompt", prompt,
-            "stream", false,
-            "format", "json"
-        );
+    public JsonNode getAiRecommendation(String prompt) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("model", "llama2");
+        request.put("prompt", prompt);
+        request.put("stream", false);
 
         try {
-            ResponseEntity<Map> response = restTemplate.postForEntity(ollamaUrl, request, Map.class);
-            if(response.getBody() == null) return null;
-            String responseText = (String) response.getBody().get("response");
+            @SuppressWarnings("unchecked")
+            ResponseEntity<Map<String, Object>> response = restTemplate.postForEntity(
+                ollamaUrl, request, (Class<Map<String, Object>>) (Class<?>) Map.class);
+            Map<String, Object> body = response.getBody();
+            if (body == null) return null;
+            String responseText = (String) body.get("response");
             return mapper.readTree(responseText);
         } catch (Exception e) {
             e.printStackTrace();

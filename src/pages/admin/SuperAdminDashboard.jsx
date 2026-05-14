@@ -3,9 +3,9 @@ import { superAdminApi } from '../../services/superAdminApi';
 import { useApp } from '../../context/AppContext.jsx';
 import dashboardService from '../../services/dashboardService.js';
 import {
-  Users, Award, TrendingUp, Activity,
+  Users, Award, Activity,
   Zap, ChevronDown, ArrowUpRight,
-  RefreshCw, MapPin
+  RefreshCw, MapPin, TrendingUp
 } from 'lucide-react';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement,
@@ -30,19 +30,35 @@ function animateCount(to, duration, cb) {
   requestAnimationFrame(step);
 }
 
+// ── Numerical Formatter ──────────────────────────────────────────────────────
+const formatIndianNumber = (num) => {
+  if (!num || isNaN(num)) return '0';
+  if (num >= 10000000) return (num / 10000000).toFixed(2) + ' Crore';
+  if (num >= 100000) return (num / 100000).toFixed(2) + ' Lakh';
+  return num.toLocaleString('en-IN');
+};
+
 // ── KPI Card ───────────────────────────────────────────────────────────────────
 function KpiCard({ label, value, icon: Icon, color, bg, accent }) {
   const [display, setDisplay] = useState(0);
-  useEffect(() => { animateCount(value || 0, 1000, setDisplay); }, [value]);
+  const isLarge = value >= 100000;
+
+  useEffect(() => {
+    // For very large numbers, we don't animate the full count to avoid lag
+    // but we can animate a percentage or just set it
+    if (!isLarge) animateCount(value || 0, 1000, setDisplay);
+  }, [value, isLarge]);
+
   return (
     <div className="kpi-card" style={{ '--kpi-accent': accent }}>
       <div className="kpi-icon" style={{ background: bg }}>
-        <Icon size={20} color={color} />
+        {Icon && <Icon size={20} color={color} />}
       </div>
       <div className="kpi-body">
         <div className="kpi-label">{label}</div>
-        <div className="kpi-value">{display.toLocaleString()}</div>
-        <div className="kpi-delta positive"><ArrowUpRight size={12} /> Live</div>
+        <div className="kpi-value">
+          {isLarge ? formatIndianNumber(value) : display.toLocaleString()}
+        </div>
       </div>
     </div>
   );
@@ -122,6 +138,12 @@ export default function SuperAdminDashboard() {
   const [segData,     setSegData]     = useState(null);
   const [segLoading,  setSegLoading]  = useState(true);
 
+  // Custom Dropdown Menus State
+  const [showSegMenu,      setShowSegMenu]      = useState(false);
+  const [showDistrictMenu, setShowDistrictMenu] = useState(false);
+  const [showAcMenu,       setShowAcMenu]       = useState(false);
+  const [showPartMenu,     setShowPartMenu]     = useState(false);
+
   // ── Issue distribution ────────────────────────────────────────────────────
   const [issueData,   setIssueData]   = useState(null);
   const [issueFilter, setIssueFilter] = useState('summary');
@@ -147,11 +169,11 @@ export default function SuperAdminDashboard() {
   }, []);
 
   const fetchIssues = useCallback(async (detailed = false) => {
-    try { setIssueData(await dashboardService.getIssueDistribution(detailed)); } catch (_) {}
+    try { setIssueData(await dashboardService.getIssueDistribution(detailed)); } catch (err) { console.error('Issue fetch error:', err); }
   }, []);
 
   const fetchBoothPerf = useCallback(async () => {
-    try { setBoothPerformance(await dashboardService.getBoothPerformance()); } catch (_) {}
+    try { setBoothPerformance(await dashboardService.getBoothPerformance()); } catch (err) { console.error('Booth perf error:', err); }
   }, []);
 
   // Initial load
@@ -278,20 +300,23 @@ export default function SuperAdminDashboard() {
               <div className="chart-title">Dynamic Voter Segmentation</div>
               <div className="chart-subtitle">Filter voters by demographic</div>
             </div>
-            <div style={{ position: 'relative' }}>
-              <select
-                value={segFilter}
-                onChange={e => setSegFilter(e.target.value)}
-                style={{
-                  appearance: 'none', padding: '0.35rem 2rem 0.35rem 0.75rem',
-                  border: '1px solid var(--border)', borderRadius: '8px',
-                  background: 'var(--surface)', color: 'var(--text)',
-                  fontSize: '0.78rem', cursor: 'pointer',
-                }}
+            <div className="custom-seg-select-container">
+              <div 
+                className="custom-seg-trigger" 
+                onClick={() => { setShowSegMenu(!showSegMenu); setShowDistrictMenu(false); setShowAcMenu(false); setShowPartMenu(false); }}
               >
-                {SEGMENT_FILTERS.map(f => <option key={f.value} value={f.value}>{f.label}</option>)}
-              </select>
-              <ChevronDown size={13} style={{ position: 'absolute', right: '0.5rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-muted)' }} />
+                <span>{SEGMENT_FILTERS.find(f => f.value === segFilter)?.label}</span>
+                <ChevronDown size={14} className={showSegMenu ? 'rotate-180' : ''} />
+              </div>
+              {showSegMenu && (
+                <div className="custom-seg-menu glass-panel">
+                  {SEGMENT_FILTERS.map(f => (
+                    <div key={f.value} className="custom-seg-item" onClick={() => { setSegFilter(f.value); setShowSegMenu(false); }}>
+                      {f.label}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -302,44 +327,62 @@ export default function SuperAdminDashboard() {
             </span>
 
             {/* District */}
-            <div style={{ position: 'relative', flex: 1, minWidth: 110 }}>
-              <select
-                value={selDistrict}
-                onChange={e => setSelDistrict(e.target.value)}
-                style={{ width: '100%', appearance: 'none', padding: '0.28rem 1.6rem 0.28rem 0.6rem', border: '1px solid var(--border)', borderRadius: '7px', background: 'var(--surface)', color: 'var(--text)', fontSize: '0.73rem', cursor: 'pointer' }}
+            <div className="custom-loc-select-container">
+              <div 
+                className="custom-loc-trigger" 
+                onClick={() => { setShowDistrictMenu(!showDistrictMenu); setShowSegMenu(false); setShowAcMenu(false); setShowPartMenu(false); }}
               >
-                <option value="">All Districts</option>
-                {districts.map(d => <option key={d} value={d}>{d}</option>)}
-              </select>
-              <ChevronDown size={11} style={{ position: 'absolute', right: '0.4rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-muted)' }} />
+                <span>{selDistrict || 'All Districts'}</span>
+                <ChevronDown size={12} className={showDistrictMenu ? 'rotate-180' : ''} />
+              </div>
+              {showDistrictMenu && (
+                <div className="custom-loc-menu glass-panel">
+                  <div className="custom-loc-item" onClick={() => { setSelDistrict(''); setShowDistrictMenu(false); }}>All Districts</div>
+                  {districts.map(d => (
+                    <div key={d} className="custom-loc-item" onClick={() => { setSelDistrict(d); setShowDistrictMenu(false); }}>{d}</div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* AC */}
-            <div style={{ position: 'relative', flex: 1, minWidth: 110 }}>
-              <select
-                value={selAc}
-                onChange={e => setSelAc(e.target.value)}
-                disabled={!selDistrict}
-                style={{ width: '100%', appearance: 'none', padding: '0.28rem 1.6rem 0.28rem 0.6rem', border: '1px solid var(--border)', borderRadius: '7px', background: selDistrict ? 'var(--surface)' : 'var(--surface-2)', color: selDistrict ? 'var(--text)' : 'var(--text-muted)', fontSize: '0.73rem', cursor: selDistrict ? 'pointer' : 'not-allowed' }}
+            <div className={`custom-loc-select-container ${!selDistrict ? 'disabled' : ''}`}>
+              <div 
+                className="custom-loc-trigger" 
+                onClick={() => { if(selDistrict) { setShowAcMenu(!showAcMenu); setShowSegMenu(false); setShowDistrictMenu(false); setShowPartMenu(false); } }}
               >
-                <option value="">{selDistrict ? 'All ACs' : '— District first —'}</option>
-                {acs.map(a => <option key={a} value={a}>{a}</option>)}
-              </select>
-              <ChevronDown size={11} style={{ position: 'absolute', right: '0.4rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-muted)' }} />
+                <span>{selAc || (selDistrict ? 'All ACs' : '— District —')}</span>
+                <ChevronDown size={12} className={showAcMenu ? 'rotate-180' : ''} />
+              </div>
+              {showAcMenu && (
+                <div className="custom-loc-menu glass-panel">
+                  <div className="custom-loc-item" onClick={() => { setSelAc(''); setShowAcMenu(false); }}>All ACs</div>
+                  {acs.map(a => (
+                    <div key={a} className="custom-loc-item" onClick={() => { setSelAc(a); setShowAcMenu(false); }}>{a}</div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Part */}
-            <div style={{ position: 'relative', flex: 1, minWidth: 100 }}>
-              <select
-                value={selPart}
-                onChange={e => setSelPart(e.target.value)}
-                disabled={!selAc}
-                style={{ width: '100%', appearance: 'none', padding: '0.28rem 1.6rem 0.28rem 0.6rem', border: '1px solid var(--border)', borderRadius: '7px', background: selAc ? 'var(--surface)' : 'var(--surface-2)', color: selAc ? 'var(--text)' : 'var(--text-muted)', fontSize: '0.73rem', cursor: selAc ? 'pointer' : 'not-allowed' }}
+            <div className={`custom-loc-select-container ${!selAc ? 'disabled' : ''}`}>
+              <div 
+                className="custom-loc-trigger" 
+                onClick={() => { if(selAc) { setShowPartMenu(!showPartMenu); setShowSegMenu(false); setShowDistrictMenu(false); setShowAcMenu(false); } }}
               >
-                <option value="">{selAc ? 'All Booths' : '— AC first —'}</option>
-                {parts.map(p => <option key={p.partNumber} value={p.partNumber}>P-{p.partNumber} · {p.partName}</option>)}
-              </select>
-              <ChevronDown size={11} style={{ position: 'absolute', right: '0.4rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-muted)' }} />
+                <span className="truncate">{selPart ? `P-${selPart}` : (selAc ? 'All Booths' : '— AC first —')}</span>
+                <ChevronDown size={12} className={showPartMenu ? 'rotate-180' : ''} />
+              </div>
+              {showPartMenu && (
+                <div className="custom-loc-menu glass-panel">
+                  <div className="custom-loc-item" onClick={() => { setSelPart(''); setShowPartMenu(false); }}>All Booths</div>
+                  {parts.map(p => (
+                    <div key={p.partNumber} className="custom-loc-item" onClick={() => { setSelPart(p.partNumber); setShowPartMenu(false); }}>
+                      P-{p.partNumber} · {p.partName}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -448,34 +491,8 @@ export default function SuperAdminDashboard() {
         </div>
       </div>
 
-      {/* ── Row 2: Booth Intelligence + Booth Performance ── */}
-      <div className="two-col-grid" style={{ marginBottom: '1.5rem' }}>
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <TrendingUp size={16} color="#6366f1" /> Booth Intelligence
-            </span>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '0.25rem 0' }}>
-            {[
-              { label: 'TOP PERFORMING BOOTH',  value: boothIntelligence.topBooth,                  color: '#10b981', score: 92 },
-              { label: 'WEAKEST BOOTH',          value: boothIntelligence.weakBooth,                 color: '#ef4444', score: 28 },
-              { label: 'MAX BENEFICIARY BOOTH',  value: boothIntelligence.boothWithMaxBeneficiaries, color: '#8b5cf6', score: 78 },
-            ].map(({ label, value, color, score }) => (
-              <div key={label} style={{ padding: '0.85rem 1rem', background: `${color}0d`, borderRadius: '8px', borderLeft: `4px solid ${color}` }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', letterSpacing: '0.05em', fontWeight: 600 }}>{label}</div>
-                  <span style={{ color, fontWeight: 700, fontSize: '0.82rem' }}>{score}%</span>
-                </div>
-                <div style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>{value}</div>
-                <div style={{ height: '5px', borderRadius: '3px', background: 'var(--surface-2)' }}>
-                  <div style={{ width: `${score}%`, height: '100%', borderRadius: '3px', background: color, transition: 'width 1s ease' }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
+      {/* ── Row 2: Booth Performance ── */}
+      <div style={{ marginBottom: '1.5rem' }}>
         <div className="card">
           <div className="card-header">
             <span className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -564,6 +581,79 @@ export default function SuperAdminDashboard() {
           </div>
         </div>
       </div>
+      <style>{`
+        .custom-seg-select-container, .custom-loc-select-container {
+          position: relative;
+          user-select: none;
+        }
+        .custom-seg-trigger, .custom-loc-trigger {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .custom-seg-trigger {
+          padding: 0.35rem 0.75rem;
+          border-radius: 8px;
+          min-width: 120px;
+          font-size: 0.78rem;
+        }
+        .custom-loc-trigger {
+          padding: 0.28rem 0.6rem;
+          border-radius: 7px;
+          font-size: 0.73rem;
+          height: 32px;
+        }
+        .custom-seg-trigger:hover, .custom-loc-trigger:hover:not(.disabled) {
+          border-color: var(--primary);
+          box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+        }
+        .custom-loc-select-container.disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+        .custom-seg-menu, .custom-loc-menu {
+          position: absolute;
+          top: calc(100% + 5px);
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+          z-index: 100;
+          max-height: 250px;
+          overflow-y: auto;
+          animation: slideDownFade 0.2s ease-out;
+        }
+        .custom-seg-item, .custom-loc-item {
+          padding: 0.5rem 0.75rem;
+          font-size: 0.75rem;
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+        .custom-seg-item:hover, .custom-loc-item:hover {
+          background: var(--surface-2);
+          color: var(--primary);
+          padding-left: 0.9rem;
+        }
+        .rotate-180 {
+          transform: rotate(180deg);
+        }
+        .truncate {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        @keyframes slideDownFade {
+          from { opacity: 0; transform: translateY(-8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }

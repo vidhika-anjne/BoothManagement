@@ -32,8 +32,8 @@ export default function SuperAdminBooths() {
             </tr>
           </thead>
           <tbody>
-            {(Array.isArray(booths) ? booths : []).slice(0, 100).map(booth => (
-              <tr key={booth.partId || booth.id || Math.random()} style={{ borderBottom: '1px solid var(--border)' }}>
+            {(Array.isArray(booths) ? booths : []).slice(0, 100).map((booth, idx) => (
+              <tr key={booth.partId || booth.id || `booth-${idx}`} style={{ borderBottom: '1px solid var(--border)' }}>
                 <td style={{ padding: '1rem' }}>{booth.partId}</td>
                 <td style={{ padding: '1rem' }}>{booth.partNumber}</td>
                 <td style={{ padding: '1rem' }}>{booth.partName}</td>
@@ -41,7 +41,7 @@ export default function SuperAdminBooths() {
                 <td style={{ padding: '1rem' }}>{booth.districtName}</td>
               </tr>
             ))}
-            {(Array.isArray(booths) ? booths : []).length > 100 && (
+            {booths.length > 100 && (
               <tr>
                 <td colSpan="5" style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)' }}>
                   Showing top 100 of {booths.length.toLocaleString()} booths.

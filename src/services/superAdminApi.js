@@ -15,8 +15,8 @@ export const superAdminApi = {
     return response.data;
   },
 
-  getSections: async (boothId = null) => {
-    const response = await axios.get(`${API_BASE_URL}/sections`, { params: { boothId } });
+  getSections: async (partId = null) => {
+    const response = await axios.get(`${API_BASE_URL}/sections`, { params: { partId } });
     return response.data;
   },
 
@@ -85,6 +85,11 @@ export const superAdminApi = {
     if (params.partNumber) queryParams.append('partNumber', params.partNumber);
     if (params.acName)     queryParams.append('acName', params.acName);
     const response = await axios.get(`${API_BASE_URL}/dashboard/segmentation?${queryParams.toString()}`);
+    return response.data;
+  },
+
+  getVoterStats: async (filters = {}) => {
+    const response = await axios.get(`${API_BASE_URL}/voter-stats`, { params: filters });
     return response.data;
   },
 };

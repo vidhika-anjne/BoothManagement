@@ -1,92 +1,57 @@
 package com.diamond.backend.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.diamond.backend.model.Complaint;
 import com.diamond.backend.repository.ComplaintRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ComplaintService {
 
-    private final ComplaintRepository repository;
-    private final OllamaAiService aiService;
+    @Autowired
+    private ComplaintRepository complaintRepository;
 
-    public ComplaintService(ComplaintRepository repository, OllamaAiService aiService) {
-        this.repository = repository;
-        this.aiService = aiService;
+    public List<Complaint> getAllComplaints() {
+        return complaintRepository.findAll();
     }
 
-    public Complaint submitComplaint(Complaint complaint) {
-        // Step 1: Base Rule-based Scoring
-        int ruleScore = calculateRuleBasedScore(complaint);
-        complaint.setAiScore(ruleScore);
-        complaint.setAiPriority(ruleScore >= 7 ? "High" : (ruleScore >= 4 ? "Medium" : "Low"));
-        
-        // Step 2: Trigger AI conditionally (if complex or 'Other' category)
-        boolean isComplex = complaint.getDescription() != null && 
-                            (complaint.getDescription().length() > 50 || "Other".equalsIgnoreCase(complaint.getCategory()));
-
-        if (isComplex) {
-            JsonNode aiOutput = aiService.analyzeComplaint(
-                complaint.getDescription(), complaint.getDuration(), 
-                complaint.getImpact(), complaint.getDetails()
-            );
-            
-            if (aiOutput != null) {
-                if (aiOutput.has("category")) complaint.setAiCategory(aiOutput.get("category").asText(complaint.getCategory()));
-                if (aiOutput.has("summary")) complaint.setAiSummary(aiOutput.get("summary").asText());
-                if (aiOutput.has("score")) complaint.setAiScore(Math.max(ruleScore, aiOutput.get("score").asInt(ruleScore)));
-                if (aiOutput.has("priority")) complaint.setAiPriority(aiOutput.get("priority").asText(complaint.getAiPriority()));
-                if (aiOutput.has("reason")) complaint.setAiReason(aiOutput.get("reason").asText());
-                complaint.setAiProcessed(true);
-            }
-        }
-        return repository.save(complaint);
+    @Transactional
+    public Complaint createComplaint(Complaint complaint) {
+        return complaintRepository.save(complaint);
     }
 
-    public Complaint resolveComplaint(Long complaintId, String proofUrl) {
-        Complaint complaint = repository.findById(complaintId)
-                .orElseThrow(() -> new RuntimeException("Complaint not found with id: " + complaintId));
+    @Transactional
+    public Complaint resolveComplaint(Long id, String resolution) {
+        Complaint complaint = complaintRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Complaint not found"));
         
         complaint.setStatus("RESOLVED");
+        complaint.setResolution(resolution);
         complaint.setResolvedAt(LocalDateTime.now());
-        if (proofUrl != null && !proofUrl.isEmpty()) {
-            complaint.setResolutionProofUrl(proofUrl);
-        }
         
-        return repository.save(complaint);
+        return complaintRepository.save(complaint);
     }
 
-    private int calculateRuleBasedScore(Complaint c) {
-        int score = 0;
-        
-        if (c.getDuration() != null) {
-            if (c.getDuration().contains(">1 week")) score += 4;
-            else if (c.getDuration().contains("3-7 days")) score += 3;
-            else if (c.getDuration().contains("1-2 days")) score += 1;
-        }
-        
-        if (c.getImpact() != null) {
-            if (c.getImpact().contains("Entire area")) score += 5;
-            else if (c.getImpact().contains("Few houses")) score += 3;
-            else if (c.getImpact().contains("Household")) score += 1;
-        }
-        
-        if (c.getDescription() != null && c.getDescription().toLowerCase().matches(".*(fire|blood|accident|hospital|death|danger|pipeline|leak).*")) {
-            score += 5;
-        }
-        
-        return Math.min(score, 10);
+    public List<Complaint> getComplaintsByVoter(String voterId) {
+        return complaintRepository.findByVoterId(voterId);
     }
-    
-    public Map<String, Object> getAnalytics() {
-        Map<String, Object> analytics = new HashMap<>();
-        analytics.put("categoryDistribution", repository.countByCategory());
-        analytics.put("boothHotspots", repository.countByBooth());
-        return analytics;
+
+    public Map<String, Long> getCategoryDistribution() {
+        List<Complaint> all = complaintRepository.findAll();
+        return all.stream()
+                .map(c -> {
+                    String cat = c.getAiCategory() != null ? c.getAiCategory() : c.getCategory();
+                    return cat == null ? "Uncategorized" : cat;
+                })
+                .collect(Collectors.groupingBy(
+                        cat -> cat,
+                        Collectors.counting()
+                ));
     }
 }

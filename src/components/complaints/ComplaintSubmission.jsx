@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
     MessageSquare, 
     Clock, 
@@ -14,7 +14,7 @@ import {
     ListTree,
     Camera
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 const ComplaintSubmission = () => {
     const [form, setForm] = useState({
@@ -87,7 +87,7 @@ const ComplaintSubmission = () => {
             } else {
                 setStatus({ type: 'error', message: 'Submission failed. Please verify connection to helpdesk.' });
             }
-        } catch (err) {
+        } catch {
             setStatus({ type: 'error', message: 'Network error. Civic services temporarily unreachable.' });
         } finally {
             setIsSubmitting(false);

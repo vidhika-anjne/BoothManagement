@@ -1,3 +1,4 @@
+// Re-indexed model for scheme sync
 package com.diamond.backend.model;
 
 import jakarta.persistence.*;
@@ -21,7 +22,7 @@ public class Scheme {
 
     private String ministry;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "scheme_beneficiaries", joinColumns = @JoinColumn(name = "scheme_id"))
     @Column(name = "beneficiary")
     private List<String> beneficiaries;
@@ -32,7 +33,7 @@ public class Scheme {
     private Integer ageMin;
     private Integer ageMax;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "scheme_genders", joinColumns = @JoinColumn(name = "scheme_id"))
     @Column(name = "gender")
     private List<String> gender;

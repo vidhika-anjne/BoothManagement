@@ -48,6 +48,7 @@ public class Complaint {
     private Boolean aiProcessed = false;
     
     // System Fields
+    private String resolution;
     private String status = "OPEN";
 
     // Getters and Setters
@@ -119,6 +120,9 @@ public class Complaint {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public String getResolution() { return resolution; }
+    public void setResolution(String resolution) { this.resolution = resolution; }
 
     @Transient
     public Long getResolutionTime() {

@@ -1,0 +1,771 @@
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\components\complaints\ComplaintSubmission.jsx
+  17:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\components\complaints\IntelligentTriage.jsx
+  18:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\context\AppContext.jsx
+  71:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\main.jsx
+  14:10  error  Fast refresh only works when a file has exports. Move your component(s) to a separate file  react-refresh/only-export-components
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\BoothMap.jsx
+  25:11  error  'darkMode' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\CitizenLogin.jsx
+  33:6  warning  React Hook useEffect has missing dependencies: 'mobile', 'onLogin', and 'profile'. Either include them or remove the dependency array. If 'onLogin' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\CitizenPortal.jsx
+   75:30  error    'Icon' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           no-unused-vars
+  500:9   error    'daysMap' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    no-unused-vars
+  626:34  error    'API_BASE' is not defined                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  no-undef
+  646:6   warning  React Hook useEffect has a missing dependency: 'fetchRecs'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               react-hooks/exhaustive-deps
+  993:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  991 |   useEffect(() => {
+  992 |     const stored = JSON.parse(localStorage.getItem('complaints') || '[]')
+> 993 |     setComplaints([...stored].reverse())
+      |     ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  994 |   }, [])
+  995 |
+  996 |   const STATUS_COLOR = {   react-hooks/set-state-in-effect
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\Dashboard.jsx
+  34:40  error  'Icon' is defined but never used  no-unused-vars
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\Notifications.jsx
+  111:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  109 |
+  110 |       <div className="notif-cf-grid">
+> 111 |         <F label="Notification Title*" err={errors.title} full>
+      |          ^ This component is created during render
+  112 |           <InpField k="title" placeholder="e.g. Road pothole repaired ??? Booth 141" />
+  113 |         </F>
+  114 |         <F label="Type*" err={errors.type}>
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                                                                             react-hooks/static-components
+  112:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  110 |       <div className="notif-cf-grid">
+  111 |         <F label="Notification Title*" err={errors.title} full>
+> 112 |           <InpField k="title" placeholder="e.g. Road pothole repaired ??? Booth 141" />
+      |            ^^^^^^^^ This component is created during render
+  113 |         </F>
+  114 |         <F label="Type*" err={errors.type}>
+  115 |           <SelField k="type">
+
+  82 |   )
+  83 |
+> 84 |   const InpField = ({ k, ...props }) => (
+     |                    ^^^^^^^^^^^^^^^^^^^^^^
+> 85 |     <input 
+     | ^^^^^^^^^^^
+> 86 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+     | ^^^^^^^^^^^
+> 87 |       value={form[k]} 
+     | ^^^^^^^^^^^
+> 88 |       onChange={e => set(k, e.target.value)} 
+     | ^^^^^^^^^^^
+> 89 |       {...props} 
+     | ^^^^^^^^^^^
+> 90 |     />
+     | ^^^^^^^^^^^
+> 91 |   )
+     | ^^^^ The component is created during render here
+  92 |
+  93 |   const SelField = ({ k, children, ...props }) => (
+  94 |     <select                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/static-components
+  114:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  112 |           <InpField k="title" placeholder="e.g. Road pothole repaired ??? Booth 141" />
+  113 |         </F>
+> 114 |         <F label="Type*" err={errors.type}>
+      |          ^ This component is created during render
+  115 |           <SelField k="type">
+  116 |             <option value="resolved">Resolved</option>
+  117 |             <option value="in-progress">In Progress</option>
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                                 react-hooks/static-components
+  115:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  113 |         </F>
+  114 |         <F label="Type*" err={errors.type}>
+> 115 |           <SelField k="type">
+      |            ^^^^^^^^ This component is created during render
+  116 |             <option value="resolved">Resolved</option>
+  117 |             <option value="in-progress">In Progress</option>
+  118 |             <option value="update">Update</option>
+
+   91 |   )
+   92 |
+>  93 |   const SelField = ({ k, children, ...props }) => (
+      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  94 |     <select 
+      | ^^^^^^^^^^^^
+>  95 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+      | ^^^^^^^^^^^^
+>  96 |       value={form[k]} 
+      | ^^^^^^^^^^^^
+>  97 |       onChange={e => set(k, e.target.value)} 
+      | ^^^^^^^^^^^^
+>  98 |       {...props}
+      | ^^^^^^^^^^^^
+>  99 |     >
+      | ^^^^^^^^^^^^
+> 100 |       {children}
+      | ^^^^^^^^^^^^
+> 101 |     </select>
+      | ^^^^^^^^^^^^
+> 102 |   )
+      | ^^^^ The component is created during render here
+  103 |
+  104 |   return (
+  105 |     <div className="notif-compose-wrap">                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/static-components
+  121:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  119 |           </SelField>
+  120 |         </F>
+> 121 |         <F label="Booth / Area*" err={errors.booth}>
+      |          ^ This component is created during render
+  122 |           <SelField k="booth">
+  123 |             <option value="">Select booth</option>
+  124 |             {BOOTHS.map(b => <option key={b.id} value={b.name}>{b.name}</option>)}
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                                                                     react-hooks/static-components
+  122:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  120 |         </F>
+  121 |         <F label="Booth / Area*" err={errors.booth}>
+> 122 |           <SelField k="booth">
+      |            ^^^^^^^^ This component is created during render
+  123 |             <option value="">Select booth</option>
+  124 |             {BOOTHS.map(b => <option key={b.id} value={b.name}>{b.name}</option>)}
+  125 |           </SelField>
+
+   91 |   )
+   92 |
+>  93 |   const SelField = ({ k, children, ...props }) => (
+      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  94 |     <select 
+      | ^^^^^^^^^^^^
+>  95 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+      | ^^^^^^^^^^^^
+>  96 |       value={form[k]} 
+      | ^^^^^^^^^^^^
+>  97 |       onChange={e => set(k, e.target.value)} 
+      | ^^^^^^^^^^^^
+>  98 |       {...props}
+      | ^^^^^^^^^^^^
+>  99 |     >
+      | ^^^^^^^^^^^^
+> 100 |       {children}
+      | ^^^^^^^^^^^^
+> 101 |     </select>
+      | ^^^^^^^^^^^^
+> 102 |   )
+      | ^^^^ The component is created during render here
+  103 |
+  104 |   return (
+  105 |     <div className="notif-compose-wrap">                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/static-components
+  127:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  125 |           </SelField>
+  126 |         </F>
+> 127 |         <F label="Linked Issue (optional)">
+      |          ^ This component is created during render
+  128 |           <SelField k="issueRef">
+  129 |             <option value="">None</option>
+  130 |             {ISSUES.map(i => <option key={i.id} value={i.id}>{i.id} ??? {i.title.slice(0,40)}</option>)}
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                                                               react-hooks/static-components
+  128:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  126 |         </F>
+  127 |         <F label="Linked Issue (optional)">
+> 128 |           <SelField k="issueRef">
+      |            ^^^^^^^^ This component is created during render
+  129 |             <option value="">None</option>
+  130 |             {ISSUES.map(i => <option key={i.id} value={i.id}>{i.id} ??? {i.title.slice(0,40)}</option>)}
+  131 |           </SelField>
+
+   91 |   )
+   92 |
+>  93 |   const SelField = ({ k, children, ...props }) => (
+      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  94 |     <select 
+      | ^^^^^^^^^^^^
+>  95 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+      | ^^^^^^^^^^^^
+>  96 |       value={form[k]} 
+      | ^^^^^^^^^^^^
+>  97 |       onChange={e => set(k, e.target.value)} 
+      | ^^^^^^^^^^^^
+>  98 |       {...props}
+      | ^^^^^^^^^^^^
+>  99 |     >
+      | ^^^^^^^^^^^^
+> 100 |       {children}
+      | ^^^^^^^^^^^^
+> 101 |     </select>
+      | ^^^^^^^^^^^^
+> 102 |   )
+      | ^^^^ The component is created during render here
+  103 |
+  104 |   return (
+  105 |     <div className="notif-compose-wrap">                                                                                                                                                                                                                                                                                                                                                                                                                                                              react-hooks/static-components
+  133:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  131 |           </SelField>
+  132 |         </F>
+> 133 |         <F label="Responsible Department / Agency*" err={errors.resolvedBy}>
+      |          ^ This component is created during render
+  134 |           <InpField k="resolvedBy" placeholder="e.g. PWD Delhi, MCD Dept." />
+  135 |         </F>
+  136 |         <F label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                                   react-hooks/static-components
+  134:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  132 |         </F>
+  133 |         <F label="Responsible Department / Agency*" err={errors.resolvedBy}>
+> 134 |           <InpField k="resolvedBy" placeholder="e.g. PWD Delhi, MCD Dept." />
+      |            ^^^^^^^^ This component is created during render
+  135 |         </F>
+  136 |         <F label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
+  137 |           <InpField k="sentTo" type="number" placeholder="e.g. 800" />
+
+  82 |   )
+  83 |
+> 84 |   const InpField = ({ k, ...props }) => (
+     |                    ^^^^^^^^^^^^^^^^^^^^^^
+> 85 |     <input 
+     | ^^^^^^^^^^^
+> 86 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+     | ^^^^^^^^^^^
+> 87 |       value={form[k]} 
+     | ^^^^^^^^^^^
+> 88 |       onChange={e => set(k, e.target.value)} 
+     | ^^^^^^^^^^^
+> 89 |       {...props} 
+     | ^^^^^^^^^^^
+> 90 |     />
+     | ^^^^^^^^^^^
+> 91 |   )
+     | ^^^^ The component is created during render here
+  92 |
+  93 |   const SelField = ({ k, children, ...props }) => (
+  94 |     <select                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            react-hooks/static-components
+  136:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  134 |           <InpField k="resolvedBy" placeholder="e.g. PWD Delhi, MCD Dept." />
+  135 |         </F>
+> 136 |         <F label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
+      |          ^ This component is created during render
+  137 |           <InpField k="sentTo" type="number" placeholder="e.g. 800" />
+  138 |         </F>
+  139 |         <F label="Message Body*" err={errors.body} full>
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                      react-hooks/static-components
+  137:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  135 |         </F>
+  136 |         <F label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
+> 137 |           <InpField k="sentTo" type="number" placeholder="e.g. 800" />
+      |            ^^^^^^^^ This component is created during render
+  138 |         </F>
+  139 |         <F label="Message Body*" err={errors.body} full>
+  140 |           <textarea className={`notif-cf-input${errors.body ? ' error' : ''}`}
+
+  82 |   )
+  83 |
+> 84 |   const InpField = ({ k, ...props }) => (
+     |                    ^^^^^^^^^^^^^^^^^^^^^^
+> 85 |     <input 
+     | ^^^^^^^^^^^
+> 86 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+     | ^^^^^^^^^^^
+> 87 |       value={form[k]} 
+     | ^^^^^^^^^^^
+> 88 |       onChange={e => set(k, e.target.value)} 
+     | ^^^^^^^^^^^
+> 89 |       {...props} 
+     | ^^^^^^^^^^^
+> 90 |     />
+     | ^^^^^^^^^^^
+> 91 |   )
+     | ^^^^ The component is created during render here
+  92 |
+  93 |   const SelField = ({ k, children, ...props }) => (
+  94 |     <select                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               react-hooks/static-components
+  139:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  137 |           <InpField k="sentTo" type="number" placeholder="e.g. 800" />
+  138 |         </F>
+> 139 |         <F label="Message Body*" err={errors.body} full>
+      |          ^ This component is created during render
+  140 |           <textarea className={`notif-cf-input${errors.body ? ' error' : ''}`}
+  141 |             rows={3} placeholder="Provide a clear, informative update for residents???"
+  142 |             value={form.body} onChange={e => set('body', e.target.value)} />
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input   react-hooks/static-components
+  144:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  142 |             value={form.body} onChange={e => set('body', e.target.value)} />
+  143 |         </F>
+> 144 |         <F label="Visual Type" hint="Generates the before/after illustration">
+      |          ^ This component is created during render
+  145 |           <SelField k="visualType">
+  146 |             {VISUAL_TYPES.map(v => <option key={v}>{v}</option>)}
+  147 |           </SelField>
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                             react-hooks/static-components
+  145:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  143 |         </F>
+  144 |         <F label="Visual Type" hint="Generates the before/after illustration">
+> 145 |           <SelField k="visualType">
+      |            ^^^^^^^^ This component is created during render
+  146 |             {VISUAL_TYPES.map(v => <option key={v}>{v}</option>)}
+  147 |           </SelField>
+  148 |         </F>
+
+   91 |   )
+   92 |
+>  93 |   const SelField = ({ k, children, ...props }) => (
+      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  94 |     <select 
+      | ^^^^^^^^^^^^
+>  95 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+      | ^^^^^^^^^^^^
+>  96 |       value={form[k]} 
+      | ^^^^^^^^^^^^
+>  97 |       onChange={e => set(k, e.target.value)} 
+      | ^^^^^^^^^^^^
+>  98 |       {...props}
+      | ^^^^^^^^^^^^
+>  99 |     >
+      | ^^^^^^^^^^^^
+> 100 |       {children}
+      | ^^^^^^^^^^^^
+> 101 |     </select>
+      | ^^^^^^^^^^^^
+> 102 |   )
+      | ^^^^ The component is created during render here
+  103 |
+  104 |   return (
+  105 |     <div className="notif-compose-wrap">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            react-hooks/static-components
+  149:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  147 |           </SelField>
+  148 |         </F>
+> 149 |         <F label="" /> {/* spacer */}
+      |          ^ This component is created during render
+  150 |         <F label="Before ??? Situation Description*" err={errors.beforeDesc}>
+  151 |           <InpField k="beforeDesc" placeholder="e.g. 6 street lights non-functional since Feb 26" />
+  152 |         </F>
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                                                           react-hooks/static-components
+  150:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  148 |         </F>
+  149 |         <F label="" /> {/* spacer */}
+> 150 |         <F label="Before ??? Situation Description*" err={errors.beforeDesc}>
+      |          ^ This component is created during render
+  151 |           <InpField k="beforeDesc" placeholder="e.g. 6 street lights non-functional since Feb 26" />
+  152 |         </F>
+  153 |         <F label="After ??? Outcome Description*" err={errors.afterDesc}>
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                         react-hooks/static-components
+  151:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  149 |         <F label="" /> {/* spacer */}
+  150 |         <F label="Before ??? Situation Description*" err={errors.beforeDesc}>
+> 151 |           <InpField k="beforeDesc" placeholder="e.g. 6 street lights non-functional since Feb 26" />
+      |            ^^^^^^^^ This component is created during render
+  152 |         </F>
+  153 |         <F label="After ??? Outcome Description*" err={errors.afterDesc}>
+  154 |           <InpField k="afterDesc" placeholder="e.g. All lights repaired and commissioned" />
+
+  82 |   )
+  83 |
+> 84 |   const InpField = ({ k, ...props }) => (
+     |                    ^^^^^^^^^^^^^^^^^^^^^^
+> 85 |     <input 
+     | ^^^^^^^^^^^
+> 86 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+     | ^^^^^^^^^^^
+> 87 |       value={form[k]} 
+     | ^^^^^^^^^^^
+> 88 |       onChange={e => set(k, e.target.value)} 
+     | ^^^^^^^^^^^
+> 89 |       {...props} 
+     | ^^^^^^^^^^^
+> 90 |     />
+     | ^^^^^^^^^^^
+> 91 |   )
+     | ^^^^ The component is created during render here
+  92 |
+  93 |   const SelField = ({ k, children, ...props }) => (
+  94 |     <select                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/static-components
+  153:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  151 |           <InpField k="beforeDesc" placeholder="e.g. 6 street lights non-functional since Feb 26" />
+  152 |         </F>
+> 153 |         <F label="After ??? Outcome Description*" err={errors.afterDesc}>
+      |          ^ This component is created during render
+  154 |           <InpField k="afterDesc" placeholder="e.g. All lights repaired and commissioned" />
+  155 |         </F>
+  156 |       </div>
+
+  73 |
+  74 |   // ?????? Helpers (inline components using current errors state)
+> 75 |   const F = ({ label, err, hint, children, full }) => (
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 76 |     <div className={`notif-cf-field${full ? ' full' : ''}`}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |       <label>{label}</label>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 78 |       {children}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 79 |       {err  && <span className="notif-cf-error">{err}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 80 |       {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 81 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 82 |   )
+     | ^^^^ The component is created during render here
+  83 |
+  84 |   const InpField = ({ k, ...props }) => (
+  85 |     <input                                                                                 react-hooks/static-components
+  154:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  152 |         </F>
+  153 |         <F label="After ??? Outcome Description*" err={errors.afterDesc}>
+> 154 |           <InpField k="afterDesc" placeholder="e.g. All lights repaired and commissioned" />
+      |            ^^^^^^^^ This component is created during render
+  155 |         </F>
+  156 |       </div>
+  157 |
+
+  82 |   )
+  83 |
+> 84 |   const InpField = ({ k, ...props }) => (
+     |                    ^^^^^^^^^^^^^^^^^^^^^^
+> 85 |     <input 
+     | ^^^^^^^^^^^
+> 86 |       className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+     | ^^^^^^^^^^^
+> 87 |       value={form[k]} 
+     | ^^^^^^^^^^^
+> 88 |       onChange={e => set(k, e.target.value)} 
+     | ^^^^^^^^^^^
+> 89 |       {...props} 
+     | ^^^^^^^^^^^
+> 90 |     />
+     | ^^^^^^^^^^^
+> 91 |   )
+     | ^^^^ The component is created during render here
+  92 |
+  93 |   const SelField = ({ k, children, ...props }) => (
+  94 |     <select                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/static-components
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\Settings.jsx
+  12:10  error  'loading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\Voters.jsx
+  203:6  warning  React Hook useEffect has missing dependencies: 'filters' and 'page'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\admin\SuperAdminBooths.jsx
+  36:52  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  34 |           <tbody>
+  35 |             {(Array.isArray(booths) ? booths : []).slice(0, 100).map(booth => (
+> 36 |               <tr key={booth.partId || booth.id || Math.random()} style={{ borderBottom: '1px solid var(--border)' }}>
+     |                                                    ^^^^^^^^^^^^^ Cannot call impure function
+  37 |                 <td style={{ padding: '1rem' }}>{booth.partId}</td>
+  38 |                 <td style={{ padding: '1rem' }}>{booth.partNumber}</td>
+  39 |                 <td style={{ padding: '1rem' }}>{booth.partName}</td>  react-hooks/purity
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\admin\SuperAdminDashboard.jsx
+   34:40  error  'Icon' is defined but never used  no-unused-vars
+  150:89  error  '_' is defined but never used     no-unused-vars
+  150:92  error  Empty block statement             no-empty
+  154:87  error  '_' is defined but never used     no-unused-vars
+  154:90  error  Empty block statement             no-empty
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\admin\SuperAdminSegmentation.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\src\pages\admin\SuperAdminVoters.jsx
+  13:79  error    '_' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  no-unused-vars
+  20:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  18 |
+  19 |   useEffect(() => {
+> 20 |     fetchVoters();
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |   }, []);
+  22 |
+  23 |   const handleFilterChange = (e) => {  react-hooks/set-state-in-effect
+  21:6   warning  React Hook useEffect has a missing dependency: 'fetchVoters'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-hooks/exhaustive-deps
+
+??? 44 problems (39 errors, 5 warnings)
+

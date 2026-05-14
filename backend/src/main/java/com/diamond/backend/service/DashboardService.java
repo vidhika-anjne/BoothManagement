@@ -42,8 +42,8 @@ public class DashboardService {
     public void seedDemoUsers() {
         try {
             if (userRepository.count() == 0) {
-                userRepository.save(new User("Master Admin", "admin@booth.gov", "password", "Senior Admin", "B-142"));
-                userRepository.save(new User("Area Officer", "officer@booth.gov", "password", "Field Supervisor", "B-141"));
+                userRepository.save(new User("Admin", "admin@booth.gov", "admin123", "Admin", 31850L));
+                userRepository.save(new User("Booth Officer", "officer@booth.gov", "booth123", "Staff", 31850L));
             } else {
                 // Force sync names and emails for existing records to ensure 100% dynamic behavior
                 jdbc.execute("UPDATE users SET name = 'Master Admin', email = 'admin@booth.gov' WHERE email = 'admin@booth.gov' OR email = 'neha@boothmanagement.gov'");
@@ -89,7 +89,7 @@ public class DashboardService {
                 "    MIN(age) AS sort_order " +
                 "  FROM voter_profiles " +
                 "  WHERE age IS NOT NULL " +
-                "  GROUP BY 1" +
+                "  GROUP BY label " +
                 ") t ORDER BY sort_order";
             return jdbc.query(sql, (rs, i) -> {
                 Map<String, Object> m = new LinkedHashMap<>();
@@ -148,19 +148,19 @@ public class DashboardService {
     public List<Map<String, Object>> getBoothPerformance() {
         // Metrics: Resolution Rate (Resolved/Total), Issue Load (Total Issues), Performance Score (Weighted)
         String sql = "SELECT " +
-                     "  v.booth_id as booth, " +
-                     "  COALESCE(MAX(v.part_name), 'Booth ' || v.booth_id) as boothName, " +
-                     "  COUNT(*) as total_issues, " +
+                     "  v.part_id as partId, " +
+                     "  COALESCE(MAX(v.part_name), 'Part ' || v.part_id) as boothName, " +
+                     "  COUNT(*) as total_voters, " +
                      "  SUM(CASE WHEN v.mobile_number IS NOT NULL THEN 1 ELSE 0 END) as resolved_issues, " +
-                     "  (SELECT COUNT(*) FROM booth_feedback f WHERE f.booth_id = v.booth_id) as feedback_count " +
+                     "  (SELECT COUNT(*) FROM booth_feedback f WHERE f.booth_id = CAST(v.part_id AS TEXT)) as feedback_count " +
                      "FROM voter_profiles v " +
                      "WHERE disability = true OR minority = true OR student = true OR bpl = true OR government_employee = true " +
-                     "GROUP BY v.booth_id " +
-                     "ORDER BY total_issues DESC " +
+                     "GROUP BY v.part_id " +
+                     "ORDER BY total_voters DESC " +
                      "LIMIT 10";
 
         return jdbc.query(sql, (rs, i) -> {
-            long total = rs.getLong("total_issues");
+            long total = rs.getLong("total_voters");
             long resolved = rs.getLong("resolved_issues");
             long feedback = rs.getLong("feedback_count");
             
@@ -175,7 +175,7 @@ public class DashboardService {
             score = Math.max(0, Math.min(100, score + (jitter * 0.8)));
 
             Map<String, Object> m = new LinkedHashMap<>();
-            m.put("booth", rs.getString("booth"));
+            m.put("booth", rs.getLong("partId"));
             m.put("boothName", rs.getString("boothName"));
             m.put("resolutionRate", Math.round(resRate * 10.0) / 10.0);
             m.put("issueLoad", total);
@@ -184,7 +184,6 @@ public class DashboardService {
         });
     }
 
-
     // ── 5. Issue Distribution ────────────────────────────────────────────────
     public Map<String, Object> getIssueDistribution() {
         return getIssueDistribution(false);
@@ -192,59 +191,49 @@ public class DashboardService {
 
     public Map<String, Object> getIssueDistribution(boolean detailed) {
         if (!detailed) {
-            // Summary view (existing logic)
-            String sql = "SELECT " +
-                         "  SUM(CASE WHEN disability = true THEN 1 ELSE 0 END) AS disability, " +
-                         "  SUM(CASE WHEN minority = true THEN 1 ELSE 0 END)   AS minority, " +
-                         "  SUM(CASE WHEN student = true THEN 1 ELSE 0 END)    AS student, " +
-                         "  SUM(CASE WHEN bpl = true THEN 1 ELSE 0 END)        AS bpl, " +
-                         "  SUM(CASE WHEN government_employee = true THEN 1 ELSE 0 END) AS govt_employee, " +
-                         "  COUNT(*) AS total " +
-                         "FROM voter_profiles";
+            // Summary view: Group by real 'domain' field from voter_profiles
+            String sql = "SELECT domain AS label, COUNT(*) AS count, " +
+                         "SUM(CASE WHEN mobile_number IS NOT NULL THEN 1 ELSE 0 END) AS resolved " +
+                         "FROM voter_profiles " +
+                         "WHERE domain IS NOT NULL " +
+                         "GROUP BY domain " +
+                         "ORDER BY count DESC " +
+                         "LIMIT 5";
 
-            Map<String, Object> row;
+            List<Map<String, Object>> rows;
             try {
-                row = jdbc.queryForMap(sql);
+                rows = jdbc.queryForList(sql);
             } catch (Exception e) {
-                // Return empty data if table is empty or query fails
-                Map<String, Object> emptyResult = new LinkedHashMap<>();
-                emptyResult.put("labels", List.of("Water Supply", "Roads & Infra", "Electricity", "Public Health", "Public Safety"));
-                emptyResult.put("open", List.of(0L, 0L, 0L, 0L, 0L));
-                emptyResult.put("resolved", List.of(0L, 0L, 0L, 0L, 0L));
-                emptyResult.put("totalVoters", 0L);
-                return emptyResult;
+                return Map.of("labels", List.of(), "open", List.of(), "resolved", List.of(), "totalVoters", 0L);
             }
-            List<String> labels = List.of("Water Supply", "Roads & Infra", "Electricity", "Public Health", "Public Safety");
+
+            List<String> labels = new ArrayList<>();
             List<Long> open = new ArrayList<>();
             List<Long> resolved = new ArrayList<>();
-            String[] keys = {"disability", "minority", "student", "bpl", "govt_employee"};
-            long total = ((Number) row.get("total")).longValue();
-            for (String k : keys) {
-                long affected = row.get(k) != null ? ((Number) row.get(k)).longValue() : 0L;
-                long openCount = (long) (affected * 0.35);
-                long resolvedCount = affected - openCount;
-                open.add(openCount);
-                resolved.add(resolvedCount);
+            long totalVotersCount = count("SELECT COUNT(*) FROM voter_profiles");
+
+            for (Map<String, Object> row : rows) {
+                String label = row.get("label").toString();
+                long count = ((Number) row.get("count")).longValue();
+                long res = ((Number) row.get("resolved")).longValue();
+                
+                labels.add(label);
+                resolved.add(res);
+                open.add(count - res);
             }
+
             Map<String, Object> result = new LinkedHashMap<>();
             result.put("labels", labels);
             result.put("open", open);
             result.put("resolved", resolved);
-            result.put("totalVoters", total);
+            result.put("totalVoters", totalVotersCount);
             return result;
         }
 
         // Detailed view
         String sql = "SELECT " +
-                     "  COALESCE(booth_id, 'B-' || CAST(part_number AS TEXT)) as booth, " +
-                     "  CASE " +
-                     "    WHEN disability = true THEN 'Water Supply' " +
-                     "    WHEN minority = true THEN 'Roads & Infra' " +
-                     "    WHEN student = true THEN 'Electricity' " +
-                     "    WHEN bpl = true THEN 'Public Health' " +
-                     "    WHEN government_employee = true THEN 'Public Safety' " +
-                     "    ELSE 'General' " +
-                     "  END as type, " +
+                     "  'Part ' || CAST(part_id AS TEXT) as booth, " +
+                     "  domain as type, " +
                      "  CASE WHEN mobile_number IS NULL THEN 'Open' ELSE 'Resolved' END as status, " +
                      "  CASE " +
                      "    WHEN (bpl = true AND age > 60) OR (disability = true AND age < 25) THEN 'High' " +
@@ -253,8 +242,8 @@ public class DashboardService {
                      "  END as severity, " +
                      "  COUNT(*) as count " +
                      "FROM voter_profiles " +
-                     "WHERE disability = true OR minority = true OR student = true OR bpl = true OR government_employee = true " +
-                     "GROUP BY 1, 2, 3, 4";
+                     "WHERE domain IS NOT NULL " +
+                     "GROUP BY booth, type, status, severity";
 
         List<Map<String, Object>> rows = jdbc.query(sql, (rs, i) -> {
             Map<String, Object> m = new LinkedHashMap<>();
@@ -266,9 +255,9 @@ public class DashboardService {
             return m;
         });
 
-        Map<String, Object> result = new LinkedHashMap<>();
-        result.put("detailedData", rows);
-        return result;
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("detailedData", rows);
+        return response;
     }
 
     // ── 6. Feedback ─────────────────────────────────────────────────────────
@@ -284,14 +273,14 @@ public class DashboardService {
     }
 
     // ── 7. User Profile & Dynamic Login ─────────────────────────────────────
-    public User getOrCreateUser(String email, String password, String boothId) {
+    public User getOrCreateUser(String email, String password, Long partId) {
         return userRepository.findByEmail(email).orElseGet(() -> {
             User newUser = new User(
                 email.split("@")[0], // Default name from email
                 email,
                 password,
                 "Admin",
-                boothId != null ? boothId : "B-100"
+                partId != null ? partId : 31850L
             );
             return userRepository.save(newUser);
         });
@@ -305,7 +294,7 @@ public class DashboardService {
                     Map<String, Object> m = new LinkedHashMap<>();
                     m.put("name", u.getName());
                     m.put("role", u.getRole());
-                    m.put("boothId", u.getBoothId());
+                    m.put("boothId", u.getPartId() != null ? "Part " + u.getPartId() : "N/A");
                     m.put("email", u.getEmail());
                     return m;
                 })
@@ -319,7 +308,7 @@ public class DashboardService {
         Map<String, Object> m = new LinkedHashMap<>();
         m.put("name", "Booth Officer");
         m.put("role", "Staff");
-        m.put("boothId", "B-000");
+        m.put("boothId", "Part 31850");
         m.put("email", email);
         return m;
     }

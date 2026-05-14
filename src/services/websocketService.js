@@ -3,52 +3,68 @@ import Stomp from 'stompjs';
 
 let stompClient = null;
 let connected = false;
-let reconnectTimer = null;
 const subscribers = {};
 
-export function connectWebSocket(onDashboard, onFeedback) {
-  if (connected) return;
-
-  try {
-    const socket = new SockJS('http://localhost:8081/ws');
-    stompClient = Stomp.over(socket);
-    if (stompClient) {
-      stompClient.debug = null; // silence STOMP debug logs
-    } else {
-      console.warn('Stomp.over(socket) returned null');
+export const websocketService = {
+  connect: (onConnected) => {
+    if (connected) {
+      if (onConnected) onConnected();
       return;
     }
 
+    const socket = new SockJS('http://localhost:8081/ws');
+    stompClient = Stomp.over(socket);
+    stompClient.debug = null;
+
     stompClient.connect({}, () => {
       connected = true;
-      clearInterval(reconnectTimer);
-
-      if (onDashboard) {
-        subscribers['/topic/dashboard'] = stompClient.subscribe('/topic/dashboard', (msg) => {
-          try { onDashboard(JSON.parse(msg.body)); } catch (e) { /* ignore */ }
-        });
-      }
-      if (onFeedback) {
-        subscribers['/topic/feedback'] = stompClient.subscribe('/topic/feedback', (msg) => {
-          try { onFeedback(JSON.parse(msg.body)); } catch (e) { /* ignore */ }
-        });
-      }
-    }, () => {
+      console.log('WebSocket Connected');
+      if (onConnected) onConnected();
+    }, (err) => {
+      console.error('WebSocket Error:', err);
       connected = false;
+      // Reconnect after 5s
+      setTimeout(() => websocketService.connect(onConnected), 5000);
     });
-  } catch (e) {
+  },
+
+  subscribe: (topic, callback) => {
+    const internalSubscribe = () => {
+      if (!stompClient || !stompClient.connected) {
+        // Queue fallback if somehow called directly without check
+        setTimeout(internalSubscribe, 500);
+        return;
+      }
+      if (subscribers[topic]) {
+        subscribers[topic].unsubscribe();
+      }
+      subscribers[topic] = stompClient.subscribe(topic, (msg) => {
+        try {
+          callback(msg.body.startsWith('{') ? JSON.parse(msg.body) : msg.body);
+        } catch {
+          callback(msg.body);
+        }
+      });
+    };
+
+    if (connected && stompClient && stompClient.connected) {
+      internalSubscribe();
+    } else {
+      websocketService.connect(() => internalSubscribe());
+    }
+
+    return () => {
+      if (subscribers[topic]) {
+        subscribers[topic].unsubscribe();
+        delete subscribers[topic];
+      }
+    };
+  },
+
+  disconnect: () => {
+    if (stompClient && connected) {
+      stompClient.disconnect();
+    }
     connected = false;
   }
-}
-
-export function disconnectWebSocket() {
-  if (stompClient && connected) {
-    try { stompClient.disconnect(); } catch (e) { /* ignore */ }
-  }
-  connected = false;
-  if (reconnectTimer) clearInterval(reconnectTimer);
-}
-
-export function isConnected() {
-  return connected;
-}
+};

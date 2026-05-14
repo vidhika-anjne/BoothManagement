@@ -6,8 +6,9 @@ import {
 import { Bar as BarChartJS, Doughnut } from 'react-chartjs-2'
 import {
   Users, MapPin, BookOpen, MessageSquare,
-  ArrowUpRight, RefreshCw, Send, ChevronDown, 
-  Wifi, WifiOff, TrendingUp, Activity, Trash2
+  ArrowUpRight, RefreshCw, ChevronDown, 
+  TrendingUp, Activity, Wifi, WifiOff, 
+  Send, Trash2
 } from 'lucide-react'
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis,
@@ -15,7 +16,7 @@ import {
 } from 'recharts'
 import { useApp } from '../context/AppContext.jsx'
 import dashboardService from '../services/dashboardService.js'
-import { connectWebSocket, disconnectWebSocket } from '../services/websocketService.js'
+import { websocketService } from '../services/websocketService.js'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend)
 
@@ -98,11 +99,6 @@ export default function Dashboard() {
   const [boothPerformance, setBoothPerformance] = useState([])
   const [issueData,     setIssueData]     = useState(null)
   const [issueFilter,   setIssueFilter]   = useState('summary') // 'summary' or 'detailed'
-  const [feedbackList,  setFeedbackList]  = useState([])
-  const [fbAuthor,      setFbAuthor]      = useState('')
-  const [fbMessage,     setFbMessage]     = useState('')
-  const [fbBooth,       setFbBooth]       = useState('')
-  const [fbSubmitting,  setFbSubmitting]  = useState(false)
   const [wsConnected,   setWsConnected]   = useState(false)
   const [loading,       setLoading]       = useState(true)
   const pollRef = useRef(null)
@@ -110,17 +106,15 @@ export default function Dashboard() {
   // ── Data fetchers ──────────────────────────────────────────────────────────
   const fetchAll = useCallback(async () => {
     try {
-      const [voters, parts, perf, fb] = await Promise.all([
+      const [voters, parts, perf] = await Promise.all([
         dashboardService.getStats(),
         dashboardService.getBoothParts(),
-        dashboardService.getBoothPerformance(),
-        dashboardService.getFeedback()
+        dashboardService.getBoothPerformance()
       ])
-      setStats(voters) // Assuming 'stats' is the correct state for 'voters'
+      setStats(voters)
       setBoothParts(parts)
       setBoothPerformance(perf)
-      setFeedbackList(fb)
-    } catch (e) {
+    } catch {
       showToast('Failed to load dashboard data — retrying…')
     } finally {
       setLoading(false)
@@ -140,7 +134,7 @@ export default function Dashboard() {
     try {
       const data = await dashboardService.getVoterSegments(filter)
       setSegments(data)
-    } catch (e) { /* fallback handled by poll */ }
+    } catch { /* fallback handled by poll */ }
   }, [])
 
   // ── WebSocket + fallback poll ──────────────────────────────────────────────
@@ -148,15 +142,11 @@ export default function Dashboard() {
     fetchAll()
     fetchSegments(segFilter)
 
-    connectWebSocket(
-      (payload) => { 
-        if (payload.stats) setStats(payload.stats);
-        if (payload.performance) setBoothPerformance(payload.performance);
-        setWsConnected(true);
-      },
-      (freshFeedback) => { setFeedbackList(freshFeedback); setWsConnected(true) },
-    )
-    setWsConnected(true)
+    const unsubDashboard = websocketService.subscribe('/topic/dashboard', (payload) => {
+      if (payload.stats) setStats(payload.stats);
+      if (payload.performance) setBoothPerformance(payload.performance);
+      setWsConnected(true);
+    });
 
     // Fallback: poll every 5 s
     pollRef.current = setInterval(() => {
@@ -164,7 +154,7 @@ export default function Dashboard() {
     }, 5000)
 
     return () => {
-      disconnectWebSocket()
+      unsubDashboard();
       clearInterval(pollRef.current)
     }
   }, []) // eslint-disable-line
@@ -173,39 +163,6 @@ export default function Dashboard() {
   useEffect(() => { fetchSegments(segFilter) }, [segFilter, fetchSegments])
   useEffect(() => { fetchIssues(issueFilter === 'detailed') }, [issueFilter, fetchIssues])
 
-  // ── Feedback Management ───────────────────────────────────────────────────
-  const handleFeedbackSubmit = async (e) => {
-    e.preventDefault()
-    if (!fbMessage.trim()) return
-    setFbSubmitting(true)
-    try {
-      await dashboardService.submitFeedback(
-        fbAuthor || 'Anonymous', 
-        fbMessage, 
-        fbBooth || null
-      )
-      setFbMessage('')
-      setFbAuthor('')
-      setFbBooth('')
-      showToast('Feedback submitted successfully!')
-      const fb = await dashboardService.getFeedback()
-      setFeedbackList(fb)
-    } catch (e) {
-      showToast('Failed to submit feedback.')
-    } finally {
-      setFbSubmitting(false)
-    }
-  }
-
-  const handleDeleteFeedback = async (id) => {
-    try {
-      await dashboardService.deleteFeedback(id)
-      setFeedbackList(prev => prev.filter(item => item.id !== id))
-      showToast('Feedback deleted')
-    } catch (e) {
-      showToast('Failed to delete feedback')
-    }
-  }
 
   // ── Chart data builders ────────────────────────────────────────────────────
   const segChartData = {
@@ -233,13 +190,6 @@ export default function Dashboard() {
     }]
   } : null
 
-  const issueChartColors = [
-    '#3B82F6', // Water -> Blue
-    '#F97316', // Roads -> Orange
-    '#EAB308', // Electricity -> Yellow
-    '#22C55E', // Health -> Green
-    '#EF4444', // Safety -> Red
-  ]
 
   const issueChartData = (issueData && issueData.labels && issueData.labels.length) ? {
     labels: issueData.labels,
@@ -288,7 +238,7 @@ export default function Dashboard() {
             {wsConnected ? <Wifi size={12}/> : <WifiOff size={12}/>}
             {wsConnected ? 'Live' : 'Polling'}
           </span>
-          <button className="btn btn-secondary" onClick={() => { fetchAll(); fetchSegments(segFilter); showToast('Refreshed') }}>
+          <button type="button" className="btn btn-secondary" onClick={() => { fetchAll(); fetchSegments(segFilter); showToast('Refreshed') }}>
             <RefreshCw size={14}/> Refresh
           </button>
         </div>
@@ -393,7 +343,7 @@ export default function Dashboard() {
             {issueFilter === 'summary' ? (
               issueChartData ? (
                 issueData.totalVoters > 0 ? (
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="99%" height="99%">
                     <BarChart data={issueChartData.labels.map((l, i) => ({
                       name: l,
                       resolved: issueChartData.datasets[0].data[i],
@@ -513,119 +463,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* ── Feedback Section ── */}
-      <div className="two-col-grid">
-        {/* Submit Feedback */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title" style={{ display:'flex', alignItems:'center', gap:'0.4rem' }}>
-              <MessageSquare size={16} color="#6366f1"/> Submit Feedback
-            </span>
-          </div>
-          <form onSubmit={handleFeedbackSubmit} style={{ display:'flex', flexDirection:'column', gap:'0.75rem', padding:'0.25rem 0' }}>
-            <input
-              type="text"
-              placeholder="Your name (optional)"
-              value={fbAuthor}
-              onChange={e => setFbAuthor(e.target.value)}
-              style={{
-                padding: '0.5rem 0.75rem', borderRadius: '8px',
-                border: '1px solid var(--border)', background: 'var(--surface)',
-                color: 'var(--text)', fontSize: '0.85rem',
-              }}
-            />
-            <input
-              type="text"
-              placeholder="Booth ID (optional)"
-              value={fbBooth}
-              onChange={e => setFbBooth(e.target.value)}
-              style={{
-                padding: '0.5rem 0.75rem', borderRadius: '8px',
-                border: '1px solid var(--border)', background: 'var(--surface)',
-                color: 'var(--text)', fontSize: '0.85rem',
-              }}
-            />
-            <textarea
-              placeholder="Write your feedback here…"
-              value={fbMessage}
-              onChange={e => setFbMessage(e.target.value)}
-              rows={4}
-              required
-              style={{
-                padding: '0.5rem 0.75rem', borderRadius: '8px', resize: 'vertical',
-                border: '1px solid var(--border)', background: 'var(--surface)',
-                color: 'var(--text)', fontSize: '0.85rem', fontFamily: 'inherit',
-              }}
-            />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={fbSubmitting || !fbMessage.trim()}
-              style={{ alignSelf: 'flex-start' }}
-            >
-              <Send size={14}/> {fbSubmitting ? 'Sending…' : 'Submit Feedback'}
-            </button>
-          </form>
-        </div>
-
-        {/* Feedback List (live) */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title" style={{ display:'flex', alignItems:'center', gap:'0.4rem' }}>
-              <TrendingUp size={16} color="#10b981"/> Live Feedback
-              <span style={{
-                fontSize:'0.7rem', background:'rgba(16,185,129,.15)', color:'#10b981',
-                borderRadius:'999px', padding:'0.1rem 0.5rem', marginLeft:'0.3rem'
-              }}>
-                {feedbackList.length}
-              </span>
-            </span>
-          </div>
-          <div style={{ overflowY: 'auto', maxHeight: 270, display:'flex', flexDirection:'column', gap:'0.6rem' }}>
-            {feedbackList.length === 0 && (
-              <div style={{ padding:'1rem', color:'var(--text-muted)', fontSize:'0.85rem', textAlign:'center' }}>
-                No feedback yet. Be the first!
-              </div>
-            )}
-            {feedbackList.map((fb, i) => (
-              <div key={fb.id || i} style={{
-                padding: '0.65rem 0.8rem',
-                background: 'var(--surface)',
-                borderRadius: '10px',
-                border: '1px solid var(--border)',
-                borderLeft: '4px solid var(--primary)',
-                position: 'relative',
-                group: 'true'
-              }} className="feedback-item">
-                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'0.3rem' }}>
-                  <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text-primary)' }}>
-                    {fb.author || 'Anonymous'}
-                    {fb.boothId && <span style={{ fontWeight:400, color:'var(--text-muted)', marginLeft:'0.4rem', fontSize:'0.75rem' }}>· Booth {fb.boothId}</span>}
-                  </span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                      {fb.createdAt ? new Date(fb.createdAt).toLocaleString('en-IN', { hour:'2-digit', minute:'2-digit' }) : '—'}
-                    </span>
-                    <button 
-                      onClick={() => handleDeleteFeedback(fb.id)}
-                      className="delete-fb-btn"
-                      style={{ 
-                        border:'none', background:'none', padding:0, 
-                        color: 'var(--danger)', cursor:'pointer', opacity: 0.6,
-                        display: 'flex', alignItems: 'center'
-                      }}
-                      title="Delete Feedback"
-                    >
-                      <Trash2 size={13} />
-                    </button>
-                  </div>
-                </div>
-                <div style={{ fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{fb.message}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

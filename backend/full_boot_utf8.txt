@@ -1,0 +1,2093 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< com.diamond:backend >-------------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ backend ---
+[INFO] Deleting C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend\target
+[INFO] 
+[INFO] >>> spring-boot:3.4.3:run (default-cli) > test-compile @ backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ backend ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 10 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 37 source files with javac [debug parameters release 17] to target\classes
+[INFO] /C:/Users/rajku/OneDrive/Documents/Team Diamond/Booth Management/BoothManagement/backend/src/main/java/com/diamond/backend/service/VoterDataLoader.java: C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend\src\main\java\com\diamond\backend\service\VoterDataLoader.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/rajku/OneDrive/Documents/Team Diamond/Booth Management/BoothManagement/backend/src/main/java/com/diamond/backend/service/VoterDataLoader.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ backend ---
+[INFO] skip non existing resourceDirectory C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.4.3:run (default-cli) < test-compile @ backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.3:run (default-cli) @ backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.3)
+
+2026-03-25T15:37:25.974+05:30  INFO 19988 --- [backend] [  restartedMain] com.diamond.backend.BackendApplication   : Starting BackendApplication using Java 21.0.8 with PID 19988 (C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend\target\classes started by rajku in C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend)
+2026-03-25T15:37:25.976+05:30  INFO 19988 --- [backend] [  restartedMain] com.diamond.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-03-25T15:37:26.022+05:30  INFO 19988 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-25T15:37:26.022+05:30  INFO 19988 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-25T15:37:26.672+05:30  INFO 19988 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-25T15:37:26.734+05:30  INFO 19988 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 7 JPA repository interfaces.
+2026-03-25T15:37:27.253+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-03-25T15:37:27.267+05:30  INFO 19988 --- [backend] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-25T15:37:27.267+05:30  INFO 19988 --- [backend] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-03-25T15:37:27.300+05:30  INFO 19988 --- [backend] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-25T15:37:27.301+05:30  INFO 19988 --- [backend] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1277 ms
+2026-03-25T15:37:27.422+05:30  INFO 19988 --- [backend] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-25T15:37:27.474+05:30  INFO 19988 --- [backend] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-03-25T15:37:27.501+05:30  INFO 19988 --- [backend] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-25T15:37:27.738+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-25T15:37:27.764+05:30  INFO 19988 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-25T15:37:27.928+05:30  INFO 19988 --- [backend] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5a3a16a5
+2026-03-25T15:37:27.930+05:30  INFO 19988 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-25T15:37:27.995+05:30  INFO 19988 --- [backend] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 18.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-25T15:37:28.828+05:30  INFO 19988 --- [backend] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    set client_min_messages = WARNING
+Hibernate: 
+    alter table if exists booth_sections 
+       drop constraint if exists FKh0xai4ktirxok4abssxdkx5j6
+Hibernate: 
+    alter table if exists scheme_beneficiaries 
+       drop constraint if exists FKk14nypd6wpy5n41x1oxshnaue
+Hibernate: 
+    alter table if exists scheme_genders 
+       drop constraint if exists FKnuvdcehgw3s0peqde7u2qgsb2
+Hibernate: 
+    drop table if exists booth_feedback cascade
+Hibernate: 
+    drop table if exists booth_parts cascade
+Hibernate: 
+    drop table if exists booth_sections cascade
+Hibernate: 
+    drop table if exists complaints cascade
+Hibernate: 
+    drop table if exists scheme_beneficiaries cascade
+Hibernate: 
+    drop table if exists scheme_genders cascade
+Hibernate: 
+    drop table if exists schemes cascade
+Hibernate: 
+    drop table if exists users cascade
+Hibernate: 
+    drop table if exists voter_profiles cascade
+Hibernate: 
+    create table booth_feedback (
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        author varchar(255) not null,
+        booth_id varchar(255),
+        message TEXT not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table booth_parts (
+        ac_number integer,
+        part_number integer not null,
+        id bigint generated by default as identity,
+        part_id bigint not null,
+        ac_name varchar(255),
+        district_id varchar(255),
+        district_name varchar(255),
+        part_name varchar(255) not null,
+        polling_station_address TEXT,
+        polling_station_name varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table booth_sections (
+        section_id integer not null,
+        booth_part_id bigint not null,
+        id bigint generated by default as identity,
+        section_name TEXT not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table complaints (
+        ai_processed boolean,
+        ai_score integer,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        resolved_at timestamp(6),
+        updated_at timestamp(6),
+        ac varchar(255),
+        ai_category varchar(255),
+        ai_priority varchar(255),
+        ai_reason TEXT,
+        ai_summary TEXT,
+        booth_id varchar(255),
+        category varchar(255),
+        description TEXT not null,
+        details TEXT,
+        duration varchar(255),
+        impact varchar(255),
+        part_name varchar(255),
+        resolution_proof_url varchar(255),
+        section varchar(255),
+        status varchar(255),
+        user_image_url varchar(255),
+        voter_id varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table scheme_beneficiaries (
+        scheme_id bigint not null,
+        beneficiary varchar(255)
+    )
+Hibernate: 
+    create table scheme_genders (
+        scheme_id bigint not null,
+        gender varchar(255)
+    )
+Hibernate: 
+    create table schemes (
+        age_max integer,
+        age_min integer,
+        amount_per_installment integer,
+        amount_per_year integer,
+        installments integer,
+        id bigint generated by default as identity,
+        abbreviation varchar(255),
+        beneficiaries_text TEXT,
+        ministry varchar(255),
+        objective_text TEXT,
+        scheme_name varchar(255) not null,
+        scheme_type varchar(255),
+        tenure_text varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        id bigint generated by default as identity,
+        part_id bigint,
+        email varchar(255) not null unique,
+        name varchar(255),
+        password varchar(255),
+        role varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table voter_profiles (
+        age integer,
+        annual_income integer,
+        bpl boolean,
+        disability boolean,
+        government_employee boolean,
+        minority boolean,
+        part_number integer,
+        student boolean,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        part_id bigint not null,
+        updated_at timestamp(6),
+        area varchar(255) not null check (area in ('Urban','Rural')),
+        assembly_constituency_ac varchar(255) not null,
+        caste_category varchar(255) not null check (caste_category in ('General','OBC','SC','ST','PVTG','DNT')),
+        district varchar(255) not null,
+        domain varchar(255),
+        employment_status varchar(255) check (employment_status in ('Employed','Unemployed','Self_Employed')),
+        gender varchar(255) not null check (gender in ('Male','Female','Non_Binary','Other')),
+        house_number varchar(255),
+        issue varchar(255),
+        marital_status varchar(255) check (marital_status in ('Single','Married','Widowed','Divorced')),
+        mobile_number varchar(255) unique,
+        name varchar(255) not null,
+        occupation varchar(255) check (occupation in ('EX_SERVICEMEN','SAFAI_KARAMCHARI','HEALTH_WORKER','STREET_VENDOR','UNORGANIZED_WORKER','ARTIST','SPORTSPERSON','JOURNALIST','TEA_AND_EX_TEA_GARDEN_TRIBES','COIR_WORKER','KHADI_ARTISAN','FARMER','FISHERMEN','ARTISANS_SPINNERS_AND_WEAVERS','TEACHER_OR_FACULTY','CONSTRUCTION_WORKER','ORGANIZED_WORKER')),
+        part_name varchar(255),
+        section varchar(255),
+        status varchar(255) not null check (status in ('APPLIED','PENDING','APPROVED','REJECTED')),
+        voter_id varchar(255) not null unique,
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists booth_sections 
+       add constraint FKh0xai4ktirxok4abssxdkx5j6 
+       foreign key (booth_part_id) 
+       references booth_parts
+Hibernate: 
+    alter table if exists scheme_beneficiaries 
+       add constraint FKk14nypd6wpy5n41x1oxshnaue 
+       foreign key (scheme_id) 
+       references schemes
+Hibernate: 
+    alter table if exists scheme_genders 
+       add constraint FKnuvdcehgw3s0peqde7u2qgsb2 
+       foreign key (scheme_id) 
+       references schemes
+2026-03-25T15:37:29.055+05:30  INFO 19988 --- [backend] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: 
+    select
+        count(*) 
+    from
+        users u1_0
+Hibernate: 
+    insert 
+    into
+        users
+        (email, name, part_id, password, role) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, name, part_id, password, role) 
+    values
+        (?, ?, ?, ?, ?)
+2026-03-25T15:37:29.649+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-25T15:37:30.241+05:30  WARN 19988 --- [backend] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-25T15:37:30.468+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-25T15:37:30.479+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2026-03-25T15:37:30.479+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@41cd718a]]
+2026-03-25T15:37:30.481+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-03-25T15:37:30.501+05:30  INFO 19988 --- [backend] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-03-25T15:37:30.509+05:30  INFO 19988 --- [backend] [  restartedMain] com.diamond.backend.BackendApplication   : Started BackendApplication in 4.889 seconds (process running for 5.18)
+[BoothDataLoader] Data already confirmed in PostgreSQL. skipping heavy startup tasks.
+Hibernate: 
+    update
+        voter_profiles v1_0 
+    set
+        issue=null 
+    where
+        v1_0.issue is not null
+[VoterDataLoader] Cleared issues from 0 existing voter records.
+Hibernate: 
+    select
+        count(*) 
+    from
+        voter_profiles v1_0
+[VoterDataLoader] No voter data found. Forcing seed from voters_demo.json...
+[VoterDataLoader] Seeding Phase 4 domain data from voters_demo.json...
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        voter_profiles
+        (age, annual_income, area, assembly_constituency_ac, caste_category, created_at, district, domain, employment_status, gender, house_number, bpl, disability, government_employee, minority, student, issue, marital_status, mobile_number, name, occupation, part_id, part_name, part_number, section, status, updated_at, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[VoterDataLoader] Phase 4 seeding completed. Loaded 50 records.
+Hibernate: 
+    select
+        count(*) 
+    from
+        complaints c1_0
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        complaints
+        (ac, ai_category, ai_priority, ai_processed, ai_reason, ai_score, ai_summary, booth_id, category, created_at, description, details, duration, impact, part_name, resolution_proof_url, resolved_at, section, status, updated_at, user_image_url, voter_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[ComplaintDataLoader] Successfully seeded 20 demo complaints.
+[SchemeDataLoader] Loading schemes from JSON...
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.abbreviation,
+        s1_0.age_max,
+        s1_0.age_min,
+        s1_0.amount_per_installment,
+        s1_0.amount_per_year,
+        s1_0.beneficiaries_text,
+        s1_0.installments,
+        s1_0.ministry,
+        s1_0.objective_text,
+        s1_0.scheme_name,
+        s1_0.tenure_text,
+        s1_0.scheme_type 
+    from
+        schemes s1_0
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-25T15:37:30.707+05:30  INFO 19988 --- [backend] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-25T15:37:30.707+05:30  INFO 19988 --- [backend] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-25T15:37:30.708+05:30  INFO 19988 --- [backend] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        schemes
+        (abbreviation, age_max, age_min, amount_per_installment, amount_per_year, beneficiaries_text, installments, ministry, objective_text, scheme_name, tenure_text, scheme_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        count(*) 
+    from
+        schemes s1_0
+[SchemeDataLoader] Schemes loaded successfully! Total: 50
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_beneficiaries
+        (scheme_id, beneficiary) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        scheme_genders
+        (scheme_id, gender) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        count(*) 
+    from
+        schemes s1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        booth_feedback f1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        schemes s1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        booth_feedback f1_0
+Hibernate: 
+    select
+        f1_0.id,
+        f1_0.author,
+        f1_0.booth_id,
+        f1_0.created_at,
+        f1_0.message 
+    from
+        booth_feedback f1_0 
+    order by
+        f1_0.created_at desc
+Hibernate: 
+    select
+        count(*) 
+    from
+        schemes s1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        booth_feedback f1_0
+2026-03-25T15:38:19.868+05:30  WARN 19988 --- [backend] [nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'ac' for method parameter type String is not present]
+Hibernate: 
+    select
+        f1_0.id,
+        f1_0.author,
+        f1_0.booth_id,
+        f1_0.created_at,
+        f1_0.message 
+    from
+        booth_feedback f1_0 
+    order by
+        f1_0.created_at desc
+Hibernate: 
+    select
+        count(*) 
+    from
+        schemes s1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        booth_feedback f1_0
+2026-03-25T15:38:19.890+05:30  WARN 19988 --- [backend] [nio-8081-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'ac' for method parameter type String is not present]

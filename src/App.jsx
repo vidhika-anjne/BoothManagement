@@ -11,26 +11,18 @@ import IntelligentTriage from './components/complaints/IntelligentTriage.jsx'
 const Dashboard     = lazy(() => import('./pages/Dashboard.jsx'))
 const BoothMap      = lazy(() => import('./pages/BoothMap.jsx'))
 const Voters        = lazy(() => import('./pages/Voters.jsx'))
-const Issues        = lazy(() => import('./pages/Issues.jsx'))
-const Campaigns     = lazy(() => import('./pages/Campaigns.jsx'))
-const AIInsights    = lazy(() => import('./pages/AIInsights.jsx'))
 const Communication = lazy(() => import('./pages/Communication.jsx'))
 const Notifications = lazy(() => import('./pages/Notifications.jsx'))
 const Settings      = lazy(() => import('./pages/Settings.jsx'))
-const BeneficiaryLinkage = lazy(() => import('./pages/BeneficiaryLinkage.jsx'))
 // const IntelligentTriage = lazy(() => import('./components/complaints/IntelligentTriage.jsx'))
 
 const PAGE_MAP = {
   dashboard:     Dashboard,
   boothmap:      BoothMap,
   voters:        Voters,
-  issues:        Issues,
-  campaigns:     Campaigns,
-  aiinsights:    AIInsights,
   communication: Communication,
   notifications: Notifications,
   settings:      Settings,
-  beneficiaries: BeneficiaryLinkage,
   triage:        IntelligentTriage,
 }
 

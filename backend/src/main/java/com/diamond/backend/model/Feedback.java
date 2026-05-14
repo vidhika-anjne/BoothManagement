@@ -18,7 +18,7 @@ public class Feedback {
     private String message;
 
     @Column(name = "booth_id")
-    private String boothId;
+    private String booth_id;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -26,10 +26,10 @@ public class Feedback {
     // Constructors
     public Feedback() {}
 
-    public Feedback(String author, String message, String boothId) {
+    public Feedback(String author, String message, String booth_id) {
         this.author = author;
         this.message = message;
-        this.boothId = boothId;
+        this.booth_id = booth_id;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -43,8 +43,8 @@ public class Feedback {
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
-    public String getBoothId() { return boothId; }
-    public void setBoothId(String boothId) { this.boothId = boothId; }
+    public String getBooth_id() { return booth_id; }
+    public void setBooth_id(String booth_id) { this.booth_id = booth_id; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

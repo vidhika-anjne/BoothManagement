@@ -23,7 +23,7 @@ export default function AdminSignIn({ onSignIn }) {
         onSignIn(data.user);
         showToast(`Welcome back, ${data.user.name}!`);
         navigate('dashboard');
-      } catch (err) {
+      } catch {
         setError('Invalid credentials. Please try again.');
         showToast('Login failed');
       } finally {

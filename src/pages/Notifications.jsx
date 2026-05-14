@@ -23,6 +23,36 @@ const CHANNEL_META = {
   Voice:    { color: '#f59e0b', bg: 'rgba(245,158,11,.1)'  },
 }
 
+// ── Helpers (static components) ─────────────────────────────────────────────
+const F = ({ label, err, hint, children, full }) => (
+  <div className={`notif-cf-field${full ? ' full' : ''}`}>
+    <label>{label}</label>
+    {children}
+    {err  && <span className="notif-cf-error">{err}</span>}
+    {hint && !err && <span className="notif-cf-hint">{hint}</span>}
+  </div>
+)
+
+const InpField = ({ k, form, errors, set, ...props }) => (
+  <input 
+    className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+    value={form[k]} 
+    onChange={e => set(k, e.target.value)} 
+    {...props} 
+  />
+)
+
+const SelField = ({ k, form, errors, set, children, ...props }) => (
+  <select 
+    className={`notif-cf-input${errors[k] ? ' error' : ''}`}
+    value={form[k]} 
+    onChange={e => set(k, e.target.value)} 
+    {...props}
+  >
+    {children}
+  </select>
+)
+
 // ── Compose form ────────────────────────────────────────────────────────────
 const BLANK = {
   title: '', body: '', issueRef: '', booth: '', type: 'resolved',
@@ -33,6 +63,7 @@ const BLANK = {
 function ComposeForm({ onSubmit, onCancel }) {
   const [form, setForm] = useState(BLANK)
   const [errors, setErrors] = useState({})
+
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
 
   const toggleChannel = (ch) => {
@@ -70,25 +101,6 @@ function ComposeForm({ onSubmit, onCancel }) {
     })
   }
 
-  const F = ({ label, err, hint, children, full }) => (
-    <div className={`notif-cf-field${full ? ' full' : ''}`}>
-      <label>{label}</label>
-      {children}
-      {err  && <span className="notif-cf-error">{err}</span>}
-      {hint && !err && <span className="notif-cf-hint">{hint}</span>}
-    </div>
-  )
-  const inp = (k, props = {}) => (
-    <input className={`notif-cf-input${errors[k] ? ' error' : ''}`}
-      value={form[k]} onChange={e => set(k, e.target.value)} {...props} />
-  )
-  const sel = (k, children, props = {}) => (
-    <select className={`notif-cf-input${errors[k] ? ' error' : ''}`}
-      value={form[k]} onChange={e => set(k, e.target.value)} {...props}>
-      {children}
-    </select>
-  )
-
   return (
     <div className="notif-compose-wrap">
       <div className="notif-compose-title">
@@ -97,32 +109,32 @@ function ComposeForm({ onSubmit, onCancel }) {
 
       <div className="notif-cf-grid">
         <F label="Notification Title*" err={errors.title} full>
-          {inp('title', { placeholder: 'e.g. Road pothole repaired — Booth 141' })}
+          <InpField k="title" form={form} errors={errors} set={set} placeholder="e.g. Road pothole repaired — Booth 141" />
         </F>
         <F label="Type*" err={errors.type}>
-          {sel('type', <>
+          <SelField k="type">
             <option value="resolved">Resolved</option>
             <option value="in-progress">In Progress</option>
             <option value="update">Update</option>
-          </>)}
+          </SelField>
         </F>
         <F label="Booth / Area*" err={errors.booth}>
-          {sel('booth', <>
+          <SelField k="booth">
             <option value="">Select booth</option>
             {BOOTHS.map(b => <option key={b.id} value={b.name}>{b.name}</option>)}
-          </>)}
+          </SelField>
         </F>
         <F label="Linked Issue (optional)">
-          {sel('issueRef', <>
+          <SelField k="issueRef">
             <option value="">None</option>
             {ISSUES.map(i => <option key={i.id} value={i.id}>{i.id} – {i.title.slice(0,40)}</option>)}
-          </>)}
+          </SelField>
         </F>
         <F label="Responsible Department / Agency*" err={errors.resolvedBy}>
-          {inp('resolvedBy', { placeholder: 'e.g. PWD Delhi, MCD Dept.' })}
+          <InpField k="resolvedBy" form={form} errors={errors} set={set} placeholder="e.g. PWD Delhi, MCD Dept." />
         </F>
         <F label="Est. Recipients" hint="Leave blank to auto-calculate from booth">
-          {inp('sentTo', { type: 'number', placeholder: 'e.g. 800' })}
+          <InpField k="sentTo" form={form} errors={errors} set={set} type="number" placeholder="e.g. 800" />
         </F>
         <F label="Message Body*" err={errors.body} full>
           <textarea className={`notif-cf-input${errors.body ? ' error' : ''}`}
@@ -130,14 +142,16 @@ function ComposeForm({ onSubmit, onCancel }) {
             value={form.body} onChange={e => set('body', e.target.value)} />
         </F>
         <F label="Visual Type" hint="Generates the before/after illustration">
-          {sel('visualType', VISUAL_TYPES.map(v => <option key={v}>{v}</option>))}
+          <SelField k="visualType" form={form} errors={errors} set={set}>
+            {VISUAL_TYPES.map(v => <option key={v}>{v}</option>)}
+          </SelField>
         </F>
         <F label="" /> {/* spacer */}
         <F label="Before — Situation Description*" err={errors.beforeDesc}>
-          {inp('beforeDesc', { placeholder: 'e.g. 6 street lights non-functional since Feb 26' })}
+          <InpField k="beforeDesc" form={form} errors={errors} set={set} placeholder="e.g. 6 street lights non-functional since Feb 26" />
         </F>
         <F label="After — Outcome Description*" err={errors.afterDesc}>
-          {inp('afterDesc', { placeholder: 'e.g. All lights repaired and commissioned' })}
+          <InpField k="afterDesc" form={form} errors={errors} set={set} placeholder="e.g. All lights repaired and commissioned" />
         </F>
       </div>
 

@@ -3,18 +3,14 @@ import {
   LayoutDashboard, Map, Users, AlertTriangle, Megaphone,
   BrainCircuit, MessageSquare, Bell, Settings, ChevronLeft,
   ChevronRight, MoreVertical, Zap, Globe, Award, LogOut,
-  FileText, ShieldAlert
+  ShieldAlert
 } from 'lucide-react'
 
 const NAV_ITEMS = [
   { id: 'dashboard',     label: 'Dashboard',     icon: LayoutDashboard, badge: null },
   { id: 'boothmap',      label: 'Booth Map',      icon: Map,             badge: null },
   { id: 'voters',        label: 'Voters',         icon: Users,           badge: null },
-  { id: 'issues',        label: 'Issues',         icon: AlertTriangle,   badge: '5', badgeClass: 'alert' },
   { id: 'triage',        label: 'AI Triage',      icon: ShieldAlert,     badge: 'NEW', badgeClass: 'new' },
-  { id: 'campaigns',     label: 'Campaigns',      icon: Megaphone,       badge: null },
-  { id: 'aiinsights',    label: 'AI Insights',    icon: BrainCircuit,    badge: '3', badgeClass: 'new' },
-  { id: 'beneficiaries', label: 'Beneficiaries',  icon: Award,           badge: null },
   { id: 'communication', label: 'Communication',  icon: MessageSquare,   badge: null },
   { id: 'notifications', label: 'Notifications',  icon: Bell,            badge: '2', badgeClass: 'alert' },
   { id: 'settings',      label: 'Settings',       icon: Settings,        badge: null },
@@ -51,11 +47,11 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         {!collapsed && <div className="nav-section-label">MAIN MENU</div>}
-        {NAV_ITEMS.slice(0, 9).map(item => (
+        {NAV_ITEMS.slice(0, 4).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
         {!collapsed && <div className="nav-section-label">SYSTEM</div>}
-        {NAV_ITEMS.slice(9).map(item => (
+        {NAV_ITEMS.slice(4).map(item => (
           <NavItem key={item.id} item={item} active={activePage === item.id} navigate={navigate} collapsed={collapsed} />
         ))}
       </nav>

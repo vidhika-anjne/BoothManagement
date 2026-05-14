@@ -30,7 +30,12 @@ public class AuthController {
         }
 
         // Dynamic Login: Any credentials work. If not in DB, create it.
-        User user = dashboardService.getOrCreateUser(email, password, boothId);
+        Long pid = null;
+        try {
+            if (boothId != null && !boothId.isEmpty()) pid = Long.valueOf(boothId);
+        } catch (NumberFormatException ignored) {}
+
+        User user = dashboardService.getOrCreateUser(email, password, pid);
 
         session.setAttribute("userEmail", user.getEmail());
         return ResponseEntity.ok(Map.of(
@@ -39,7 +44,7 @@ public class AuthController {
                 "name", user.getName(),
                 "email", user.getEmail(),
                 "role", user.getRole(),
-                "boothId", user.getBoothId()
+                "boothId", user.getPartId() != null ? user.getPartId() : "N/A"
             )
         ));
     }

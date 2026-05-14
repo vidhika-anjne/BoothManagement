@@ -7,7 +7,7 @@ const api = axios.create({ baseURL: BASE, timeout: 10000 });
 export const dashboardService = {
   getStats:           () => api.get('/api/dashboard/stats').then(r => r.data),
   getVoterSegments:   (filter) => api.get('/api/voters/segments', { params: { filter } }).then(r => r.data),
-  getBoothParts:      () => api.get('/api/booths/parts').then(r => r.data),
+  getBoothParts:      () => api.get('/api/dashboard/booth-parts').then(r => r.data),
   getBoothPerformance:() => api.get('/api/booths/performance').then(r => r.data),
   getIssueDistribution:  (detailed = false) => api.get(`/api/issues/distribution${detailed ? '?detailed=true' : ''}`).then(r => r.data),
   submitFeedback:     (author, message, boothId) =>

@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "voter_profiles")
 public class Voter {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,20 +16,25 @@ public class Voter {
     @Column(nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Gender gender;
-
     private Integer age;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
     @Column(nullable = false)
-    private String district;
+    private String district = "Digital District";
 
     @Column(name = "assembly_constituency_ac", nullable = false)
-    private String assemblyConstituencyAc;
+    private String assemblyConstituency = "AC-01";
+
+    @Enumerated(EnumType.STRING)
+    private AreaType area;
+
+    @Enumerated(EnumType.STRING)
+    private CasteCategory casteCategory;
 
     @Column(nullable = false)
     private Long partId;
@@ -39,78 +43,27 @@ public class Voter {
     private Integer partNumber;
     private String partName;
     private String section;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private AreaType area;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CasteCategory casteCategory;
-
-    @Column(name = "disability")
-    private boolean isDisability = false;
-    
-    @Column(name = "minority")
-    private boolean isMinority = false;
-
-    // Education & Economic
-    @Column(name = "student")
-    private boolean isStudent = false;
-    
-    @Column(name = "bpl")
-    private boolean isBpl = false;
-    
-    private Integer annualIncome;
-
-    @Column(name = "mobile_number", unique = true)
     private String mobileNumber;
 
-    // Employment
-    @Enumerated(EnumType.STRING)
-    private EmploymentStatus employmentStatus;
-
-    @Column(name = "government_employee")
-    private boolean isGovernmentEmployee = false;
+    private Boolean disability = false;
+    private Boolean minority = false;
+    private Boolean student = false;
+    private Boolean bpl = false;
+    private Integer annualIncome = 0;
+    private Boolean governmentEmployee = false;
 
     @Enumerated(EnumType.STRING)
     private Occupation occupation;
 
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private String domain;
 
-    @Column(name = "updated_at")
+    @Enumerated(EnumType.STRING)
+    private VoterStatus status = VoterStatus.PENDING;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    // Enums
-    public enum Gender { Male, Female, Non_Binary, Other }
-    public enum MaritalStatus { Single, Married, Widowed, Divorced }
-    public enum AreaType { Urban, Rural }
-    public enum CasteCategory { General, OBC, SC, ST, PVTG, DNT }
-    public enum EmploymentStatus { Employed, Unemployed, Self_Employed }
-    public enum Occupation {
-        EX_SERVICEMEN("Ex Servicemen"),
-        SAFAI_KARAMCHARI("Safai Karamchari"),
-        HEALTH_WORKER("Health Worker"),
-        STREET_VENDOR("Street Vendor"),
-        UNORGANIZED_WORKER("Unorganized Worker"),
-        ARTIST("Artist"),
-        SPORTSPERSON("Sportsperson"),
-        JOURNALIST("Journalist"),
-        TEA_AND_EX_TEA_GARDEN_TRIBES("Tea and Ex-Tea Garden Tribes"),
-        COIR_WORKER("Coir Worker"),
-        KHADI_ARTISAN("Khadi Artisan"),
-        FARMER("Farmer"),
-        FISHERMEN("Fishermen"),
-        ARTISANS_SPINNERS_AND_WEAVERS("Artisans, Spinners and Weavers"),
-        TEACHER_OR_FACULTY("Teacher or Faculty"),
-        CONSTRUCTION_WORKER("Construction Worker"),
-        ORGANIZED_WORKER("Organized Worker");
-
-        private final String label;
-        Occupation(String label) { this.label = label; }
-        public String getLabel() { return label; }
-    }
+    public Voter() {}
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -119,16 +72,20 @@ public class Voter {
     public void setVoterId(String voterId) { this.voterId = voterId; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-    public Gender getGender() { return gender; }
-    public void setGender(Gender gender) { this.gender = gender; }
     public Integer getAge() { return age; }
     public void setAge(Integer age) { this.age = age; }
+    public Gender getGender() { return gender; }
+    public void setGender(Gender gender) { this.gender = gender; }
     public MaritalStatus getMaritalStatus() { return maritalStatus; }
     public void setMaritalStatus(MaritalStatus maritalStatus) { this.maritalStatus = maritalStatus; }
     public String getDistrict() { return district; }
     public void setDistrict(String district) { this.district = district; }
-    public String getAssemblyConstituencyAc() { return assemblyConstituencyAc; }
-    public void setAssemblyConstituencyAc(String assemblyConstituencyAc) { this.assemblyConstituencyAc = assemblyConstituencyAc; }
+    public String getAssemblyConstituency() { return assemblyConstituency; }
+    public void setAssemblyConstituency(String assemblyConstituency) { this.assemblyConstituency = assemblyConstituency; }
+    public AreaType getArea() { return area; }
+    public void setArea(AreaType area) { this.area = area; }
+    public CasteCategory getCasteCategory() { return casteCategory; }
+    public void setCasteCategory(CasteCategory casteCategory) { this.casteCategory = casteCategory; }
     public Long getPartId() { return partId; }
     public void setPartId(Long partId) { this.partId = partId; }
     public String getHouseNumber() { return houseNumber; }
@@ -139,31 +96,41 @@ public class Voter {
     public void setPartName(String partName) { this.partName = partName; }
     public String getSection() { return section; }
     public void setSection(String section) { this.section = section; }
-    public AreaType getArea() { return area; }
-    public void setArea(AreaType area) { this.area = area; }
-    public CasteCategory getCasteCategory() { return casteCategory; }
-    public void setCasteCategory(CasteCategory casteCategory) { this.casteCategory = casteCategory; }
-    public boolean isDisability() { return isDisability; }
-    public void setDisability(boolean disability) { isDisability = disability; }
-    public boolean isMinority() { return isMinority; }
-    public void setMinority(boolean minority) { isMinority = minority; }
-    public boolean isStudent() { return isStudent; }
-    public void setStudent(boolean student) { isStudent = student; }
-    public boolean isBpl() { return isBpl; }
-    public void setBpl(boolean bpl) { isBpl = bpl; }
-    public Integer getAnnualIncome() { return annualIncome; }
-    public void setAnnualIncome(Integer annualIncome) { this.annualIncome = annualIncome; }
     public String getMobileNumber() { return mobileNumber; }
     public void setMobileNumber(String mobileNumber) { this.mobileNumber = mobileNumber; }
-    public EmploymentStatus getEmploymentStatus() { return employmentStatus; }
-    public void setEmploymentStatus(EmploymentStatus employmentStatus) { this.employmentStatus = employmentStatus; }
-    public boolean isGovernmentEmployee() { return isGovernmentEmployee; }
-    public void setGovernmentEmployee(boolean governmentEmployee) { isGovernmentEmployee = governmentEmployee; }
+    public Boolean getDisability() { return disability; }
+    public void setDisability(Boolean disability) { this.disability = disability; }
+    public Boolean getMinority() { return minority; }
+    public void setMinority(Boolean minority) { this.minority = minority; }
+    public Boolean getStudent() { return student; }
+    public void setStudent(Boolean student) { this.student = student; }
+    public Boolean getBpl() { return bpl; }
+    public void setBpl(Boolean bpl) { this.bpl = bpl; }
+    public Integer getAnnualIncome() { return annualIncome; }
+    public void setAnnualIncome(Integer annualIncome) { this.annualIncome = annualIncome; }
+    public Boolean getGovernmentEmployee() { return governmentEmployee; }
+    public void setGovernmentEmployee(Boolean governmentEmployee) { this.governmentEmployee = governmentEmployee; }
     public Occupation getOccupation() { return occupation; }
     public void setOccupation(Occupation occupation) { this.occupation = occupation; }
+    public String getDomain() { return domain; }
+    public void setDomain(String domain) { this.domain = domain; }
+    public VoterStatus getStatus() { return status; }
+    public void setStatus(VoterStatus status) { this.status = status; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
-}
 
+    // Helper methods for Logic
+    public boolean isGovernmentEmployee() { return governmentEmployee != null && governmentEmployee; }
+    public boolean isStudent() { return student != null && student; }
+    public boolean isBpl() { return bpl != null && bpl; }
+    public boolean isMinority() { return minority != null && minority; }
+    public boolean isDisability() { return disability != null && disability; }
+    
+    public EmploymentStatus getEmploymentStatus() {
+        if (isGovernmentEmployee()) return EmploymentStatus.Employed;
+        if (isStudent()) return EmploymentStatus.Student;
+        return EmploymentStatus.Unemployed;
+    }
+}

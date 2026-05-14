@@ -17,16 +17,16 @@ public class User {
 
     private String password;
     private String role;
-    private String boothId;
+    private Long partId;
 
     public User() {}
 
-    public User(String name, String email, String password, String role, String boothId) {
+    public User(String name, String email, String password, String role, Long partId) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.boothId = boothId;
+        this.partId = partId;
     }
 
     // Getters and Setters
@@ -40,6 +40,6 @@ public class User {
     public void setPassword(String password) { this.password = password; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
-    public String getBoothId() { return boothId; }
-    public void setBoothId(String boothId) { this.boothId = boothId; }
+    public Long getPartId() { return partId; }
+    public void setPartId(Long partId) { this.partId = partId; }
 }

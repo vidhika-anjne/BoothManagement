@@ -1,0 +1,292 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< com.diamond:backend >-------------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.3:run (default-cli) > test-compile @ backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ backend ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 10 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ backend ---
+[INFO] skip non existing resourceDirectory C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.4.3:run (default-cli) < test-compile @ backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.3:run (default-cli) @ backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.3)
+
+2026-03-25T15:35:53.184+05:30  INFO 2852 --- [backend] [  restartedMain] com.diamond.backend.BackendApplication   : Starting BackendApplication using Java 21.0.8 with PID 2852 (C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend\target\classes started by rajku in C:\Users\rajku\OneDrive\Documents\Team Diamond\Booth Management\BoothManagement\backend)
+2026-03-25T15:35:53.186+05:30  INFO 2852 --- [backend] [  restartedMain] com.diamond.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-03-25T15:35:53.217+05:30  INFO 2852 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-25T15:35:53.217+05:30  INFO 2852 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-25T15:35:53.658+05:30  INFO 2852 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-25T15:35:53.716+05:30  INFO 2852 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 7 JPA repository interfaces.
+2026-03-25T15:35:54.100+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-03-25T15:35:54.108+05:30  INFO 2852 --- [backend] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-25T15:35:54.108+05:30  INFO 2852 --- [backend] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-03-25T15:35:54.133+05:30  INFO 2852 --- [backend] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-25T15:35:54.134+05:30  INFO 2852 --- [backend] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 916 ms
+2026-03-25T15:35:54.238+05:30  INFO 2852 --- [backend] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-25T15:35:54.267+05:30  INFO 2852 --- [backend] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-03-25T15:35:54.286+05:30  INFO 2852 --- [backend] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-25T15:35:54.463+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-25T15:35:54.481+05:30  INFO 2852 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-25T15:35:54.627+05:30  INFO 2852 --- [backend] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@8377a87
+2026-03-25T15:35:54.629+05:30  INFO 2852 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-25T15:35:54.670+05:30  INFO 2852 --- [backend] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 18.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-25T15:35:55.372+05:30  INFO 2852 --- [backend] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    set client_min_messages = WARNING
+Hibernate: 
+    alter table if exists booth_sections 
+       drop constraint if exists FKh0xai4ktirxok4abssxdkx5j6
+Hibernate: 
+    alter table if exists scheme_beneficiaries 
+       drop constraint if exists FKk14nypd6wpy5n41x1oxshnaue
+Hibernate: 
+    alter table if exists scheme_genders 
+       drop constraint if exists FKnuvdcehgw3s0peqde7u2qgsb2
+Hibernate: 
+    drop table if exists booth_feedback cascade
+Hibernate: 
+    drop table if exists booth_parts cascade
+Hibernate: 
+    drop table if exists booth_sections cascade
+Hibernate: 
+    drop table if exists complaints cascade
+Hibernate: 
+    drop table if exists scheme_beneficiaries cascade
+Hibernate: 
+    drop table if exists scheme_genders cascade
+Hibernate: 
+    drop table if exists schemes cascade
+Hibernate: 
+    drop table if exists users cascade
+Hibernate: 
+    drop table if exists voter_profiles cascade
+Hibernate: 
+    create table booth_feedback (
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        author varchar(255) not null,
+        booth_id varchar(255),
+        message TEXT not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table booth_parts (
+        ac_number integer,
+        part_number integer not null,
+        id bigint generated by default as identity,
+        part_id bigint not null,
+        ac_name varchar(255),
+        district_id varchar(255),
+        district_name varchar(255),
+        part_name varchar(255) not null,
+        polling_station_address TEXT,
+        polling_station_name varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table booth_sections (
+        section_id integer not null,
+        booth_part_id bigint not null,
+        id bigint generated by default as identity,
+        section_name TEXT not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table complaints (
+        ai_processed boolean,
+        ai_score integer,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        resolved_at timestamp(6),
+        updated_at timestamp(6),
+        ac varchar(255),
+        ai_category varchar(255),
+        ai_priority varchar(255),
+        ai_reason TEXT,
+        ai_summary TEXT,
+        booth_id varchar(255),
+        category varchar(255),
+        description TEXT not null,
+        details TEXT,
+        duration varchar(255),
+        impact varchar(255),
+        part_name varchar(255),
+        resolution_proof_url varchar(255),
+        section varchar(255),
+        status varchar(255),
+        user_image_url varchar(255),
+        voter_id varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table scheme_beneficiaries (
+        scheme_id bigint not null,
+        beneficiary varchar(255)
+    )
+Hibernate: 
+    create table scheme_genders (
+        scheme_id bigint not null,
+        gender varchar(255)
+    )
+Hibernate: 
+    create table schemes (
+        age_max integer,
+        age_min integer,
+        amount_per_installment integer,
+        amount_per_year integer,
+        installments integer,
+        id bigint generated by default as identity,
+        abbreviation varchar(255),
+        beneficiaries_text TEXT,
+        ministry varchar(255),
+        objective_text TEXT,
+        scheme_name varchar(255) not null,
+        scheme_type varchar(255),
+        tenure_text varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        id bigint generated by default as identity,
+        part_id bigint,
+        email varchar(255) not null unique,
+        name varchar(255),
+        password varchar(255),
+        role varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table voter_profiles (
+        age integer,
+        annual_income integer,
+        bpl boolean,
+        disability boolean,
+        government_employee boolean,
+        minority boolean,
+        part_number integer,
+        student boolean,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        part_id bigint not null,
+        updated_at timestamp(6),
+        area varchar(255) not null check (area in ('Urban','Rural')),
+        assembly_constituency_ac varchar(255) not null,
+        caste_category varchar(255) not null check (caste_category in ('General','OBC','SC','ST','PVTG','DNT')),
+        district varchar(255) not null,
+        domain varchar(255),
+        employment_status varchar(255) check (employment_status in ('Employed','Unemployed','Self_Employed')),
+        gender varchar(255) not null check (gender in ('Male','Female','Non_Binary','Other')),
+        house_number varchar(255),
+        issue varchar(255),
+        marital_status varchar(255) check (marital_status in ('Single','Married','Widowed','Divorced')),
+        mobile_number varchar(255) unique,
+        name varchar(255) not null,
+        occupation varchar(255) check (occupation in ('EX_SERVICEMEN','SAFAI_KARAMCHARI','HEALTH_WORKER','STREET_VENDOR','UNORGANIZED_WORKER','ARTIST','SPORTSPERSON','JOURNALIST','TEA_AND_EX_TEA_GARDEN_TRIBES','COIR_WORKER','KHADI_ARTISAN','FARMER','FISHERMEN','ARTISANS_SPINNERS_AND_WEAVERS','TEACHER_OR_FACULTY','CONSTRUCTION_WORKER','ORGANIZED_WORKER')),
+        part_name varchar(255),
+        section varchar(255),
+        status varchar(255) not null check (status in ('APPLIED','PENDING','APPROVED','REJECTED')),
+        voter_id varchar(255) not null unique,
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists booth_sections 
+       add constraint FKh0xai4ktirxok4abssxdkx5j6 
+       foreign key (booth_part_id) 
+       references booth_parts
+Hibernate: 
+    alter table if exists scheme_beneficiaries 
+       add constraint FKk14nypd6wpy5n41x1oxshnaue 
+       foreign key (scheme_id) 
+       references schemes
+Hibernate: 
+    alter table if exists scheme_genders 
+       add constraint FKnuvdcehgw3s0peqde7u2qgsb2 
+       foreign key (scheme_id) 
+       references schemes
+2026-03-25T15:35:55.447+05:30  INFO 2852 --- [backend] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: 
+    select
+        count(*) 
+    from
+        users u1_0
+Hibernate: 
+    insert 
+    into
+        users
+        (email, name, part_id, password, role) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, name, part_id, password, role) 
+    values
+        (?, ?, ?, ?, ?)
+2026-03-25T15:35:55.975+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-25T15:35:56.541+05:30  WARN 2852 --- [backend] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-25T15:35:56.753+05:30  WARN 2852 --- [backend] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-03-25T15:35:56.764+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2026-03-25T15:35:56.765+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@63e05dad]]
+2026-03-25T15:35:56.765+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-03-25T15:35:56.768+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2026-03-25T15:35:56.769+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@63e05dad]]
+2026-03-25T15:35:56.769+05:30  INFO 2852 --- [backend] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2026-03-25T15:35:56.769+05:30  WARN 2852 --- [backend] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-03-25T15:35:56.770+05:30  INFO 2852 --- [backend] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T15:35:56.771+05:30  INFO 2852 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-25T15:35:56.774+05:30  INFO 2852 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-25T15:35:56.785+05:30  INFO 2852 --- [backend] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-03-25T15:35:56.803+05:30 ERROR 2852 --- [backend] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.559 s
+[INFO] Finished at: 2026-03-25T15:35:56+05:30
+[INFO] ------------------------------------------------------------------------

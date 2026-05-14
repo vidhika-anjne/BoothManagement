@@ -5,28 +5,25 @@ import {
 import SuperAdminSignIn from './pages/admin/SuperAdminSignIn';
 
 const SuperAdminDashboard = lazy(() => import('./pages/admin/SuperAdminDashboard.jsx'));
-const SuperAdminBooths    = lazy(() => import('./pages/admin/SuperAdminBooths.jsx'));
-const SuperAdminSections  = lazy(() => import('./pages/admin/SuperAdminSections.jsx'));
 const SuperAdminVoters    = lazy(() => import('./pages/admin/SuperAdminVoters.jsx'));
 const SuperAdminSchemes   = lazy(() => import('./pages/admin/SuperAdminSchemes.jsx'));
-const SuperAdminAnalytics = lazy(() => import('./pages/admin/SuperAdminAnalytics.jsx'));
+const SuperAdminSegmentation = lazy(() => import('./pages/admin/SuperAdminSegmentation.jsx'));
+const BoothMap = lazy(() => import('./pages/BoothMap.jsx'));
 
 const PAGE_MAP = {
   'dashboard': SuperAdminDashboard,
-  'booths':    SuperAdminBooths,
-  'sections':  SuperAdminSections,
+  'boothmap':  BoothMap,
   'voters':    SuperAdminVoters,
   'schemes':   SuperAdminSchemes,
-  'analytics': SuperAdminAnalytics,
+  'segmentation': SuperAdminSegmentation,
 };
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Overview',  icon: LayoutDashboard },
-  { id: 'booths',    label: 'All Booths',icon: Map },
-  { id: 'sections',  label: 'Sections',  icon: Map },
+  { id: 'boothmap',  label: 'Booth Map', icon: Map },
   { id: 'voters',    label: 'Voters DB', icon: UsersRound },
   { id: 'schemes',   label: 'Schemes',   icon: Award },
-  { id: 'analytics', label: 'Analytics', icon: BrainCircuit },
+  { id: 'segmentation', label: 'Demographics', icon: Users },
 ];
 
 export default function SuperAdminApp() {

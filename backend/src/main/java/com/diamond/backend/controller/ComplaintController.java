@@ -3,6 +3,8 @@ package com.diamond.backend.controller;
 import com.diamond.backend.model.Complaint;
 import com.diamond.backend.repository.ComplaintRepository;
 import com.diamond.backend.service.ComplaintService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,35 +12,40 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/complaints")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class ComplaintController {
 
-    private final ComplaintService service;
-    private final ComplaintRepository repository;
+    @Autowired
+    private ComplaintRepository complaintRepository;
 
-    public ComplaintController(ComplaintService service, ComplaintRepository repository) {
-        this.service = service;
-        this.repository = repository;
+    @Autowired
+    private ComplaintService complaintService;
+
+    @GetMapping
+    public List<Complaint> getAllComplaints() {
+        return complaintRepository.findAll();
     }
 
     @PostMapping
     public Complaint createComplaint(@RequestBody Complaint complaint) {
-        return service.submitComplaint(complaint);
+        return complaintRepository.save(complaint);
     }
 
-    @GetMapping
-    public List<Complaint> getAllComplaints() {
-        return repository.findAllByOrderByAiScoreDesc(); 
-    }
-
-    @PostMapping("/{id}/resolve")
-    public Complaint resolveComplaint(@PathVariable Long id, @RequestBody(required = false) Map<String, String> payload) {
-        String proofUrl = (payload != null) ? payload.get("resolutionProofUrl") : null;
-        return service.resolveComplaint(id, proofUrl);
+    @PutMapping("/{id}/resolve")
+    public ResponseEntity<Complaint> resolveComplaint(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        String resolution = request.get("resolution");
+        return ResponseEntity.ok(complaintService.resolveComplaint(id, resolution));
     }
 
     @GetMapping("/analytics")
-    public Map<String, Object> getAnalytics() {
-        return service.getAnalytics();
+    public ResponseEntity<Map<String, Object>> getAnalytics() {
+        Map<String, Long> distribution = complaintService.getCategoryDistribution();
+        
+        // Convert to list of entries for frontend compatibility [ ["Category", Count], ... ]
+        List<List<Object>> entries = distribution.entrySet().stream()
+                .map(e -> List.of((Object)e.getKey(), (Object)e.getValue()))
+                .collect(java.util.stream.Collectors.toList());
+        
+        return ResponseEntity.ok(Map.of("categoryDistribution", entries));
     }
 }

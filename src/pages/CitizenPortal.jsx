@@ -2,11 +2,35 @@ import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import {
   User, Search, AlertCircle, Award, BarChart2, ClipboardList,
   Shield, Landmark, CheckCircle2, ArrowRight, ChevronRight,
-  Info, Check, X, Star, Phone, Home, FileText, Bell, Sparkles
+  Info, Check, X, Star, Phone, Home, FileText, Bell, Sparkles,
+  MessageSquare, Send, TrendingUp, Trash2
 } from 'lucide-react'
+import dashboardService from '../services/dashboardService.js'
 import { useApp } from '../context/AppContext.jsx'
 import { BOOTHS, ISSUES, NOTIFICATIONS, VOTER_DB } from '../data/mockData.js'
 import BeforeAfterVisual from '../components/shared/BeforeAfterVisual.jsx'
+
+const monthsMap = {
+  'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+  'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+};
+
+const NavItem = ({ id, label, icon: Icon, activeTab, setActiveTab }) => {
+  const isActive = activeTab === id;
+  return (
+    <button
+      key={id}
+      onClick={() => setActiveTab(id)}
+      className={`cp-tab ${isActive ? 'active' : ''}`}
+    >
+      <Icon size={15} />
+      <span>{label}</span>
+    </button>
+  );
+};
+import Field from '../components/shared/Field.jsx'
+import Inp from '../components/shared/Inp.jsx'
+import Sel from '../components/shared/Sel.jsx'
 
 const AICOMPLAINT = lazy(() => import('../components/complaints/ComplaintSubmission.jsx'))
 
@@ -66,25 +90,7 @@ const COMPLAINT_CATS = {
 // ─── MOCK DB for status check ──────────────────────────────────────────────
 // ─── VOTER_DB is now imported from mockData.js ───
 
-// ─── Field components ──────────────────────────────────────────────────────
-function Field({ label, error, hint, children, full }) {
-  return (
-    <div className={`cpf-field${full ? ' full' : ''}`}>
-      <label>{label}</label>
-      {children}
-      {error && <span className="cpf-error">{error}</span>}
-      {hint && !error && <span className="cpf-hint">{hint}</span>}
-    </div>
-  )
-}
-
-function Inp({ error, ...props }) {
-  return <input className={`cpf-input${error ? ' error' : ''}`} {...props} />
-}
-
-function Sel({ error, children, ...props }) {
-  return <select className={`cpf-input${error ? ' error' : ''}`} {...props}>{children}</select>
-}
+// ─── Local UI Helpers ───────────────────────────────────────────────────────
 
 // ─── SUCCESS SCREEN ────────────────────────────────────────────────────────
 function SuccessCard({ icon: Icon, iconColor, title, message, refId, refLabel = 'Reference ID', note, steps, onReset, resetLabel = 'Start Again' }) {
@@ -600,10 +606,8 @@ function ComplaintTab({ showToast }) {
   )
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
-//  TAB 4 – SCHEME RECOMMENDATIONS  (API-powered)
-// ═══════════════════════════════════════════════════════════════════════════
-const API_BASE = 'http://localhost:8081'
+// ─── TAB 4 – SCHEME RECOMMENDATIONS  (API-powered)
+
 
 function ScoreBar({ score }) {
   const pct = Math.round(score * 100)
@@ -640,7 +644,11 @@ function SchemesTab() {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch(`${API_BASE}/api/recommendations/${encodeURIComponent(voterId)}`)
+      const API_URL = `${window.location.host.includes('localhost') ? 'http://localhost:8081' : ''}/api/schemes/recommend/${voterId}`;
+      const res = await fetch(API_URL, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
       if (res.status === 404) {
         setError(`No voter record found for Voter ID "${voterId}" in the database. Please ensure your profile is synced.`)
         setRecs([])
@@ -650,8 +658,8 @@ function SchemesTab() {
         const data = await res.json()
         setRecs(data)
       }
-    } catch (err) {
-      setError('Could not connect to the recommendation engine. Please ensure the backend is running on port 8080.')
+    } catch {
+      setError('Could not connect to the recommendation engine. Please ensure the backend is running on port 8081.')
     } finally {
       setLoading(false)
     }
@@ -1007,7 +1015,8 @@ function HistoryTab() {
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('complaints') || '[]')
-    setComplaints(stored.reverse())
+    setComplaints([...stored].reverse())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const STATUS_COLOR = { 
@@ -1105,6 +1114,145 @@ function HistoryTab() {
   )
 }
 
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  TAB 5 – FEEDBACK
+// ═══════════════════════════════════════════════════════════════════════════
+function FeedbackTab({ showToast }) {
+  const [feedbackList, setFeedbackList] = useState([])
+  const [fbAuthor, setFbAuthor] = useState('')
+  const [fbMessage, setFbMessage] = useState('')
+  const [fbBooth, setFbBooth] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const fetchFeedback = async () => {
+    try {
+      const data = await dashboardService.getFeedback()
+      setFeedbackList(Array.isArray(data) ? data : [])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => { fetchFeedback() }, [])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!fbMessage.trim()) return
+    setSubmitting(true)
+    try {
+      await dashboardService.submitFeedback(fbAuthor || 'Anonymous', fbMessage, fbBooth || null)
+      setFbMessage('')
+      setFbAuthor('')
+      setFbBooth('')
+      showToast('Thank you for your feedback!')
+      fetchFeedback()
+    } catch {
+      showToast('Failed to submit feedback. Please try again.', 'error')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const handleDeleteFeedback = async (id) => {
+    try {
+      await dashboardService.deleteFeedback(id)
+      setFeedbackList(prev => prev.filter(item => item.id !== id))
+      showToast('Feedback deleted successfully')
+    } catch {
+      showToast('Failed to delete feedback', 'error')
+    }
+  }
+
+  return (
+    <div className="cpf-form">
+      <div className="two-col-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        {/* Submit Form */}
+        <div className="cpf-section" style={{ height: 'fit-content' }}>
+          <div className="cpf-sec-title"><MessageSquare size={15} /> Your Feedback</div>
+          <p style={{ fontSize: '.85rem', color: 'var(--text-secondary)', marginBottom: '1.2rem' }}>
+            Help us improve our services. Tell us about your experience or report a concern.
+          </p>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Field label="Your Name (optional)">
+              <Inp placeholder="e.g. Ramesh Yadav" value={fbAuthor} onChange={e => setFbAuthor(e.target.value)} />
+            </Field>
+            <Field label="Polling Booth / Area (optional)">
+              <Inp placeholder="e.g. 142 or Sector B" value={fbBooth} onChange={e => setFbBooth(e.target.value)} />
+            </Field>
+            <Field label="Your Message*">
+              <textarea 
+                className="cpf-input" 
+                rows={5} 
+                required 
+                placeholder="Describe your feedback, suggestion or concern..."
+                value={fbMessage} 
+                onChange={e => setFbMessage(e.target.value)}
+                style={{ resize: 'vertical' }}
+              />
+            </Field>
+            <button type="submit" className="cpf-btn primary" disabled={submitting || !fbMessage.trim()}>
+              {submitting ? 'Submitting...' : 'Submit Feedback'} <Send size={15} />
+            </button>
+          </form>
+        </div>
+
+        {/* Live List */}
+        <div className="cpf-section">
+          <div className="cpf-sec-title" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+              <TrendingUp size={15} /> Public Feedback
+            </div>
+            <span style={{ fontSize: '.7rem', background: '#3b82f61a', color: 'var(--primary)', padding: '2px 8px', borderRadius: '10px' }}>
+              {feedbackList.length} total
+            </span>
+          </div>
+          
+          <div style={{ maxHeight: '450px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+            {loading ? (
+              <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading...</div>
+            ) : feedbackList.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>No feedback shared yet.</div>
+            ) : (
+              feedbackList.map((fb, i) => (
+                <div key={fb.id || i} style={{ 
+                  padding: '1rem', 
+                  background: 'var(--surface-2)', 
+                  borderRadius: '12px',
+                  borderLeft: '4px solid var(--primary)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '.4rem' }}>
+                    <span style={{ fontWeight: 600, fontSize: '.85rem' }}>
+                      {fb.author || 'Anonymous Citizen'}
+                      {fb.boothId && <span style={{ fontWeight: 400, color: 'var(--text-muted)', fontSize: '.75rem', marginLeft: '.5rem' }}>· Booth {fb.boothId}</span>}
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <span style={{ fontSize: '.7rem', color: 'var(--text-muted)' }}>
+                        {fb.createdAt ? new Date(fb.createdAt).toLocaleDateString() : ''}
+                      </span>
+                      <button 
+                        onClick={() => handleDeleteFeedback(fb.id)}
+                        style={{ background: 'none', border: 'none', padding: 0, color: 'var(--danger)', cursor: 'pointer', opacity: 0.7 }}
+                        title="Delete Feedback"
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  </div>
+                  <div style={{ fontSize: '.85rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                    {fb.message}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 //  MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1117,6 +1265,7 @@ const TABS = [
   { id: 'survey',        label: 'Citizen Survey',      icon: BarChart2 },
   { id: 'track',         label: 'Track Issues',        icon: ClipboardList },
   { id: 'history',       label: 'My Complaints',       icon: FileText },
+  { id: 'feedback',      label: 'Public Feedback',     icon: MessageSquare },
 ]
 
 export default function CitizenPortal() {
@@ -1137,6 +1286,7 @@ export default function CitizenPortal() {
       case 'survey':    return <SurveyTab showToast={showToast} />
       case 'track':     return <TrackTab />
       case 'history':   return <HistoryTab />
+      case 'feedback':  return <FeedbackTab showToast={showToast} />
       default:          return null
     }
   }
@@ -1165,16 +1315,16 @@ export default function CitizenPortal() {
 
       {/* ── Tab Bar ─────────────────────────────────────────────────────── */}
       <div className="cp-tab-bar">
-        {TABS.map(t => {
-          const Icon = t.icon
-          return (
-            <button key={t.id} className={`cp-tab${activeTab === t.id ? ' active' : ''}`}
-              onClick={() => setActiveTab(t.id)}>
-              <Icon size={15} />
-              <span>{t.label}</span>
-            </button>
-          )
-        })}
+        {TABS.map(t => (
+          <NavItem
+            key={t.id}
+            id={t.id}
+            label={t.label}
+            icon={t.icon}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+          />
+        ))}
       </div>
 
       {/* ── Content ─────────────────────────────────────────────────────── */}
