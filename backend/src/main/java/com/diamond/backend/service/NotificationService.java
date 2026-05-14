@@ -201,7 +201,7 @@ public class NotificationService {
             };
             rabbitTemplate.convertAndSend(RabbitMQConfig.NOTIFICATION_EXCHANGE, routingKey, n.getId());
             log.info("Notification {} enqueued on {}", n.getId(), routingKey);
-        } catch (AmqpException | Exception ex) {
+        } catch (Exception ex) {
             // RabbitMQ unavailable — send directly via Twilio so the message still goes out
             log.warn("RabbitMQ unavailable ({}), sending {} directly via Twilio", ex.getMessage(), n.getId());
             sendDirectViaTwilio(n);

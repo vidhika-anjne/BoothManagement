@@ -3,7 +3,7 @@
    the same light / dark theme as the rest of the admin shell.
 ───────────────────────────────────────────────────────────────────────────── */
 
-.notif-panel {
+.twilio-center-panel {
   background: var(--surface);
   color: var(--text-primary);
   font-family: 'Zilla Slab', serif;

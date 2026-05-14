@@ -2,6 +2,7 @@ package com.diamond.backend.service;
 
 import com.diamond.backend.config.TwilioConfig;
 import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.rest.api.v2010.account.Call;
 import com.twilio.type.PhoneNumber;
 import com.twilio.type.Twiml;
@@ -35,7 +36,7 @@ public class TwilioSenderService {
     public String sendSms(String to, String body) {
         log.info("Sending SMS to {}", to);
 
-        Message.Creator creator;
+        MessageCreator creator;
         String msid = twilioConfig.getMessagingServiceSid();
         if (StringUtils.hasText(msid)) {
             // Preferred: use MessagingServiceSid (matches your curl command)
@@ -65,7 +66,7 @@ public class TwilioSenderService {
         log.info("Sending WhatsApp to {}", to);
         String formattedTo = to.startsWith("whatsapp:") ? to : "whatsapp:" + to;
 
-        Message.Creator creator;
+        MessageCreator creator;
         String msid = twilioConfig.getMessagingServiceSid();
         if (StringUtils.hasText(msid)) {
             creator = Message.creator(new PhoneNumber(formattedTo), msid, body);

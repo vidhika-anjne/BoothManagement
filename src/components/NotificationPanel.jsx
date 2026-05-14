@@ -625,7 +625,7 @@ export default function NotificationPanel() {
       : notifications.filter((n) => n.channel === filterChannel);
 
   return (
-    <div className="notif-panel">
+    <div className="twilio-center-panel">
       {toast && <div className="np-toast">{toast}</div>}
 
       {/* Header */}
