@@ -1,0 +1,637 @@
+/* ── NotificationPanel.css ─────────────────────────────────────────────────
+   Uses the dashboard's CSS custom properties so the panel inherits
+   the same light / dark theme as the rest of the admin shell.
+───────────────────────────────────────────────────────────────────────────── */
+
+.notif-panel {
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: 'Zilla Slab', serif;
+  position: relative;
+}
+
+/* ── Toast ─────────────────────────────────────────────────────────────── */
+.np-toast {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  z-index: 9999;
+  background: var(--primary);
+  color: #f5f0e8;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+  animation: npSlideIn 0.28s ease;
+}
+@keyframes npSlideIn {
+  from { transform: translateX(80px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.np-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.np-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: 'Zilla Slab', serif;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.np-header p {
+  margin: 0.15rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.np-header-actions { display: flex; gap: 0.5rem; }
+
+/* ── Tabs ───────────────────────────────────────────────────────────────── */
+.np-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.np-tab {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.75rem 1.1rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.18s;
+  white-space: nowrap;
+  font-family: 'Zilla Slab', serif;
+}
+.np-tab:hover  { color: var(--text-primary); }
+.np-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ── Tab Content ────────────────────────────────────────────────────────── */
+.np-tab-content { padding: 1.5rem; }
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.np-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--primary);
+  color: #f5f0e8;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.5rem;
+  justify-content: center;
+  transition: background 0.18s;
+  font-family: 'Zilla Slab', serif;
+}
+.np-btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+.np-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.np-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 0.42rem 0.85rem;
+  border-radius: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: 'Zilla Slab', serif;
+}
+.np-btn-ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--text-primary);
+  border-color: var(--border-2);
+}
+.np-btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.np-btn-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(245,158,11,.12);
+  color: #f59e0b;
+  border: 1px solid rgba(245,158,11,.3);
+  padding: 0.42rem 0.85rem;
+  border-radius: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: 'Zilla Slab', serif;
+}
+.np-btn-warning:hover { background: rgba(245,158,11,.2); }
+
+/* ── Send Form ──────────────────────────────────────────────────────────── */
+.np-send-form {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1.5rem;
+  max-width: 700px;
+}
+.np-form-title {
+  margin: 0 0 1.1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-primary);
+  font-family: 'Zilla Slab', serif;
+}
+.np-form-error {
+  background: rgba(239,68,68,.08);
+  border: 1px solid rgba(239,68,68,.25);
+  color: var(--danger);
+  padding: 0.6rem 0.9rem;
+  border-radius: 0;
+  margin-bottom: 1rem;
+  font-size: 0.84rem;
+}
+.np-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.np-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.np-form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-form-group input,
+.np-form-group textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--text-primary);
+  padding: 0.52rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.18s;
+  resize: vertical;
+  font-family: 'Zilla Slab', serif;
+}
+.np-form-group input:focus,
+.np-form-group textarea:focus { border-color: var(--primary); }
+.np-form-group input[type="range"] {
+  padding: 0;
+  accent-color: var(--primary);
+}
+
+.np-priority-label {
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-priority-hint {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+/* ── Channel Selector ───────────────────────────────────────────────────── */
+.np-channel-selector { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.np-channel-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.42rem 0.85rem;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.18s;
+  font-family: 'Zilla Slab', serif;
+}
+.np-channel-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+.np-channel-btn.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ── Table ──────────────────────────────────────────────────────────────── */
+.np-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+.np-notif-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.np-notif-table th {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.71rem;
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-notif-table td {
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: middle;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-notif-table tbody tr:nth-child(odd)  { background: var(--surface); }
+.np-notif-table tbody tr:nth-child(even) { background: var(--surface-2); }
+.np-notif-table tbody tr:hover td { background: var(--primary-light); }
+.np-notif-table tr:last-child td { border-bottom: none; }
+
+.np-id-cell    { color: var(--primary); font-weight: 700; }
+.np-msg-cell   { color: var(--text-muted); max-width: 200px; }
+.np-phone-cell { font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+
+.np-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 0;
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.np-channel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.np-table-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+.np-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: npSpin 0.8s linear infinite;
+}
+@keyframes npSpin { to { transform: rotate(360deg); } }
+
+.np-empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ── Filter Bar ─────────────────────────────────────────────────────────── */
+.np-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.np-filter-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.7rem;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 0.79rem;
+  font-weight: 600;
+  transition: all 0.18s;
+  font-family: 'Zilla Slab', serif;
+}
+.np-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+.np-filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #f5f0e8;
+}
+
+/* ── Pagination ─────────────────────────────────────────────────────────── */
+.np-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+/* ── Stats ──────────────────────────────────────────────────────────────── */
+.np-stats-section { display: flex; flex-direction: column; gap: 1.5rem; }
+.np-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.75rem;
+}
+.np-stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1rem;
+  text-align: center;
+  transition: border-color 0.18s;
+}
+.np-stat-card:hover { border-color: var(--border-2); }
+.np-stat-icon  { font-size: 1.4rem; margin-bottom: 0.3rem; }
+.np-stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 0.15rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.np-channel-stats {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1.1rem;
+}
+.np-channel-stats h4 {
+  margin: 0 0 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-channel-bars  { display: flex; flex-direction: column; gap: 0.9rem; }
+.np-channel-bar-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.np-channel-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.np-channel-bar-track {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 0;
+  overflow: hidden;
+}
+.np-channel-bar-fill {
+  height: 100%;
+  border-radius: 0;
+  transition: width 0.7s ease;
+}
+.np-channel-bar-meta { font-size: 0.73rem; color: var(--text-muted); }
+
+/* ── Voter Picker ────────────────────────────────────────────────────────── */
+.np-voter-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+}
+.np-voter-picker > label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-voter-picker-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.np-voter-search-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--text-primary);
+  padding: 0.52rem 2.2rem 0.52rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.18s;
+  font-family: 'Zilla Slab', serif;
+}
+.np-voter-search-input:focus { border-color: var(--primary); }
+.np-picker-clear-btn {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 0;
+  transition: color 0.15s;
+  line-height: 1;
+}
+.np-picker-clear-btn:hover { color: var(--danger); }
+
+/* ── Dropdown ────────────────────────────────────────────────────────────── */
+.np-voter-dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  max-height: 240px;
+  overflow-y: auto;
+}
+.np-voter-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.np-voter-dropdown-item:last-child { border-bottom: none; }
+.np-voter-dropdown-item:hover:not(.muted):not(.already-added) {
+  background: var(--primary-light);
+}
+.np-voter-dropdown-item.already-added { opacity: 0.5; cursor: default; }
+.np-voter-dropdown-item.muted {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.82rem;
+  cursor: default;
+}
+.np-vd-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+.np-vd-meta {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-vd-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--success);
+  margin-top: 1px;
+}
+
+/* ── Selected Voter Card (single) ───────────────────────────────────────── */
+.np-selected-voter-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: var(--primary-light);
+  border: 1px solid rgba(37,99,235,.25);
+  border-radius: 0;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.84rem;
+  margin-top: 0.4rem;
+  color: var(--text-primary);
+}
+.np-phone-badge {
+  background: rgba(16,185,129,.1);
+  color: var(--success);
+  padding: 0.12rem 0.5rem;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 0.78rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ── Voter Chips (multi) ────────────────────────────────────────────────── */
+.np-selected-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.np-voter-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--primary-light);
+  border: 1px solid rgba(37,99,235,.2);
+  border-radius: 0;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  font-family: 'Zilla Slab', serif;
+}
+.np-voter-chip.chip-warn {
+  background: rgba(245,158,11,.1);
+  border-color: rgba(245,158,11,.3);
+  color: #d97706;
+}
+.np-chip-phone {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.np-chip-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.78rem;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+  margin-left: 0.1rem;
+}
+.np-chip-remove:hover { color: var(--danger); }
+
+/* ── Form Warning ────────────────────────────────────────────────────────── */
+.np-form-warning {
+  background: rgba(245,158,11,.08);
+  border: 1px solid rgba(245,158,11,.25);
+  color: #b45309;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .np-header    { flex-direction: column; align-items: flex-start; }
+  .np-form-row  { grid-template-columns: 1fr; }
+  .np-tabs      { overflow-x: auto; padding-bottom: 2px; }
+  .np-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .np-notif-table th,
+  .np-notif-table td { padding: 0.5rem 0.6rem; font-size: 0.75rem; }
+}

@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import {
   Bell, Send, CheckCircle2, Clock, AlertCircle, Plus, X,
-  Users, Megaphone, MessageSquare, ArrowRight, BarChart2,
+  Users, Megaphone, MessageSquare, ArrowRight, BarChart2, Zap,
 } from 'lucide-react'
 import { useApp } from '../context/AppContext.jsx'
 import { NOTIFICATIONS, BOOTHS, ISSUES } from '../data/mockData.js'
 import BeforeAfterVisual from '../components/shared/BeforeAfterVisual.jsx'
+import NotificationPanel from '../components/NotificationPanel.jsx'
 
 // ── Type + channel config ──────────────────────────────────────────────────
 const TYPE_CFG = {
@@ -112,20 +113,20 @@ function ComposeForm({ onSubmit, onCancel }) {
           <InpField k="title" form={form} errors={errors} set={set} placeholder="e.g. Road pothole repaired — Booth 141" />
         </F>
         <F label="Type*" err={errors.type}>
-          <SelField k="type">
+          <SelField k="type" form={form} errors={errors} set={set}>
             <option value="resolved">Resolved</option>
             <option value="in-progress">In Progress</option>
             <option value="update">Update</option>
           </SelField>
         </F>
         <F label="Booth / Area*" err={errors.booth}>
-          <SelField k="booth">
+          <SelField k="booth" form={form} errors={errors} set={set}>
             <option value="">Select booth</option>
             {BOOTHS.map(b => <option key={b.id} value={b.name}>{b.name}</option>)}
           </SelField>
         </F>
         <F label="Linked Issue (optional)">
-          <SelField k="issueRef">
+          <SelField k="issueRef" form={form} errors={errors} set={set}>
             <option value="">None</option>
             {ISSUES.map(i => <option key={i.id} value={i.id}>{i.id} – {i.title.slice(0,40)}</option>)}
           </SelField>
@@ -260,6 +261,7 @@ export default function Notifications() {
   const [filter, setFilter] = useState('all')
   const [selected, setSelected] = useState(NOTIFICATIONS[0]?.id ?? null)
   const [mode, setMode] = useState('detail') // 'detail' | 'compose'
+  const [showTwilio, setShowTwilio] = useState(false)
 
   const filtered = filter === 'all' ? notifs : notifs.filter(n => n.type === filter)
   const selectedNotif = notifs.find(n => n.id === selected)
@@ -291,11 +293,24 @@ export default function Notifications() {
           <div className="page-subtitle">Send proof-of-resolution alerts with before &amp; after evidence to citizens</div>
         </div>
         <div className="page-actions">
+          <button
+            className={`btn ${showTwilio ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setShowTwilio(v => !v)}
+          >
+            <Zap size={14} /> {showTwilio ? 'Hide' : 'Twilio Live'} Panel
+          </button>
           <button className="btn btn-primary" onClick={() => { setMode('compose'); setSelected(null) }}>
             <Plus size={14} /> New Notification
           </button>
         </div>
       </div>
+
+      {/* ── Twilio Live Panel ── */}
+      {showTwilio && (
+        <div className="card" style={{ marginBottom: '1.5rem', padding: 0, overflow: 'hidden' }}>
+          <NotificationPanel />
+        </div>
+      )}
 
       {/* KPI strip */}
       <div className="notif-kpi-row">

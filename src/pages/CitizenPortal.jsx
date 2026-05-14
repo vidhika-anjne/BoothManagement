@@ -194,7 +194,7 @@ function RegisterTab({ showToast }) {
   const minDob = new Date(today.getFullYear() - 110, 0, 1).toISOString().split('T')[0]
 
   return (
-    <div className="cpf-form">
+    <div className="cpf-form cpf-survey-flat">
       {/* Personal */}
       <div className="cpf-section">
         <div className="cpf-sec-title"><User size={15} /> Personal Information</div>
@@ -611,7 +611,7 @@ function ComplaintTab({ showToast }) {
 
 function ScoreBar({ score }) {
   const pct = Math.round(score * 100)
-  const color = score >= 0.65 ? '#10b981' : score >= 0.4 ? '#3b82f6' : '#94a3b8'
+  const color = 'var(--cp-accent)'
   return (
     <div className="sr-score-wrap">
       <div className="sr-score-bar-bg">
@@ -757,10 +757,10 @@ function SchemesTab() {
           const isHighly = rec.eligibilityStatus === 'Highly Relevant'
           const isOpen = expanded[idx]
           return (
-            <div key={idx} className={`sr-card${isHighly ? ' sr-card-high' : ''}`}>
+            <div key={idx} className={`sr-card${isHighly ? ' sr-card-high' : ''}${isOpen ? ' open' : ''}`}>
               {/* Top row */}
               <div className="sr-card-top">
-                <div className="sr-card-rank">{idx + 1}</div>
+                <div className={`sr-card-rank${isOpen ? ' open' : ''}`}>{idx + 1}</div>
                 <div className="sr-card-info">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', flexWrap: 'wrap' }}>
                     <span className="sr-scheme-name">{rec.schemeName}</span>
@@ -787,7 +787,7 @@ function SchemesTab() {
                   <ul className="sr-reasons-list">
                     {rec.reasons.map((r, i) => (
                       <li key={i} className="sr-reason-item">
-                        <CheckCircle2 size={13} style={{ color: '#10b981', flexShrink: 0, marginTop: '1px' }} />
+                        <CheckCircle2 size={13} style={{ color: 'var(--cp-teal)', flexShrink: 0, marginTop: '1px' }} />
                         <span>{r}</span>
                       </li>
                     ))}
@@ -858,7 +858,7 @@ function SurveyTab({ showToast }) {
 
         {SURVEY_QS.map((q, i) => (
           <div key={q.id} className="cpf-survey-q">
-            <div className="cpf-survey-label">{i + 1}. {q.text}</div>
+            <div className="cpf-survey-label"><span className="cpf-survey-num">{i + 1}.</span> {q.text}</div>
             <div className="cpf-survey-opts">
               {q.opts.map(opt => (
                 <button key={opt}
@@ -1257,10 +1257,10 @@ function FeedbackTab({ showToast }) {
 //  MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════
 const TABS = [
-  { id: 'register',      label: 'Voter Registration', icon: User },
+  // { id: 'register',      label: 'Voter Registration', icon: User },
   { id: 'status',        label: 'Check Status',        icon: Search },
   { id: 'ai-complaint',  label: 'AI Complaint',        icon: Sparkles },
-  { id: 'complaint',     label: 'File Complaint',      icon: AlertCircle },
+  // { id: 'complaint',     label: 'File Complaint',      icon: AlertCircle },
   { id: 'schemes',       label: 'Scheme Eligibility',  icon: Award },
   { id: 'survey',        label: 'Citizen Survey',      icon: BarChart2 },
   { id: 'track',         label: 'Track Issues',        icon: ClipboardList },
@@ -1271,6 +1271,17 @@ const TABS = [
 export default function CitizenPortal() {
   const { showToast } = useApp()
   const [activeTab, setActiveTab] = useState('register')
+  const citizenUser = (() => {
+    try { return JSON.parse(sessionStorage.getItem('citizen_user')) } catch { return null }
+  })()
+  const citizenName = citizenUser?.name || citizenUser?.fullName || citizenUser?.username || 'Citizen'
+  const citizenInitials = citizenName
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0])
+    .join('')
+    .toUpperCase()
 
   const renderTab = () => {
     switch (activeTab) {
@@ -1293,23 +1304,50 @@ export default function CitizenPortal() {
 
   return (
     <div className="cp-portal">
+      {/* ── Top Navigation ─────────────────────────────────────────── */}
+      <div className="cp-topbar">
+        <div className="cp-topbar-left">
+          <div className="cp-topbar-emblem">
+            <Landmark size={16} />
+          </div>
+          <div className="cp-topbar-title">
+            <span className="cp-topbar-name">Citizen Service Portal</span>
+            <span className="cp-topbar-sub">Ward 8 · Delhi</span>
+          </div>
+        </div>
+        <div className="cp-topbar-right">
+          <div className="cp-helpline-chip">
+            <Phone size={13} /> Helpline 1950
+          </div>
+          <div className="cp-user-badge">
+            <span className="cp-user-avatar">{citizenInitials}</span>
+            <span className="cp-user-name">{citizenName}</span>
+          </div>
+          <button type="button" className="cp-ghost-btn">Sign out</button>
+          <button type="button" className="cp-admin-btn">Admin</button>
+        </div>
+      </div>
+
       {/* ── Hero Banner ─────────────────────────────────────────────────── */}
       <div className="cp-hero-banner">
-        <div className="cp-hero-emblem">
-          <Landmark size={28} />
-        </div>
-        <div className="cp-hero-text">
-          <h1>Citizen Service Portal</h1>
-          <p>Ward 8 · Delhi · Electoral Services &amp; Grievance Redressal</p>
-        </div>
-        <div className="cp-hero-badges">
-          <div className="cp-hero-badge"><Phone size={13} /><span>Helpline: 1950</span></div>
-          <div className="cp-hero-badge"><Home size={13} /><span>Ward Office: Booth 141</span></div>
-        </div>
-        <div className="cp-hero-stats">
-          <div className="cp-hero-stat"><span>5,821</span><small>Registered Voters</small></div>
-          <div className="cp-hero-stat"><span>10</span><small>Open Issues</small></div>
-          <div className="cp-hero-stat"><span>10</span><small>Gov. Schemes</small></div>
+        <div className="cp-hero-main">
+          <div className="cp-hero-left">
+            <div className="cp-hero-text">
+              <h1>Citizen Service Portal</h1>
+              <p>Ward 8 · Delhi · Electoral Services &amp; Grievance Redressal</p>
+            </div>
+            <div className="cp-hero-badges">
+              <div className="cp-hero-badge"><Phone size={13} /><span>Helpline: 1950</span></div>
+              <div className="cp-hero-badge"><Home size={13} /><span>Ward Office: Booth 141</span></div>
+            </div>
+          </div>
+          <div className="cp-hero-stats">
+            <div className="cp-hero-stat"><span>5,821</span><small>Registered Voters</small></div>
+            <div className="cp-hero-divider" />
+            <div className="cp-hero-stat"><span>10</span><small>Open Issues</small></div>
+            <div className="cp-hero-divider" />
+            <div className="cp-hero-stat"><span>10</span><small>Gov. Schemes</small></div>
+          </div>
         </div>
       </div>
 
