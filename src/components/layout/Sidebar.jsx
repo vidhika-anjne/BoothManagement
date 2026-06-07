@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { id: 'boothmap',      label: 'Booth Map',      icon: Map,             badge: null },
   { id: 'voters',        label: 'Voters',         icon: Users,           badge: null },
   { id: 'triage',        label: 'AI Triage',      icon: ShieldAlert,     badge: 'NEW', badgeClass: 'new' },
-  { id: 'communication', label: 'Communication',  icon: MessageSquare,   badge: null },
+  // { id: 'communication', label: 'Communication',  icon: MessageSquare,   badge: null },
   { id: 'notifications', label: 'Notifications',  icon: Bell,            badge: '2', badgeClass: 'alert' },
   { id: 'settings',      label: 'Settings',       icon: Settings,        badge: null },
 ]

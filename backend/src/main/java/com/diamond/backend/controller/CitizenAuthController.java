@@ -18,6 +18,7 @@ import java.util.Optional;
  *
  * Returns the full voter profile on success (OTP is demo, always passes on frontend).
  */
+
 @RestController
 @RequestMapping("/api/citizen")
 @CrossOrigin(origins = "*")
@@ -30,6 +31,7 @@ public class CitizenAuthController {
      * Lookup voter by mobile number.
      * Returns 200 with voter data if found, 404 if not registered.
      */
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
         String mobile = body.getOrDefault("mobileNumber", "").trim();
